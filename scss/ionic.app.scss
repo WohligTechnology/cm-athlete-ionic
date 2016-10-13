@@ -46,6 +46,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default; // Include all of Ionic
   }
 }
 
+.bar-header {
+  border: 0;
+}
+
 .pb10 {
   padding-bottom: 10px;
 }
