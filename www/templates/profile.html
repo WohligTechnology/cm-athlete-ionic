@@ -1,0 +1,59 @@
+<ion-view view-title="{{profileData.name}}">
+  <ion-nav-buttons side="right">
+    <a class="button button-icon icon ln-pencil ln-fit" ui-sref="app.edit-profile"></a>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="picture-hold">
+      <div class="dp" style="background-image: url({{profileData.image}});"></div>
+      <h3>{{profileData.name}} {{profileData.surname}}</h3>
+      <p>{{profileData.credentials}}</p>
+      <div class="main-info">
+        <div class="row">
+          <div class="col">
+            <h3>{{profileData.yearsCoaching}} years</h3>
+            <p>Years of Coaching</p>
+          </div>
+          <div class="col">
+            <h3>{{profileData.country}}</h3>
+            <p>Country</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ion-list>
+      <ion-item class="item-text-wrap">
+        <h3>Contact</h3>
+        <p>{{profileData.contact}}</p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Email</h3>
+        <p>{{profileData.email}}</p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Date of Birth</h3>
+        <p>{{profileData.dob}}</p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Gender</h3>
+        <p>{{profileData.gender}}</p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>About</h3>
+        <p class="read-more text-justified" ng-class="{'auto-height': read==true}">{{profileData.about}}</p>
+        <p class="text-right bold" ng-click="readMore()">Show <span ng-if="!read">More</span><span ng-if="read">Less</span></p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Coaching Focus</h3>
+        <p>
+          <span class="tag-box" ng-repeat="c in profileData.coachingFocus">{{c}}</span>
+        </p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Specialisations</h3>
+        <p>
+          <span class="tag-box" ng-repeat="s in profileData.specialisations">{{s}}</span>
+        </p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

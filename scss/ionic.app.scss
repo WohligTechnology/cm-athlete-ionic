@@ -1,0 +1,642 @@
+$light: #fff !default;
+$stable: #f8f8f8 !default;
+$positive: #004a9b !default;
+$calm: #11c1f3 !default;
+$balanced: #369e57 !default;
+$energized: #f29c2c !default;
+$assertive: #c70e17 !default;
+$royal: #886aea !default;
+$dark: #444 !default;
+$light-grey: #666 !default;
+$font-family-sans-serif: "Open Sans",
+"Helvetica Neue",
+"Roboto",
+"Segoe UI",
+sans-serif !default;
+$font-family-light-sans-serif: "Open Sans",
+"HelveticaNeue-Light",
+"Roboto-Light",
+"Segoe UI-Light",
+sans-serif-light !default; // The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default; // Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../fonts/OpenSans-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../fonts/OpenSans-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../fonts/OpenSans-Regular.ttf");
+}
+
+@mixin placeholder {
+  $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+  @each $placeholder in $placeholders {
+    &:#{$placeholder}-placeholder {
+      @content;
+    }
+  }
+}
+
+.pb10 {
+  padding-bottom: 10px;
+}
+
+.right-badge-modal {
+  position: absolute;
+  right: 15px;
+  top: 14px;
+  display: inline-block;
+}
+
+.gradient-bg {
+  background-color: #09386b;
+  background-image: linear-gradient(to top, #2174d0, #09386b);
+  background-image: -webkit-linear-gradient(to top, #2174d0, #09386b);
+  .item,
+  .item-complex .item-content,
+  .item-radio .item-content {
+    color: white;
+    border-color: transparent;
+    background-color: transparent;
+    font-size: 14px;
+    p {
+      color: white;
+      font-size: 12px;
+    }
+    h2 {
+      color: white;
+      font-weight: bold;
+    }
+  }
+  .text-right {
+    text-align: right;
+  }
+  .item {
+    &.on,
+    .activated {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-left: 2px solid white;
+    }
+  }
+  .item-icon-left {
+    .icon {
+      font-size: 20px;
+    }
+  }
+}
+
+.ln-fit:before {
+  font-size: 24px !important;
+}
+
+.dp {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  background-size: cover;
+  margin: 0 auto;
+  background-image: url(../img/img-placeholder.png);
+}
+
+.picture-hold {
+  padding-top: 30px;
+  text-align: center;
+  background-image: linear-gradient(to top, #2174d0, #004a9b);
+  background-image: -webkit-linear-gradient(to top, #2174d0, #004a9b);
+  color: white;
+  &.picture-pad {
+    padding-bottom: 30px;
+  }
+  h3 {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 15px 0 5px;
+  }
+}
+
+.pic-edit {
+  padding: 30px 0;
+  text-align: center;
+  background: rgba(231, 231, 231, 0.65);
+}
+
+.main-info {
+  text-align: center;
+  p {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  h3 {
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+}
+
+.tag-box {
+  padding: 2px 10px;
+  border: 1px solid;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 5px;
+  +.tag-box {
+    margin-left: 3px;
+  }
+}
+
+.tag-box-label {
+  position: relative;
+  display: inline-block;
+  +.tag-box-label {
+    margin-left: 3px;
+  }
+  input[type=checkbox] {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+  label {
+    @extend .tag-box;
+  }
+  input[type=checkbox]:checked+label {
+    background-color: $positive;
+    border-color: $positive;
+    color: white;
+  }
+}
+
+.text-justified {
+  text-align: justify;
+}
+
+.read-more {
+  height: 40px;
+  overflow: hidden !important;
+  &.read-full {
+    height: auto;
+  }
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+p.bold {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.share {
+  .item {
+    padding: 0;
+    font-size: 14px;
+  }
+}
+
+.right-badge {
+  font-size: 20px;
+  padding: 7px 20px;
+  .badge {
+    position: absolute;
+    right: 1px;
+    top: -1px;
+  }
+}
+
+.brd-zero {
+  border-color: #fff;
+}
+
+.picture-hold-coach {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  text-align: center;
+  background: #fff;
+  // &.bg-white {
+  //   background: #fff;
+  //   color:#000;
+  //
+  // }
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 15px 0 5px;
+  }
+}
+
+.chat-holder {
+  padding: 20px 15px;
+  .time-stamp {
+    font-size: 11px;
+  }
+}
+
+.bubble {
+  &.me {
+    text-align: right;
+    .msg {
+      background-color: $positive;
+      color: white;
+      text-align: left;
+    }
+  }
+  .msg {
+    padding: 8px;
+    background-color: #e2e2e2;
+    display: inline-block;
+    border-radius: 10px;
+  }
+  +.bubble {
+    margin-top: 15px;
+  }
+}
+
+.item-name {
+  h2 {
+    margin-top: 10px;
+  }
+}
+
+.pb30 {
+  padding-bottom: 30px;
+}
+
+.pro-edit {
+  &.text-rite {
+    .item-input input {
+      text-align: right;
+    }
+  }
+  .input-label {
+    color: #000;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
+  .item-select select {
+    width: 100%;
+    max-width: 100%;
+  }
+  .item {
+    position: relative;
+  }
+  .item-radio {
+    border: none;
+    font-size: 14px;
+  }
+  input,
+  textarea {
+    @include placeholder {
+      color: #000;
+    }
+  }
+}
+
+.multi-select {
+  .active {
+    background: $positive;
+    color: #fff;
+  }
+}
+
+.ch-relative {
+  position: relative;
+  .button {
+    position: absolute;
+    bottom: 0;
+    z-index: 98;
+    background: $positive;
+    color: #fff;
+    border-radius: 100%;
+    font-size: 15px;
+    min-height: 35px;
+    min-width: 35px;
+    left: 50%;
+    transform: translatex(50%);
+    padding: 0;
+    &:before {
+      line-height: 30px;
+      font-size: 18px !important;
+    }
+  }
+  .activated {
+    background: $positive !important;
+    opacity: 1 !important;
+  }
+}
+
+.m20 {
+  margin: 20px 0;
+}
+
+.done-btn {
+  border-color: #fff !important;
+}
+
+.bg-login {
+  background: url(../img/bg-login.jpg)no-repeat;
+  background-size: cover;
+}
+
+.mt30 {
+  margin-top: 30%;
+}
+
+.logo {
+  text-align: center;
+}
+
+.login-form {
+  margin-top: 15%;
+  i {
+    font-size: 24px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .item {
+    background: transparent;
+    border-color: transparent;
+    border-bottom: 1px solid #b4b4b4;
+    margin: 3px 15px;
+    padding: 20px 0 5px;
+    input {
+      color: #fff;
+      @include placeholder {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.psw-form {
+  @extend .login-form;
+  i {
+    color: $positive;
+  }
+  .item {
+    border-bottom: 1px solid #004a9b;
+    input {
+      color: $positive;
+      @include placeholder {
+        color: $positive;
+      }
+    }
+  }
+}
+
+.color-primary {
+  color: $positive;
+}
+
+.pr15 {
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.text-left {
+  float: left;
+}
+
+.pl15 {
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.ps-relative {
+  position: relative;
+}
+
+.error-msg {
+  background-color: $assertive;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  top: 2px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  &:after {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid $assertive;
+    bottom: -5px;
+    content: '';
+  }
+}
+
+.sp-reg {
+  padding-top: 10px;
+  display: block;
+}
+
+.rigistration {
+  .input-label {
+    color: #000;
+    font-size: 14px;
+    @include placeholder {
+      color: #666;
+    }
+  }
+  textarea {
+    border: 1px solid #ddd;
+    padding: 5px;
+    width: 96%;
+    margin-top: 10px;
+  }
+  .item-select {
+    min-height: 70px;
+  }
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.error-msg-form {
+  @extend .error-msg;
+  padding: 2px 6px;
+  top: -15px;
+  font-size: 9px;
+  z-index: 99;
+  &:after {
+    bottom: -5px;
+    position: absolute;
+    left: 50%;
+  }
+}
+
+.sb-btn {
+  .button.button-positive.activated {
+    border-color: transparent !important;
+  }
+}
+
+.light-grey {
+  color: $light-grey;
+}
+
+.pull-right {
+  float: right;
+}
+
+.badged {
+  color: $positive;
+  display: inline-block;
+  padding: 6px 10px;
+  margin: 0;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.item.icon-c-l .item-content {
+  padding-left: 60px;
+}
+
+.icon.icon-circled {
+  background-color: #c4c4c4;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  font-size: 26px;
+  color: white;
+  padding-left: 4px;
+  top: 17px;
+  left: 10px;
+  &.ln-speed-fast {
+    padding-bottom: 10px;
+  }
+  &.icon-positive {
+    background-color: $positive;
+  }
+}
+
+.item.item-checkbox img {
+  height: 30px;
+  vertical-align: middle;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.blog-detail {
+  background-color: #f1f1f1;
+  .card {
+    margin: 0;
+    +.card {
+      margin-top: 15px;
+    }
+  }
+  .item-body {
+    padding: 0;
+    .card-title {
+      padding: 5px 0 10px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #444;
+      margin: 0;
+      text-overflow: inherit;
+    }
+    p {
+      margin: 0;
+      margin-bottom: 10px;
+      color: #444;
+      line-height: 180%;
+      text-align: justify;
+      font-size: 14px;
+    }
+    .item-content {
+      padding: 5px 15px;
+    }
+    .date {
+      font-weight: 400;
+      color: #000;
+      font-size: 12px;
+      padding: 2px 0;
+    }
+  }
+}
+
+.small-text {
+  font-size: 14px;
+}
+
+.more-info {
+  border-top: 1px solid #cecece;
+  padding: 10px 0;
+  &.adjustment {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #cecece;
+    border-top: 0 solid;
+    margin-top: -10px;
+  }
+}
+
+.rate-card {
+  background-color: #009b29;
+  color: white;
+  font-weight: 700;
+  padding: 0px 4px;
+  border-radius: 3px;
+}
+
+.auto-height {
+  height: auto;
+}
+
+.small-avatar img {
+  width: 32px;
+  margin-right: 15px;
+  vertical-align: middle;
+  border-radius: 100%;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) {
+  .top-statusbar {
+    top: 20px;
+  }
+}
+
+.badge.chat-badge {
+  top: 24px;
+  right: 15px;
+}
+
+.button.input-label {
+  width: auto;
+}
+
+.calendar-event-inner,
+.monthview-primary-with-event {
+  background-color: $positive;
+}
+
+@import "www/lib/ionic-calendar/dist/css/calendar.min";
+.monthview-selected {
+  background-color: $balanced;
+  color: #fff;
+}
+
+.calendar-event-inner,
+.monthview-primary-with-event {
+  background-color: $positive;
+  color: #fff;
+}
