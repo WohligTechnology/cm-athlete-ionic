@@ -9826,9 +9826,9 @@ a.button {
   display: inline-block; }
 
 .gradient-bg {
-  background-color: #09386b;
-  background-image: linear-gradient(to top, #2174d0, #09386b);
-  background-image: -webkit-linear-gradient(to top, #2174d0, #09386b); }
+  background-color: #003268;
+  background-image: linear-gradient(to top, #2174d0, #003268);
+  background-image: -webkit-linear-gradient(to top, #2174d0, #003268); }
   .gradient-bg .item,
   .gradient-bg .item-complex .item-content,
   .gradient-bg .item-radio .item-content {
