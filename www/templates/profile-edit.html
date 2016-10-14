@@ -21,10 +21,6 @@
             <input type="text" placeholder="Surname" name="surname" ng-model="formData.surname" maxlength="35">
           </label>
           <label class="item item-input">
-            <span class="input-label">Years Coaching</span>
-            <input type="number" placeholder="Years Coaching" name="yearsCoaching" ng-model="formData.yearsCoaching" min="1" max="99">
-          </label>
-          <label class="item item-input">
             <span class="input-label">Email Address</span>
             <input type="email" placeholder="Email" name="email" ng-model="formData.email">
           </label>
@@ -54,43 +50,26 @@
             <span class="input-label">Date of Birth</span>
             <input type="date" name="dob" ng-model="formData.dob">
           </label>
-          <label class="item item-input" ng-click="changeLimit()">
-            <span class="input-label">Coaching Limit</span>
-            <input type="text" name="coachingLimit" ng-model="formData.coachingLimit" readonly>
-          </label>
-          <label class="item item-input" ng-click="changePrice()">
-            <span class="input-label">Coach Asking Price</span>
-            <input type="text" name="askingPrice" ng-model="formData.askingPrice" readonly>
-          </label>
           <label class="item item-input">
             <span class="input-label">About</span>
             <textarea rows="6" name="about" ng-model="formData.about"></textarea>
           </label>
-          <ion-item class="item-text-wrap multi-select">
-            <h3>Coaching Focus</h3>
-            <p>
-              <div class="tag-box-label" ng-repeat="c in coachingFocus">
-                <input type="checkbox" id="{{c}}" checklist-model="formData.coachingFocus" checklist-value="c" name="coachingFocus">
-                <label for="{{c}}">{{c}}</label>
-              </div>
-            </p>
-          </ion-item>
-          <ion-item class="item-text-wrap">
-            <h3>Specialisations</h3>
-            <p>
-              <div class="tag-box-label" ng-repeat="s in specialisations">
-                <input type="checkbox" id="{{s}}" checklist-model="formData.specialisations" checklist-value="s" name="specialisations">
-                <label for="{{s}}">{{s}}</label>
-              </div>
-              <div class="tag-box-label">
-                <input type="checkbox" id="Others" ng-model="formData.specialisations.otherVal">
-                <label for="Others">Others</label>
-              </div>
-            </p>
-          </ion-item>
-          <ion-item ng-if="formData.specialisations.otherVal" class="item-input">
-            <input type="text" placeholder="Please mention others" name="others" ng-model="formData.specialisations.others">
-          </ion-item>
+          <label class="item item-input">
+            <span class="input-label">Events</span>
+            <textarea rows="6" name="about" ng-model="formData.events"></textarea>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Achievement <br>/ Personal bests</span>
+            <textarea rows="6" name="about" ng-model="formData.achievements"></textarea>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Previous Season <br>Review</span>
+            <textarea rows="6" name="about" ng-model="formData.previousSeasonReview"></textarea>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Personal Goals</span>
+            <textarea rows="6" name="about" ng-model="formData.personalGoals"></textarea>
+          </label>
         </div>
       </div>
       <div class="text-center m20 padding-horizontal">

@@ -6,25 +6,21 @@
     <div class="picture-hold">
       <div class="dp" style="background-image: url({{profileData.image}});"></div>
       <h3>{{profileData.name}} {{profileData.surname}}</h3>
-      <p>{{profileData.credentials}}</p>
+      <p>{{profileData.dob | ageConvert}}</p>
       <div class="main-info">
         <div class="row">
           <div class="col">
-            <h3>{{profileData.askingPrice}}£</h3>
-            <p>Asking Price</p>
+            <h3>{{profileData.gender}}</h3>
+            <p>Gender</p>
           </div>
           <div class="col">
-            <h3>{{profileData.coachingLimit}}</h3>
-            <p>Coaching Limit</p>
+            <h3><span ng-if="!profileData.sport">-</span>{{profileData.sport}}</h3>
+            <p>Sport</p>
           </div>
         </div>
       </div>
     </div>
     <ion-list>
-      <ion-item class="item-text-wrap">
-        <h3>Years of Coaching</h3>
-        <p>{{profileData.yearsCoaching}} years</p>
-      </ion-item>
       <ion-item class="item-text-wrap">
         <h3>Country</h3>
         <p>{{profileData.country}}</p>
@@ -39,7 +35,7 @@
       </ion-item>
       <ion-item class="item-text-wrap">
         <h3>Date of Birth</h3>
-        <p>{{profileData.dob}}</p>
+        <p>{{profileData.dob | date:'dd MMMM, yyyy'}}</p>
       </ion-item>
       <ion-item class="item-text-wrap">
         <h3>Gender</h3>
@@ -51,15 +47,27 @@
         <p class="text-right bold" ng-click="readMore()">Show <span ng-if="!read">More</span><span ng-if="read">Less</span></p>
       </ion-item>
       <ion-item class="item-text-wrap">
-        <h3>Coaching Focus</h3>
+        <h3>Events</h3>
         <p>
-          <span class="tag-box" ng-repeat="c in profileData.coachingFocus">{{c}}</span>
+          {{profileData.events}}
         </p>
       </ion-item>
       <ion-item class="item-text-wrap">
-        <h3>Specialisations</h3>
+        <h3>Achievement / Personal bests</h3>
         <p>
-          <span class="tag-box" ng-repeat="s in profileData.specialisations">{{s}}</span>
+          {{profileData.achievements}}
+        </p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Previous Season Review</h3>
+        <p>
+          {{profileData.previousSeasonReview}}
+        </p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Personal Goals</h3>
+        <p>
+          {{profileData.personalGoals}}
         </p>
       </ion-item>
     </ion-list>

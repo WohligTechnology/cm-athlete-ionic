@@ -1,7 +1,6 @@
-
 {
-  "name": "My Ionic App",
-  "short_name": "My Ionic App",
+  "name": "Athlete",
+  "short_name": "Coach Mentor",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

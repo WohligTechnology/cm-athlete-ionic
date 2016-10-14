@@ -25,21 +25,20 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('ProfileCtrl', function ($scope, $ionicScrollDelegate) {
   $scope.profileData = {
-    name: 'Sachin',
-    surname: 'Tendulkar',
-    image: 'http://2.bp.blogspot.com/-TgdKBlUGk90/T0PhPlFOf8I/AAAAAAAAAVc/jijEQ8u1uUg/s1600/387430_257363124319593_257347670987805_670782_1318978483_n.jpg',
-    yearsCoaching: 2,
+    name: 'Usain',
+    surname: 'Bolt',
+    image: 'img/profile-pic.png',
     email: 'sachin@gmail.com',
     gender: 'Male',
     contact: '+919098765324',
-    dob: '24th April, 1973',
+    dob: new Date("September 7, 1989"),
     country: 'United Kingdom',
-    coachingLimit: 50,
-    askingPrice: 100,
-    credentials: 'Level 4',
     about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
-    coachingFocus: ['Sprinting', 'Hurdles'],
-    specialisations: ['Children in Athletics', 'First aid']
+    sport: 'Running',
+    events: '400m Relay, 32KM Marathon',
+    achievements: '-',
+    previousSeasonReview: '-',
+    personalGoals: '-'
   };
 
   $scope.read = false;
@@ -202,8 +201,8 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.data = {};
   $scope.messages = [{
     userId: 'he',
-    name: 'Sachin',
-    surname: 'Sachin',
+    name: 'Usain',
+    surname: 'Usain',
     text: 'Hello! Welcome to Coach Mentor!',
     time: $scope.timeStamp()
   }];
@@ -285,7 +284,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 })
 
 
-.controller('TestingCtrl', function ($scope, $ionicModal) {
+.controller('InjuriesCtrl', function ($scope, $ionicModal) {
   $scope.data = [{
     name: '800M Running',
     startDate: '14 January, 2017',
@@ -333,7 +332,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     allDay: false
   }, {
     id: 1,
-    type: 'testing',
+    type: 'Injuries',
     title: 'London Cycling Tour',
     startTime: new Date("October 16, 2016 11:13:00"),
     endTime: new Date("October 16, 2016 14:13:00"),
@@ -364,7 +363,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('TestingCreateCtrl', function ($scope, $ionicModal) {
+.controller('InjuriesCreateCtrl', function ($scope, $ionicModal) {
 
   $ionicModal.fromTemplateUrl('templates/modal/modal-add-athlete.html', {
     scope: $scope,
@@ -461,28 +460,21 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('EditProfileCtrl', function ($scope, $state, MyServices, $ionicModal, $filter) {
   $scope.formData = {
-    name: 'Sachin',
-    surname: 'Tendulkar',
-    image: 'http://2.bp.blogspot.com/-TgdKBlUGk90/T0PhPlFOf8I/AAAAAAAAAVc/jijEQ8u1uUg/s1600/387430_257363124319593_257347670987805_670782_1318978483_n.jpg',
-    yearsCoaching: 2,
+    name: 'Usain',
+    surname: 'Bolt',
+    image: 'img/profile-pic.png',
     email: 'sachin@gmail.com',
     gender: 'Male',
     contact: '+919098765324',
-    dob: new Date(),
+    dob: new Date("September 7, 1989"),
     country: 'United Kingdom',
-    coachingLimit: 50,
-    askingPrice: 100,
-    credentials: 'Level 4',
     about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
-    coachingFocus: ['Sprinting', 'Hurdles'],
-    specialisations: ['Children in Athletics', 'First aid']
+    sport: 'Running',
+    events: '400m Relay, 32KM Marathon',
+    achievements: '-',
+    previousSeasonReview: '-',
+    personalGoals: '-'
   };
-  $scope.coachingFocus = [
-    'Sprinting', 'Middle Distance', 'Endurance', 'Throws', 'Jumps', 'Hurdles', 'Hill/Fell Running', 'Cross Country'
-  ];
-  $scope.specialisations = [
-    'Coaching athletes with a disability', 'Coaching female athletes', 'Eating disorders', 'First aid', 'Long-term athlete development', 'Mentored practice', 'Strength and conditioning', 'Fitness in Running and Walking', 'Children in Athletics'
-  ];
 
   $scope.dummyPassword = '12345678';
 
@@ -557,35 +549,52 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 })
 
 .controller('AthletesCoachingCtrl', function ($scope, $ionicModal) {
-  $ionicModal.fromTemplateUrl('templates/modal/modal-coach.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
-  $scope.openModal = function () {
-    $scope.modal.show();
-  };
-  $scope.closeModal = function () {
-    $scope.modal.hide();
-  };
+    $ionicModal.fromTemplateUrl('templates/modal/modal-coach.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
+      $scope.modal = modal;
+    });
+    $scope.openModal = function () {
+      $scope.modal.show();
+    };
+    $scope.closeModal = function () {
+      $scope.modal.hide();
+    };
 
-  $scope.athleteCoaching = [{
-    name: 'Matt',
-    surname: 'Smith',
-    image: 'img/img-placeholder.png',
-    acceptedDate: '13 May, 2016',
-    renewalDate: '12 June, 2016',
-    subscriptionType: 'Monthly'
-  }, {
-    name: 'John',
-    surname: 'Damon',
-    image: 'img/img-placeholder.png',
-    acceptedDate: '17 August, 2016',
-    renewalDate: '16 August, 2017',
-    subscriptionType: 'Annual'
-  }];
-})
+    $scope.athleteCoaching = [{
+      name: 'Matt',
+      surname: 'Smith',
+      image: 'img/img-placeholder.png',
+      acceptedDate: '13 May, 2016',
+      renewalDate: '12 June, 2016',
+      subscriptionType: 'Monthly'
+    }, {
+      name: 'John',
+      surname: 'Damon',
+      image: 'img/img-placeholder.png',
+      acceptedDate: '17 August, 2016',
+      renewalDate: '16 August, 2017',
+      subscriptionType: 'Annual'
+    }];
+  })
+  .controller('CoachesCtrl', function ($scope, $ionicModal) {
+    $scope.coaches = [{
+      name: 'Matt',
+      surname: 'Smith',
+      image: 'img/img-placeholder.png',
+      acceptedDate: '13 May, 2016',
+      renewalDate: '12 June, 2016',
+      subscriptionType: 'Monthly'
+    }, {
+      name: 'John',
+      surname: 'Damon',
+      image: 'img/img-placeholder.png',
+      acceptedDate: '17 August, 2016',
+      renewalDate: '16 August, 2017',
+      subscriptionType: 'Annual'
+    }];
+  })
 
 .controller('AthletesCoachingDetailCtrl', function ($scope, $ionicModal) {
 

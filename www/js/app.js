@@ -168,33 +168,33 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.testing', {
-    url: '/testing',
+  .state('app.injuries', {
+    url: '/injuries',
     views: {
       'menuContent': {
-        templateUrl: 'templates/testing.html',
-        controller: 'TestingCtrl'
+        templateUrl: 'templates/injuries.html',
+        controller: 'InjuriesCtrl'
       }
     }
   })
 
 
-  .state('app.testing-create', {
-    url: '/testing-create',
+  .state('app.injuries-create', {
+    url: '/injuries-create',
     views: {
       'menuContent': {
-        templateUrl: 'templates/testing-create.html',
-        controller: 'TestingCreateCtrl'
+        templateUrl: 'templates/injuries-create.html',
+        controller: 'InjuriesCreateCtrl'
       }
     }
   })
 
-  .state('app.testing-detail', {
-    url: '/testing-detail',
+  .state('app.injuries-detail', {
+    url: '/injuries-detail',
     views: {
       'menuContent': {
-        templateUrl: 'templates/testing-create.html',
-        controller: 'TestingDetailCtrl'
+        templateUrl: 'templates/injuries-create.html',
+        controller: 'InjuriesDetailCtrl'
       }
     }
   })
@@ -232,4 +232,28 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
-});
+})
+
+.filter('ageConvert', function () {
+  function calculateAge(birthday) { // birthday is a date
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  function monthDiff(d1, d2) {
+    if (d1 < d2) {
+      var months = d2.getMonth() - d1.getMonth();
+      return months <= 0 ? 0 : months;
+    }
+    return 0;
+  }
+  return function (birthdate) {
+    var age = calculateAge(birthdate);
+    if (age == 0)
+      return monthDiff(birthdate, new Date()) + ' months';
+    return age + ' years';
+  };
+})
+
+;
