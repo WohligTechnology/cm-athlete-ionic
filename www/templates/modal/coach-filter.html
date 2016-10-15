@@ -1,20 +1,24 @@
 <ion-modal-view>
     <ion-header-bar class="bar-positive bar bar-header">
+        <button class="button button-clear" ng-click="selectedFilters={}">Clear</button>
         <h1 class="title">Filter By</h1>
-        <span class="right-badge-modal ln ln-cross ln-fit" ng-click="closeModal()">
-    </span>
+        <button class="button button-icon ln-cross ln-fit" ng-click="closeModal()"> </button>
     </ion-header-bar>
-    <ion-content>
-        <ion-list>
-            <ion-item class="item-thumbnail-left">
-                <img src="img/img-placeholder.png">
-                <h2>Adam Scott</h2>
-                <p>
-                    Location: UK <br> Age: 22 years <br> Sports: Running, Cycling <br>
-                </p>
-                <ion-option-button class="button-assertive">Delete</ion-option-button>
-                <ion-option-button class="button-balanced">Accept</ion-option-button>
-            </ion-item>
-        </ion-list>
-    </ion-content>
+    <div class="full-content">
+        <div class="colr">
+            <div class="part p1">
+                <ion-list>
+                    <ion-item ng-click="changeFilter($index)" ng-class="{'in':filterActive == $index}" ng-repeat="f in filterData">{{f.name}}</ion-item>
+                </ion-list>
+            </div>
+            <div class="part p2">
+                <ion-list ng-repeat="f in filterData" ng-show="filterActive == $index">
+                    <ion-checkbox ng-model="selectedFilters[v]" ng-repeat="v in f.value">{{v}}</ion-checkbox>
+                </ion-list>
+            </div>
+        </div>
+    </div>
+    <ion-footer-bar class="bar-light sm">
+        <h1 class="title">Submit</h1>
+    </ion-footer-bar>
 </ion-modal-view>

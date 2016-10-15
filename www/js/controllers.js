@@ -566,13 +566,55 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     name: 'Matt',
     surname: 'Smith',
     image: 'img/img-placeholder.png',
-    credentials: 'Level 2'
+    credentials: 'Level 2',
+    full: false
   }, {
     name: 'John',
     surname: 'Damon',
     image: 'img/img-placeholder.png',
-    credentials: 'Level 1'
+    credentials: 'Level 1',
+    full: true
   }];
+
+  $ionicModal.fromTemplateUrl('templates/modal/coach-filter.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
+
+  $scope.openFilter = function () {
+    $scope.modal.show();
+  };
+
+  $scope.filterData = [{
+    name: 'Age',
+    value: ['Less than 20 years', '21 - 25 years', '26 - 30 years', '31 - 35 years', '36 - 40 years', 'More than 40 years']
+  }, {
+    name: 'Location',
+    value: ['Within 10 miles', '15 miles', '20 miles', '25 miles', 'Beyond 25 miles']
+  }, {
+    name: 'Gender',
+    value: ['Male', 'Female']
+  }, {
+    name: 'Credentials',
+    value: ['Level 1', 'Level 2', 'Level 3', 'Level 4']
+  }, {
+    name: 'Coaching Experience ',
+    value: ['0 - 5 years', '6 - 10 years', '11 - 15 years', '16 - 20 years', 'More than 20 years']
+  }];
+
+  $scope.filterActive = 0;
+  $scope.selectedFilters = {};
+
+  $scope.changeFilter = function (data) {
+    $scope.filterActive = data;
+  };
+
 })
 
 .controller('SearchCoachesDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
@@ -596,22 +638,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     $scope.read = !$scope.read;
     $ionicScrollDelegate.resize();
   };
-
-  $ionicModal.fromTemplateUrl('templates/modal/coach-filter.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
-
-  $scope.closeModal = function () {
-    $scope.modal.hide();
-  };
-
-  $scope.shareAthlete = function () {
-    $scope.modal.show();
-  };
-
 
 })
 

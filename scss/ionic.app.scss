@@ -565,6 +565,7 @@ p.bold {
 
 .blog-detail {
   background-color: #f1f1f1;
+  margin-top: -1px;
   .card {
     margin: 0;
     +.card {
@@ -662,6 +663,7 @@ p.bold {
   padding: 3px 5px;
   color: white;
   border-radius: 7px;
+  font-size: 14px;
   &.up {
     background-color: #32ca32;
   }
@@ -685,6 +687,70 @@ p.bold {
   width: 100%;
 }
 
+.full {
+  color: $assertive;
+  background-color: #f7f6f6;
+  padding: 5px 6px;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  top: 21px;
+  right: 10px;
+  border-radius: 3px;
+  &.sm {
+    font-size: 10px;
+    top: 5px;
+  }
+}
+
+.full-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+  top: 44px;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .full-content {
+  top: 64px;
+}
+
+.part {
+  .in {
+    font-weight: bold;
+  }
+  .item {
+    font-size: 12px;
+    padding: 13px 10px;
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    &.item-checkbox {
+      padding-left: 55px;
+    }
+  }
+  &.p1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 145px;
+    border-right: 1px solid #ddd;
+    background-color: #f3f3f3;
+  }
+  &.p2 {
+    padding-left: 145px;
+    .item {
+      font-size: 14px;
+    }
+  }
+}
+
 @import "www/lib/ionic-calendar/dist/css/calendar.min";
 .monthview-selected {
   background-color: $balanced;
@@ -695,4 +761,14 @@ p.bold {
 .monthview-primary-with-event {
   background-color: $positive;
   color: #fff;
+}
+
+.bar-footer.sm {
+  height: 34px;
+  .title {
+    height: auto;
+    line-height: 34px;
+    font-size: 14px;
+    color: $positive;
+  }
 }

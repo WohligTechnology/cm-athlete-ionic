@@ -10244,7 +10244,8 @@ p.bold {
   margin-right: 10px; }
 
 .blog-detail {
-  background-color: #f1f1f1; }
+  background-color: #f1f1f1;
+  margin-top: -1px; }
   .blog-detail .card {
     margin: 0; }
     .blog-detail .card + .card {
@@ -10320,7 +10321,8 @@ p.bold {
 .th {
   padding: 3px 5px;
   color: white;
-  border-radius: 7px; }
+  border-radius: 7px;
+  font-size: 14px; }
   .th.up {
     background-color: #32ca32; }
   .th.dn {
@@ -10336,6 +10338,61 @@ p.bold {
 
 .item-input-inset .item-input-wrapper input {
   width: 100%; }
+
+.full {
+  color: #c70e17;
+  background-color: #f7f6f6;
+  padding: 5px 6px;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  top: 21px;
+  right: 10px;
+  border-radius: 3px; }
+  .full.sm {
+    font-size: 10px;
+    top: 5px; }
+
+.full-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+  top: 44px; }
+
+.platform-ios.platform-cordova:not(.fullscreen) .full-content {
+  top: 64px; }
+
+.part .in {
+  font-weight: bold; }
+
+.part .item {
+  font-size: 12px;
+  padding: 13px 10px;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  margin: 0; }
+  .part .item.item-checkbox {
+    padding-left: 55px; }
+
+.part.p1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 145px;
+  border-right: 1px solid #ddd;
+  background-color: #f3f3f3; }
+
+.part.p2 {
+  padding-left: 145px; }
+  .part.p2 .item {
+    font-size: 14px; }
 
 .nav-left {
   text-align: left; }
@@ -10528,3 +10585,11 @@ p.bold {
 .monthview-primary-with-event {
   background-color: #004a9b;
   color: #fff; }
+
+.bar-footer.sm {
+  height: 34px; }
+  .bar-footer.sm .title {
+    height: auto;
+    line-height: 34px;
+    font-size: 14px;
+    color: #004a9b; }
