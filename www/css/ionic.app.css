@@ -10038,6 +10038,11 @@ p.bold {
 .pro-edit textarea:-ms-input-placeholder {
   color: #000; }
 
+.pro-edit textarea,
+.pro-edit input,
+.pro-edit .item-select select {
+  color: #666; }
+
 .multi-select .active {
   background: #004a9b;
   color: #fff; }
@@ -10325,6 +10330,12 @@ p.bold {
       position: relative; }
   .th i {
     font-size: 20px; }
+
+.item.item-block {
+  display: block; }
+
+.item-input-inset .item-input-wrapper input {
+  width: 100%; }
 
 .nav-left {
   text-align: left; }

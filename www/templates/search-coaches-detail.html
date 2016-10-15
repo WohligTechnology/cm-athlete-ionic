@@ -1,0 +1,51 @@
+<ion-view view-title="{{coaches.name}}">
+  <ion-content>
+    <div class="picture-hold picture-pad">
+      <div class="dp" style="background-image: url('{{coaches.image}}');"></div>
+      <h3>{{coaches.name}} {{coaches.surname}}</h3>
+      <p class="badged stable-bg">{{coaches.credentials}}</p>
+    </div>
+    <ion-list>
+      <ion-item class="item-text-wrap">
+        <h3>Asking Price</h3>
+        <p>{{coaches.askingPrice | currency:'£':0}}</p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Years of Coaching</h3>
+        <p>{{coaches.yearsCoaching}} years</p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Country</h3>
+        <p>{{coaches.country}}</p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Age</h3>
+        <p>{{coaches.dob | ageConvert}}</p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Gender</h3>
+        <p>{{coaches.gender}}</p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>About</h3>
+        <p class="read-more text-justified" ng-class="{'auto-height': read==true}">{{coaches.about}}</p>
+        <p class="text-right bold" ng-click="readMore()">Show <span ng-if="!read">More</span><span ng-if="read">Less</span></p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Coaching Focus</h3>
+        <p>
+          <span class="tag-box" ng-repeat="c in coaches.coachingFocus">{{c}}</span>
+        </p>
+      </ion-item>
+      <ion-item class="item-text-wrap">
+        <h3>Specialisations</h3>
+        <p>
+          <span class="tag-box" ng-repeat="s in coaches.specialisations">{{s}}</span>
+        </p>
+      </ion-item>
+    </ion-list>
+    <div class="padding-horizontal">
+      <button class="button button-balanced button-block">Subscribe Now</button>
+    </div>
+  </ion-content>
+</ion-view>

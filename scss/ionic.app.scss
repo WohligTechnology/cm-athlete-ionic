@@ -323,6 +323,11 @@ p.bold {
       color: #000;
     }
   }
+  textarea,
+  input,
+  .item-select select {
+    color: #666;
+  }
 }
 
 .multi-select {
@@ -670,6 +675,14 @@ p.bold {
   i {
     font-size: 20px;
   }
+}
+
+.item.item-block {
+  display: block;
+}
+
+.item-input-inset .item-input-wrapper input {
+  width: 100%;
 }
 
 @import "www/lib/ionic-calendar/dist/css/calendar.min";

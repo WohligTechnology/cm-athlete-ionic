@@ -66,7 +66,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 })
 
 .controller('BlogDetailCtrl', function ($scope, $ionicModal) {
-  $ionicModal.fromTemplateUrl('templates/modal/modal-add-athlete.html', {
+  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function (modal) {
@@ -84,7 +84,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 })
 
 .controller('ChatCtrl', function ($scope, $ionicModal, $state) {
-  $ionicModal.fromTemplateUrl('templates/modal/modal-chat.html', {
+  $ionicModal.fromTemplateUrl('templates/modal/chat.html', {
     id: 1,
     scope: $scope,
     animation: 'slide-in-up'
@@ -95,7 +95,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     $scope.modalChat.show();
   };
 
-  $ionicModal.fromTemplateUrl('templates/modal/modal-group-chat.html', {
+  $ionicModal.fromTemplateUrl('templates/modal/group-chat.html', {
     id: 2,
     scope: $scope,
     animation: 'slide-in-up'
@@ -233,7 +233,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('CompetitionCreateCtrl', function ($scope, $ionicModal) {
 
-  $ionicModal.fromTemplateUrl('templates/modal/modal-add-athlete.html', {
+  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function (modal) {
@@ -252,7 +252,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('CompetitionDetailCtrl', function ($scope, $ionicModal) {
 
-  $ionicModal.fromTemplateUrl('templates/modal/modal-add-athlete.html', {
+  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function (modal) {
@@ -365,7 +365,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('InjuriesCreateCtrl', function ($scope, $ionicModal) {
 
-  $ionicModal.fromTemplateUrl('templates/modal/modal-add-athlete.html', {
+  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function (modal) {
@@ -496,21 +496,21 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
   $scope.countries = MyServices.getCountries();
 
-  $ionicModal.fromTemplateUrl('templates/modal/modal-password.html', {
+  $ionicModal.fromTemplateUrl('templates/modal/password.html', {
     id: 1,
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function (modal) {
     $scope.modalPassword = modal;
   });
-  $ionicModal.fromTemplateUrl('templates/modal/modal-price.html', {
+  $ionicModal.fromTemplateUrl('templates/modal/price.html', {
     id: 2,
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function (modal) {
     $scope.modalPrice = modal;
   });
-  $ionicModal.fromTemplateUrl('templates/modal/modal-coaching-limit.html', {
+  $ionicModal.fromTemplateUrl('templates/modal/coaching-limit.html', {
     id: 3,
     scope: $scope,
     animation: 'slide-in-up'
@@ -548,75 +548,115 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('AthletesCoachingCtrl', function ($scope, $ionicModal) {
-    $ionicModal.fromTemplateUrl('templates/modal/modal-coach.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function (modal) {
-      $scope.modal = modal;
-    });
-    $scope.openModal = function () {
-      $scope.modal.show();
-    };
-    $scope.closeModal = function () {
-      $scope.modal.hide();
-    };
+.controller('SearchCoachesCtrl', function ($scope, $ionicModal) {
+  $ionicModal.fromTemplateUrl('templates/modal/coach.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function () {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
 
-    $scope.athleteCoaching = [{
-      name: 'Matt',
-      surname: 'Smith',
-      image: 'img/img-placeholder.png',
-      acceptedDate: '13 May, 2016',
-      renewalDate: '12 June, 2016',
-      subscriptionType: 'Monthly'
-    }, {
-      name: 'John',
-      surname: 'Damon',
-      image: 'img/img-placeholder.png',
-      acceptedDate: '17 August, 2016',
-      renewalDate: '16 August, 2017',
-      subscriptionType: 'Annual'
-    }];
-  })
-  .controller('CoachesCtrl', function ($scope, $ionicModal) {
-    $scope.coaches = [{
-      name: 'Matt',
-      surname: 'Smith',
-      image: 'img/img-placeholder.png',
-      acceptedDate: '13 May, 2016',
-      renewalDate: '12 June, 2016',
-      subscriptionType: 'Monthly'
-    }, {
-      name: 'John',
-      surname: 'Damon',
-      image: 'img/img-placeholder.png',
-      acceptedDate: '17 August, 2016',
-      renewalDate: '16 August, 2017',
-      subscriptionType: 'Annual'
-    }];
-  })
-
-.controller('AthletesCoachingDetailCtrl', function ($scope, $ionicModal) {
-
-  $scope.athleteCoaching = {
+  $scope.coaches = [{
     name: 'Matt',
     surname: 'Smith',
     image: 'img/img-placeholder.png',
-    acceptedDate: '13 May, 2016',
-    renewalDate: '12 June, 2016',
-    subscriptionType: 'Monthly',
-    location: 'United Kingdom',
-    age: '22',
-    sports: [
-      'Cycling',
-      'Running'
-    ],
-    events: [
-      'United Kingdom Marathon 2016',
-      'Triathlon 2016'
-    ]
+    credentials: 'Level 2'
+  }, {
+    name: 'John',
+    surname: 'Damon',
+    image: 'img/img-placeholder.png',
+    credentials: 'Level 1'
+  }];
+})
+
+.controller('SearchCoachesDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
+
+  $scope.coaches = {
+    name: 'Matt',
+    surname: 'Smith',
+    image: 'img/img-placeholder.png',
+    yearsCoaching: '2',
+    gender: 'Male',
+    dob: new Date('24 April, 1973'),
+    country: 'United Kingdom',
+    askingPrice: '100',
+    credentials: 'Level 2',
+    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
+    coachingFocus: ['Sprinting', 'Hurdles'],
+    specialisations: ['Children in Athletics', 'First aid']
   };
 
+  $scope.readMore = function () {
+    $scope.read = !$scope.read;
+    $ionicScrollDelegate.resize();
+  };
+
+  $ionicModal.fromTemplateUrl('templates/modal/coach-filter.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
+
+  $scope.shareAthlete = function () {
+    $scope.modal.show();
+  };
+
+
 })
+
+.controller('MenteesCtrl', function ($scope, $ionicModal) {
+  $scope.mentees = [{
+    name: 'Matt',
+    surname: 'Smith',
+    image: 'img/img-placeholder.png',
+    acceptedDate: new Date('13 May, 2016'),
+    renewalDate: new Date('12 June, 2016'),
+    subscriptionType: 'Monthly'
+  }, {
+    name: 'John',
+    surname: 'Damon',
+    image: 'img/img-placeholder.png',
+    acceptedDate: new Date('17 August, 2016'),
+    renewalDate: new Date('16 August, 2017'),
+    subscriptionType: 'Annual'
+  }];
+})
+
+.controller('MenteesDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
+  $scope.mentees = {
+    name: 'Matt',
+    surname: 'Smith',
+    subscriptionFee: '200',
+    image: 'img/img-placeholder.png',
+    acceptedDate: new Date('13 May, 2016'),
+    renewalDate: new Date('12 June, 2016'),
+    subscriptionType: 'Monthly',
+    yearsCoaching: '2',
+    gender: 'Male',
+    dob: new Date('24 April, 1973'),
+    country: 'United Kingdom',
+    credentials: 'Level 4',
+    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
+    coachingFocus: ['Sprinting', 'Hurdles'],
+    specialisations: ['Children in Athletics', 'First aid']
+  };
+
+  $scope.readMore = function () {
+    $scope.read = !$scope.read;
+    $ionicScrollDelegate.resize();
+  };
+})
+
 
 ;

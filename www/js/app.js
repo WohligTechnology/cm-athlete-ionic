@@ -79,7 +79,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .state('app.blogdetail', {
-    url: '/blog-detail',
+    url: '/blog/detail',
     views: {
       'menuContent': {
         templateUrl: 'templates/blog-detail.html',
@@ -99,7 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .state('app.chatdetail', {
-    url: '/chat-detail',
+    url: '/chat/detail',
     views: {
       'menuContent': {
         templateUrl: 'templates/chat-detail.html',
@@ -118,12 +118,22 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.coaches', {
-    url: '/coaches',
+  .state('app.mentees', {
+    url: '/mentees',
     views: {
       'menuContent': {
-        templateUrl: 'templates/coaches.html',
-        controller: 'CoachesCtrl'
+        templateUrl: 'templates/mentees.html',
+        controller: 'MenteesCtrl'
+      }
+    }
+  })
+
+  .state('app.mentees-detail', {
+    url: '/mentees/detail',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/mentees-detail.html',
+        controller: 'MenteesDetailCtrl'
       }
     }
   })
@@ -190,7 +200,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .state('app.injuries-detail', {
-    url: '/injuries-detail',
+    url: '/injuries/detail',
     views: {
       'menuContent': {
         templateUrl: 'templates/injuries-create.html',
@@ -200,22 +210,22 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
 
-  .state('app.athletes-coaching', {
-    url: '/athletes-coaching',
+  .state('app.search-coaches', {
+    url: '/search-coaches',
     views: {
       'menuContent': {
-        templateUrl: 'templates/athletes-coaching.html',
-        controller: 'AthletesCoachingCtrl'
+        templateUrl: 'templates/search-coaches.html',
+        controller: 'SearchCoachesCtrl'
       }
     }
   })
 
-  .state('app.athletes-coaching-detail', {
-    url: '/athletes-coaching-detail',
+  .state('app.search-coaches-detail', {
+    url: '/search-coaches/detail',
     views: {
       'menuContent': {
-        templateUrl: 'templates/athletes-coaching-detail.html',
-        controller: 'AthletesCoachingDetailCtrl'
+        templateUrl: 'templates/search-coaches-detail.html',
+        controller: 'SearchCoachesDetailCtrl'
       }
     }
   })
@@ -250,7 +260,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   }
   return function (birthdate) {
     var age = calculateAge(birthdate);
-    if (age == 0)
+    if (age === 0)
       return monthDiff(birthdate, new Date()) + ' months';
     return age + ' years';
   };
