@@ -566,6 +566,17 @@ p.bold {
 .blog-detail {
   background-color: #f1f1f1;
   margin-top: -1px;
+  .author {
+    margin: 0 !important;
+    padding: 5px 0;
+    img {
+      vertical-align: middle;
+      height: 30px;
+      width: 30px;
+      border-radius: 100%;
+      margin-right: 5px;
+    }
+  }
   .card {
     margin: 0;
     +.card {
@@ -664,15 +675,16 @@ p.bold {
   color: white;
   border-radius: 7px;
   font-size: 14px;
+  background-color: #ddd;
   &.up {
     background-color: #32ca32;
   }
+  i.ion-thumbsdown {
+    top: 3px;
+    position: relative;
+  }
   &.dn {
     background-color: #f35353;
-    i {
-      top: 3px;
-      position: relative;
-    }
   }
   i {
     font-size: 20px;

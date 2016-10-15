@@ -10246,6 +10246,15 @@ p.bold {
 .blog-detail {
   background-color: #f1f1f1;
   margin-top: -1px; }
+  .blog-detail .author {
+    margin: 0 !important;
+    padding: 5px 0; }
+    .blog-detail .author img {
+      vertical-align: middle;
+      height: 30px;
+      width: 30px;
+      border-radius: 100%;
+      margin-right: 5px; }
   .blog-detail .card {
     margin: 0; }
     .blog-detail .card + .card {
@@ -10322,14 +10331,15 @@ p.bold {
   padding: 3px 5px;
   color: white;
   border-radius: 7px;
-  font-size: 14px; }
+  font-size: 14px;
+  background-color: #ddd; }
   .th.up {
     background-color: #32ca32; }
+  .th i.ion-thumbsdown {
+    top: 3px;
+    position: relative; }
   .th.dn {
     background-color: #f35353; }
-    .th.dn i {
-      top: 3px;
-      position: relative; }
   .th i {
     font-size: 20px; }
 
