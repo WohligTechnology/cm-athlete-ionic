@@ -10603,3 +10603,10 @@ p.bold {
     line-height: 34px;
     font-size: 14px;
     color: #004a9b; }
+
+.profile-list h3 {
+  font-size: 12px;
+  color: #004a9b; }
+
+.profile-list p {
+  color: #111; }
