@@ -116,17 +116,58 @@ $ionicons-font-path: "../lib/ionic/fonts" !default; // Include all of Ionic
 .picture-hold {
   padding-top: 30px;
   text-align: center;
-  background-image: linear-gradient(to top, $positiveTo, $positive);
-  background-image: -webkit-linear-gradient(to top, $positiveTo, $positive);
-  color: white;
+  background-image: url(../img/admin-bg.jpg);
+  background-size: cover;
+  color: #000;
+  position: relative;
+  &::before {
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, .7) 0, #fff 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, .7) 0, #fff 100%);
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+  }
   &.picture-pad {
     padding-bottom: 30px;
   }
   h3 {
-    color: white;
+    color: #000;
     font-size: 18px;
     font-weight: 700;
     margin: 15px 0 5px;
+  }
+}
+
+.white-profile {
+  .list {
+    padding: 0;
+  }
+  .item {
+    border: none;
+    padding: 14px 16px;
+    &.item-long {
+      h3 {
+        margin: 0 0 10px;
+        float: none;
+      }
+      p {
+        text-align: justify;
+      }
+    }
+    h3 {
+      float: left;
+      line-height: 20px;
+      margin: 0;
+      font-weight: 700;
+    }
+    p {
+      text-align: right;
+      color: #000;
+    }
   }
 }
 
@@ -229,11 +270,6 @@ p.bold {
   padding-bottom: 20px;
   text-align: center;
   background: #fff;
-  // &.bg-white {
-  //   background: #fff;
-  //   color:#000;
-  //
-  // }
   h3 {
     font-size: 18px;
     font-weight: 700;
@@ -763,18 +799,6 @@ p.bold {
   }
 }
 
-@import "www/lib/ionic-calendar/dist/css/calendar.min";
-.monthview-selected {
-  background-color: $balanced;
-  color: #fff;
-}
-
-.calendar-event-inner,
-.monthview-primary-with-event {
-  background-color: $positive;
-  color: #fff;
-}
-
 .bar-footer.sm {
   height: 34px;
   .title {
@@ -793,4 +817,21 @@ p.bold {
   p {
     color: #111;
   }
+}
+
+.zd {
+  z-index: 1;
+  position: relative;
+}
+
+@import "www/lib/ionic-calendar/dist/css/calendar.min";
+.monthview-selected {
+  background-color: $balanced;
+  color: #fff;
+}
+
+.calendar-event-inner,
+.monthview-primary-with-event {
+  background-color: $positive;
+  color: #fff;
 }
