@@ -611,7 +611,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     value: ['Less than 20 years', '21 - 25 years', '26 - 30 years', '31 - 35 years', '36 - 40 years', 'More than 40 years']
   }, {
     name: 'Location',
-    value: ['Within 10 miles', '15 miles', '20 miles', '25 miles', 'Beyond 25 miles']
+    value: ['Within 10 miles', '11 - 15 miles', '16 - 20 miles', '21 - 25 miles', 'Beyond 25 miles']
   }, {
     name: 'Gender',
     value: ['Male', 'Female']
