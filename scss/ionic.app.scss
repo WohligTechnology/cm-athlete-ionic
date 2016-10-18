@@ -158,6 +158,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default; // Include all of Ionic
         text-align: justify;
       }
     }
+    .item-content {
+      padding: 0;
+    }
     h3 {
       float: left;
       line-height: 20px;
@@ -352,6 +355,7 @@ p.bold {
   textarea[readonly]:not(.cloned-text-input),
   select[readonly] {
     background-color: transparent;
+    opacity: 1 !important;
   }
   input,
   textarea {
@@ -561,7 +565,7 @@ p.bold {
 }
 
 .badged {
-  color: $positive;
+  color: white;
   display: inline-block;
   padding: 6px 10px;
   margin: 0;

@@ -9902,6 +9902,8 @@ a.button {
     float: none; }
   .white-profile .item.item-long p {
     text-align: justify; }
+  .white-profile .item .item-content {
+    padding: 0; }
   .white-profile .item h3 {
     float: left;
     line-height: 20px;
@@ -10242,7 +10244,7 @@ p.bold {
   float: right; }
 
 .badged {
-  color: #004a9b;
+  color: white;
   display: inline-block;
   padding: 6px 10px;
   margin: 0;

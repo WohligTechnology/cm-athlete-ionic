@@ -1,10 +1,12 @@
 <ion-view view-title="{{mentees.name}}">
-    <ion-content>
+    <ion-content class="white-profile">
         <div class="picture-hold picture-pad">
-            <div class="dp" style="background-image: url('{{mentees.image}}');"></div>
-            <h3>{{mentees.name}} {{mentees.surname}}</h3>
-            <p>{{mentees.credentials}}</p>
-            <p class="badged stable-bg">{{mentees.subscriptionType}}, {{mentees.subscriptionFee | currency : '£' : 0}}</p>
+            <div class="zd">
+                <div class="dp" style="background-image: url('{{mentees.image}}');"></div>
+                <h3>{{mentees.name}} {{mentees.surname}}</h3>
+                <p>{{mentees.credentials}}</p>
+                <p class="badged positive-bg">{{mentees.subscriptionType}}, {{mentees.subscriptionFee | currency : '£' : 0}}</p>
+            </div>
         </div>
         <ion-list>
             <ion-item class="item-text-wrap">
@@ -32,18 +34,18 @@
                 <h3>Gender</h3>
                 <p>{{mentees.gender}}</p>
             </ion-item>
-            <ion-item class="item-text-wrap">
+            <ion-item class="item-text-wrap item-long">
                 <h3>About</h3>
                 <p class="read-more text-justified" ng-class="{'auto-height': read==true}">{{mentees.about}}</p>
                 <p class="text-right bold" ng-click="readMore()">Show <span ng-if="!read">More</span><span ng-if="read">Less</span></p>
             </ion-item>
-            <ion-item class="item-text-wrap">
+            <ion-item class="item-text-wrap item-long">
                 <h3>Coaching Focus</h3>
                 <p>
                     <span class="tag-box" ng-repeat="c in mentees.coachingFocus">{{c}}</span>
                 </p>
             </ion-item>
-            <ion-item class="item-text-wrap">
+            <ion-item class="item-text-wrap item-long">
                 <h3>Specialisations</h3>
                 <p>
                     <span class="tag-box" ng-repeat="s in mentees.specialisations">{{s}}</span>

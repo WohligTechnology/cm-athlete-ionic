@@ -1,10 +1,12 @@
 <ion-view view-title="{{coaches.name}}">
-  <ion-content>
+  <ion-content class="white-profile">
     <div class="picture-hold picture-pad">
-      <span class="full sm"><i class="ion ion-alert-circled"></i> Fully Subscribed</span>
-      <div class="dp" style="background-image: url('{{coaches.image}}');"></div>
-      <h3>{{coaches.name}} {{coaches.surname}}</h3>
-      <p class="badged stable-bg">{{coaches.credentials}}</p>
+      <div class="zd">
+        <span class="full sm"><i class="ion ion-alert-circled"></i> Fully Subscribed</span>
+        <div class="dp" style="background-image: url('{{coaches.image}}');"></div>
+        <h3>{{coaches.name}} {{coaches.surname}}</h3>
+        <p class="badged positive-bg">{{coaches.credentials}}</p>
+      </div>
     </div>
     <ion-list>
       <ion-item class="item-text-wrap">
@@ -27,18 +29,18 @@
         <h3>Gender</h3>
         <p>{{coaches.gender}}</p>
       </ion-item>
-      <ion-item class="item-text-wrap">
+      <ion-item class="item-text-wrap item-long">
         <h3>About</h3>
         <p class="read-more text-justified" ng-class="{'auto-height': read==true}">{{coaches.about}}</p>
         <p class="text-right bold" ng-click="readMore()">Show <span ng-if="!read">More</span><span ng-if="read">Less</span></p>
       </ion-item>
-      <ion-item class="item-text-wrap">
+      <ion-item class="item-text-wrap item-long">
         <h3>Coaching Focus</h3>
         <p>
           <span class="tag-box" ng-repeat="c in coaches.coachingFocus">{{c}}</span>
         </p>
       </ion-item>
-      <ion-item class="item-text-wrap">
+      <ion-item class="item-text-wrap item-long">
         <h3>Specialisations</h3>
         <p>
           <span class="tag-box" ng-repeat="s in coaches.specialisations">{{s}}</span>
@@ -46,7 +48,8 @@
       </ion-item>
     </ion-list>
     <div class="padding-horizontal">
-      <button class="button button-balanced button-block">Subscribe Now</button>
+      <!--<button class="button button-balanced button-block">Subscribe Now</button>-->
+      <button class="button button-assertive button-block" disabled>Fully Subscribed</button>
     </div>
   </ion-content>
 </ion-view>
