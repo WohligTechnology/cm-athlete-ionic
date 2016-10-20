@@ -27,16 +27,18 @@
             <span class="input-label">Password</span>
             <input type="password" name="password" ng-model="formData.password">
             </label>
-          <label class="item item-input item-select">
-            <span class="input-label">Gender</span>
-            <select name="gender" ng-model="formData.gender">
-              <option value="{{g.value}}" ng-repeat="g in gender">{{g.name}}</option>
-            </select>
-          </label>
           <label class="item item-input">
             <span class="input-label">Confirm Password</span>
             <input type="password" name="repassword" ng-model="formData.repassword">
           </label>
+          <label class="item item-input item-select">
+            <span class="input-label">Gender</span>
+            <select name="gender" ng-model="formData.gender">
+              <option value="" selected>Select</option>
+              <option value="{{g.value}}" ng-repeat="g in gender">{{g.name}}</option>
+            </select>
+          </label>
+
 
         </div>
         <div class="text-center m20 padding-horizontal">

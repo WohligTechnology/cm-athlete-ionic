@@ -7,315 +7,315 @@
 angular.module('starter', ['ionic', 'starter.controllers'])
 
 .run(function ($ionicPlatform) {
-  $ionicPlatform.ready(function () {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if (window.StatusBar) {
-      StatusBar.styleBlackTranslucent();
-    }
-  });
+    $ionicPlatform.ready(function () {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            cordova.plugins.Keyboard.disableScroll(true);
+        }
+        if (window.StatusBar) {
+            StatusBar.styleBlackTranslucent();
+        }
+    });
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
-  $stateProvider
+    $stateProvider
 
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
+        .state('app', {
+        url: '/app',
+        abstract: true,
+        templateUrl: 'templates/menu.html',
+        controller: 'AppCtrl'
+    })
 
-  .state('app.profile', {
-    url: '/profile',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/profile.html',
-        controller: 'ProfileCtrl'
-      }
-    }
-  })
+    .state('app.profile', {
+        url: '/profile',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/profile.html',
+                controller: 'ProfileCtrl'
+            }
+        }
+    })
 
-  .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'LoginCtrl'
-  })
+    .state('login', {
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
+    })
 
-  .state('registration', {
-    url: '/registration',
-    templateUrl: 'templates/registration.html',
-    controller: 'RegistrationCtrl'
-  })
+    .state('registration', {
+        url: '/registration',
+        templateUrl: 'templates/registration.html',
+        controller: 'RegistrationCtrl'
+    })
 
-  .state('forgot-password', {
-    url: '/forgot-password',
-    templateUrl: 'templates/forgot-password.html',
-    controller: 'ForgotPasswordCtrl'
-  })
+    .state('forgot-password', {
+        url: '/forgot-password',
+        templateUrl: 'templates/forgot-password.html',
+        controller: 'ForgotPasswordCtrl'
+    })
 
-  .state('app.edit-profile', {
-    url: '/edit-profile',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/profile-edit.html',
-        controller: 'EditProfileCtrl'
-      }
-    }
-  })
+    .state('app.edit-profile', {
+        url: '/edit-profile',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/profile-edit.html',
+                controller: 'EditProfileCtrl'
+            }
+        }
+    })
 
-  .state('app.blog', {
-    url: '/blog',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/blog.html',
-        controller: 'BlogCtrl'
-      }
-    }
-  })
+    .state('app.blog', {
+        url: '/blog',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/blog.html',
+                controller: 'BlogCtrl'
+            }
+        }
+    })
 
-  .state('app.blogdetail', {
-    url: '/blog/detail',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/blog-detail.html',
-        controller: 'BlogDetailCtrl'
-      }
-    }
-  })
+    .state('app.blogdetail', {
+        url: '/blog/detail',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/blog-detail.html',
+                controller: 'BlogDetailCtrl'
+            }
+        }
+    })
 
-  .state('app.chat', {
-    url: '/chat',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/chat.html',
-        controller: 'ChatCtrl'
-      }
-    }
-  })
+    .state('app.chat', {
+        url: '/chat',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/chat.html',
+                controller: 'ChatCtrl'
+            }
+        }
+    })
 
-  .state('app.chatdetail', {
-    url: '/chat/detail',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/chat-detail.html',
-        controller: 'ChatDetailCtrl'
-      }
-    }
-  })
+    .state('app.chatdetail', {
+        url: '/chat/detail',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/chat-detail.html',
+                controller: 'ChatDetailCtrl'
+            }
+        }
+    })
 
-  .state('app.chat-group', {
-    url: '/chat-group',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/chat-group.html',
-        controller: 'ChatGroupCtrl'
-      }
-    }
-  })
+    .state('app.chat-group', {
+        url: '/chat-group',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/chat-group.html',
+                controller: 'ChatGroupCtrl'
+            }
+        }
+    })
 
-  .state('app.mentees', {
-    url: '/mentees',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/mentees.html',
-        controller: 'MenteesCtrl'
-      }
-    }
-  })
+    .state('app.coach', {
+        url: '/coach',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/coach.html',
+                controller: 'CoachCtrl'
+            }
+        }
+    })
 
-  .state('app.mentees-detail', {
-    url: '/mentees/detail',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/mentees-detail.html',
-        controller: 'MenteesDetailCtrl'
-      }
-    }
-  })
+    .state('app.coach-detail', {
+        url: '/coach/detail',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/coach-detail.html',
+                controller: 'CoachDetailCtrl'
+            }
+        }
+    })
 
-  .state('app.competition', {
-    url: '/competition',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/competition.html',
-        controller: 'CompetitionCtrl'
-      }
-    }
-  })
+    .state('app.competition', {
+        url: '/competition',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/competition.html',
+                controller: 'CompetitionCtrl'
+            }
+        }
+    })
 
-  .state('app.charts', {
-    url: '/charts',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/charts.html',
-        controller: 'ChartsCtrl'
-      }
-    }
-  })
+    .state('app.charts', {
+        url: '/charts',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/charts.html',
+                controller: 'ChartsCtrl'
+            }
+        }
+    })
 
-  .state('app.competition-create', {
-    url: '/competition-create',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/competition-create.html',
-        controller: 'CompetitionCreateCtrl'
-      }
-    }
-  })
+    .state('app.competition-create', {
+        url: '/competition-create',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/competition-create.html',
+                controller: 'CompetitionCreateCtrl'
+            }
+        }
+    })
 
-  .state('app.competition-detail', {
-    url: '/competition-detail',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/competition-create.html',
-        controller: 'CompetitionDetailCtrl'
-      }
-    }
-  })
+    .state('app.competition-detail', {
+        url: '/competition-detail',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/competition-create.html',
+                controller: 'CompetitionDetailCtrl'
+            }
+        }
+    })
 
-  .state('app.injuries', {
-    url: '/injuries',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/injuries.html',
-        controller: 'InjuriesCtrl'
-      }
-    }
-  })
-
-
-  .state('app.injuries-create', {
-    url: '/injuries-create',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/injuries-create.html',
-        controller: 'InjuriesCreateCtrl'
-      }
-    }
-  })
-
-  .state('app.injuries-detail', {
-    url: '/injuries/detail',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/injuries-create.html',
-        controller: 'InjuriesDetailCtrl'
-      }
-    }
-  })
+    .state('app.injuries', {
+        url: '/injuries',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/injuries.html',
+                controller: 'InjuriesCtrl'
+            }
+        }
+    })
 
 
-  .state('app.search-coaches', {
-    url: '/search-coaches',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search-coaches.html',
-        controller: 'SearchCoachesCtrl'
-      }
-    }
-  })
+    .state('app.injuries-create', {
+        url: '/injuries-create',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/injuries-create.html',
+                controller: 'InjuriesCreateCtrl'
+            }
+        }
+    })
 
-  .state('app.search-coaches-detail', {
-    url: '/search-coaches/detail',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search-coaches-detail.html',
-        controller: 'SearchCoachesDetailCtrl'
-      }
-    }
-  })
+    .state('app.injuries-detail', {
+        url: '/injuries/detail',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/injuries-create.html',
+                controller: 'InjuriesDetailCtrl'
+            }
+        }
+    })
 
-  .state('app.training-diary', {
-    url: '/training-diary',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/training-diary.html',
-        controller: 'TrainingDiaryCtrl'
-      }
-    }
-  });
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+    .state('app.search-coaches', {
+        url: '/search-coaches',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/search-coaches.html',
+                controller: 'SearchCoachesCtrl'
+            }
+        }
+    })
+
+    .state('app.search-coaches-detail', {
+        url: '/search-coaches/detail',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/search-coaches-detail.html',
+                controller: 'SearchCoachesDetailCtrl'
+            }
+        }
+    })
+
+    .state('app.training-diary', {
+        url: '/training-diary',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/training-diary.html',
+                controller: 'TrainingDiaryCtrl'
+            }
+        }
+    });
+
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/login');
 })
 
 .filter('ageConvert', function () {
-  function calculateAge(birthday) { // birthday is a date
-    var ageDifMs = Date.now() - birthday.getTime();
-    var ageDate = new Date(ageDifMs); // miliseconds from epoch
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
-  function monthDiff(d1, d2) {
-    if (d1 < d2) {
-      var months = d2.getMonth() - d1.getMonth();
-      return months <= 0 ? 0 : months;
+    function calculateAge(birthday) { // birthday is a date
+        var ageDifMs = Date.now() - birthday.getTime();
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
-    return 0;
-  }
-  return function (birthdate) {
-    var age = calculateAge(birthdate);
-    if (age === 0)
-      return monthDiff(birthdate, new Date()) + ' months';
-    return age + ' years';
-  };
+
+    function monthDiff(d1, d2) {
+        if (d1 < d2) {
+            var months = d2.getMonth() - d1.getMonth();
+            return months <= 0 ? 0 : months;
+        }
+        return 0;
+    }
+    return function (birthdate) {
+        var age = calculateAge(birthdate);
+        if (age === 0)
+            return monthDiff(birthdate, new Date()) + ' months';
+        return age + ' years';
+    };
 })
 
 .filter('truncate', function () {
-  return function (text, length, end) {
-    if (isNaN(length)) {
-      length = 10;
-    }
+    return function (text, length, end) {
+        if (isNaN(length)) {
+            length = 10;
+        }
 
-    if (end === undefined) {
-      end = '...';
-    }
+        if (end === undefined) {
+            end = '...';
+        }
 
-    if (text.length <= length || text.length - end.length <= length) {
-      return text;
-    } else {
-      return String(text).substring(0, length - end.length) + end;
-    }
-  };
+        if (text.length <= length || text.length - end.length <= length) {
+            return text;
+        } else {
+            return String(text).substring(0, length - end.length) + end;
+        }
+    };
 })
 
 .directive('readMore', function ($filter, $ionicScrollDelegate) {
-  return {
-    restrict: 'A',
-    scope: {
-      text: '=readMore',
-      labelExpand: '@readMoreLabelExpand',
-      labelCollapse: '@readMoreLabelCollapse',
-      limit: '@readMoreLimit'
-    },
-    transclude: true,
-    template: '<span ng-transclude ng-bind-html="text"></span><a href="javascript:;" class="read-more" ng-click="toggleReadMore()" ng-bind="label"></a>',
-    link: function (scope /*, element, attrs */ ) {
+    return {
+        restrict: 'A',
+        scope: {
+            text: '=readMore',
+            labelExpand: '@readMoreLabelExpand',
+            labelCollapse: '@readMoreLabelCollapse',
+            limit: '@readMoreLimit'
+        },
+        transclude: true,
+        template: '<span ng-transclude ng-bind-html="text"></span><a href="javascript:;" class="read-more" ng-click="toggleReadMore()" ng-bind="label"></a>',
+        link: function (scope /*, element, attrs */ ) {
 
-      var originalText = scope.text;
+            var originalText = scope.text;
 
-      scope.label = scope.labelExpand;
+            scope.label = scope.labelExpand;
 
-      scope.$watch('expanded', function (expandedNew) {
-        if (expandedNew) {
-          scope.text = originalText;
-          scope.label = scope.labelCollapse;
-        } else {
-          scope.text = $filter('truncate')(originalText, scope.limit, '...');
-          scope.label = scope.labelExpand;
+            scope.$watch('expanded', function (expandedNew) {
+                if (expandedNew) {
+                    scope.text = originalText;
+                    scope.label = scope.labelCollapse;
+                } else {
+                    scope.text = $filter('truncate')(originalText, scope.limit, '...');
+                    scope.label = scope.labelExpand;
+                }
+            });
+
+            scope.toggleReadMore = function () {
+                scope.expanded = !scope.expanded;
+                $ionicScrollDelegate.resize();
+            };
+
         }
-      });
-
-      scope.toggleReadMore = function () {
-        scope.expanded = !scope.expanded;
-        $ionicScrollDelegate.resize();
-      };
-
-    }
-  };
+    };
 });

@@ -1,54 +1,54 @@
-<ion-view view-title="{{mentees.name}}">
+<ion-view view-title="{{coach.name}}">
     <ion-content class="white-profile">
         <div class="picture-hold picture-pad">
             <div class="zd">
-                <div class="dp" style="background-image: url('{{mentees.image}}');"></div>
-                <h3>{{mentees.name}} {{mentees.surname}}</h3>
-                <p>{{mentees.credentials}}</p>
-                <p class="badged positive-bg">{{mentees.subscriptionType}}, {{mentees.subscriptionFee | currency : '£' : 0}}</p>
+                <div class="dp" style="background-image: url('{{coach.image}}');"></div>
+                <h3>{{coach.name}} {{coach.surname}}</h3>
+                <p>{{coach.credentials}}</p>
+                <p class="badged positive-bg">{{coach.subscriptionType}}, {{coach.subscriptionFee | currency : '£' : 0}}</p>
             </div>
         </div>
         <ion-list>
             <ion-item class="item-text-wrap">
                 <h3>Subscription Since</h3>
-                <p>{{mentees.acceptedDate | date:'dd MMMM, yyyy'}}</p>
+                <p>{{coach.acceptedDate | date:'dd MMMM, yyyy'}}</p>
             </ion-item>
             <ion-item class="item-text-wrap">
                 <h3>Next Renewal</h3>
-                <p>{{mentees.renewalDate | date:'dd MMMM, yyyy'}}</p>
+                <p>{{coach.renewalDate | date:'dd MMMM, yyyy'}}</p>
                 <ion-option-button class="button-positive">Renew Now</ion-option-button>
             </ion-item>
             <ion-item class="item-text-wrap">
                 <h3>Years of Coaching</h3>
-                <p>{{mentees.yearsCoaching}} years</p>
+                <p>{{coach.yearsCoaching}} years</p>
             </ion-item>
             <ion-item class="item-text-wrap">
                 <h3>Country</h3>
-                <p>{{mentees.country}}</p>
+                <p>{{coach.country}}</p>
             </ion-item>
             <ion-item class="item-text-wrap">
                 <h3>Age</h3>
-                <p>{{mentees.dob | ageConvert}}</p>
+                <p>{{coach.dob | ageConvert}}</p>
             </ion-item>
             <ion-item class="item-text-wrap">
                 <h3>Gender</h3>
-                <p>{{mentees.gender}}</p>
+                <p>{{coach.gender}}</p>
             </ion-item>
             <ion-item class="item-text-wrap item-long">
                 <h3>About</h3>
-                <p class="read-more text-justified" ng-class="{'auto-height': read==true}">{{mentees.about}}</p>
+                <p class="read-more text-justified" ng-class="{'auto-height': read==true}">{{coach.about}}</p>
                 <p class="text-right bold" ng-click="readMore()">Show <span ng-if="!read">More</span><span ng-if="read">Less</span></p>
             </ion-item>
             <ion-item class="item-text-wrap item-long">
                 <h3>Coaching Focus</h3>
                 <p>
-                    <span class="tag-box" ng-repeat="c in mentees.coachingFocus">{{c}}</span>
+                    <span class="tag-box" ng-repeat="c in coach.coachingFocus">{{c}}</span>
                 </p>
             </ion-item>
             <ion-item class="item-text-wrap item-long">
                 <h3>Specialisations</h3>
                 <p>
-                    <span class="tag-box" ng-repeat="s in mentees.specialisations">{{s}}</span>
+                    <span class="tag-box" ng-repeat="s in coach.specialisations">{{s}}</span>
                 </p>
             </ion-item>
         </ion-list>

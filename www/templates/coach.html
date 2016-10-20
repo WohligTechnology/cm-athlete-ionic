@@ -1,4 +1,4 @@
-<ion-view view-title="My Mentees">
+<ion-view view-title="My Coach">
     <ion-nav-buttons side="right">
         <button type="button" class="button button-icon ion-ios-plus-empty" ui-sref="app.search-coaches"></button>
     </ion-nav-buttons>
@@ -8,7 +8,7 @@
                 <label class="item-input-wrapper"><input type="text" placeholder="Coach Name"></label>
                 <button class="button button-small icon ln-magnifier"></button>
             </ion-item>
-            <ion-item class="item-avatar" ui-sref="app.mentees-detail" ng-repeat="m in mentees">
+            <ion-item class="item-avatar" ui-sref="app.coach-detail" ng-repeat="m in coach">
                 <img ng-src="{{m.image}}">
                 <h2>{{m.name}} {{m.surname}}</h2>
                 <p>

@@ -656,8 +656,8 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('MenteesCtrl', function ($scope, $ionicModal) {
-  $scope.mentees = [{
+.controller('CoachCtrl', function ($scope, $ionicModal) {
+  $scope.coach = [{
     name: 'Matt',
     surname: 'Smith',
     image: 'img/img-placeholder.png',
@@ -674,8 +674,8 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   }];
 })
 
-.controller('MenteesDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
-  $scope.mentees = {
+.controller('CoachDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
+  $scope.coach = {
     name: 'Matt',
     surname: 'Smith',
     subscriptionFee: '200',
