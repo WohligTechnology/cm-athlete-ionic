@@ -610,8 +610,8 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     name: 'Age',
     value: ['Less than 20 years', '21 - 25 years', '26 - 30 years', '31 - 35 years', '36 - 40 years', 'More than 40 years']
   }, {
-    name: 'Location',
-    value: ['Within 10 miles', '11 - 15 miles', '16 - 20 miles', '21 - 25 miles', 'Beyond 25 miles']
+    name: 'Coaching Focus',
+    value: ['Sprinting', 'Middle Distance', 'Endurance', 'Throws', 'Jumps', 'Hurdles', 'Hill/Fell Running', 'Cross Country']
   }, {
     name: 'Gender',
     value: ['Male', 'Female']
