@@ -632,7 +632,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('SearchCoachesDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
+.controller('SearchCoachesDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopup) {
 
   $scope.coaches = {
     name: 'Matt',
@@ -644,6 +644,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     country: 'United Kingdom',
     askingPrice: '100',
     credentials: 'Level 2',
+    subscriptionFull: false,
     about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
     coachingFocus: ['Sprinting', 'Hurdles'],
     specialisations: ['Children in Athletics', 'First aid']
@@ -652,6 +653,25 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.readMore = function () {
     $scope.read = !$scope.read;
     $ionicScrollDelegate.resize();
+  };
+
+  $scope.subscribeNow = function () {
+    $scope.data = {};
+    var myPopup = $ionicPopup.show({
+      template: '<textarea auto-grow type="password" ng-model="data.message"><textarea>',
+      title: '<h4>Request Subscription</h4>',
+      subTitle: 'Please enter some message!',
+      scope: $scope,
+      buttons: [{
+        text: 'Cancel'
+      }, {
+        text: '<b>Send</b>',
+        type: 'button-positive',
+        onTap: function (e) {
+          console.log($scope.data.message);
+        }
+      }, ]
+    });
   };
 
 })

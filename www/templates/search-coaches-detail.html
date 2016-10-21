@@ -2,7 +2,7 @@
   <ion-content class="white-profile">
     <div class="picture-hold picture-pad">
       <div class="zd">
-        <span class="full sm"><i class="ion ion-alert-circled"></i> Fully Subscribed</span>
+        <span class="full sm" ng-if="subscriptionFull"><i class="ion ion-alert-circled"></i> Fully Subscribed</span>
         <div class="dp" style="background-image: url('{{coaches.image}}');"></div>
         <h3>{{coaches.name}} {{coaches.surname}}</h3>
         <p class="badged positive-bg">{{coaches.credentials}}</p>
@@ -48,8 +48,8 @@
       </ion-item>
     </ion-list>
     <div class="padding-horizontal">
-      <!--<button class="button button-balanced button-block">Subscribe Now</button>-->
-      <button class="button button-assertive button-block" disabled>Fully Subscribed</button>
+      <button class="button button-balanced button-block" ng-click="subscribeNow();" ng-if="!subscriptionFull">Subscribe Now</button>
+      <button class="button button-assertive button-block" ng-if="subscriptionFull" disabled>Fully Subscribed</button>
     </div>
   </ion-content>
 </ion-view>
