@@ -652,18 +652,40 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   };
 })
 
-.controller('NotificationsCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
+.controller('NotificationsCtrl', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopup) {
   $scope.notifications = [{
     name: 'Nike Marathon London',
     type: 'Competition',
     startDate: '14 January, 2017',
     endDate: '15 January, 2017',
-    keyCompetition: true,
-    assignedAthletes: [{
-      name: 'Van Gough',
-      img: 'img/img-placeholder.png'
-    }]
+    keyCompetition: true
+  }, {
+    name: 'Mathew',
+    surname: 'Dodge',
+    type: 'coachAssign'
+  }, {
+    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    type: 'blog'
   }, ];
+
+  $scope.reason = function () {
+    $scope.data = {};
+    var myPopup = $ionicPopup.show({
+      template: '<textarea auto-grow type="password" ng-model="data.message"><textarea>',
+      title: '<h4>Reject Competition!</h4>',
+      subTitle: 'Please enter some message!',
+      scope: $scope,
+      buttons: [{
+        text: 'Cancel'
+      }, {
+        text: '<b>Reject</b>',
+        type: 'button-assertive',
+        onTap: function (e) {
+          console.log($scope.data.message);
+        }
+      }, ]
+    });
+  };
 })
 
 ;

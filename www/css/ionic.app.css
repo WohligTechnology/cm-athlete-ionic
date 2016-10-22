@@ -10503,6 +10503,9 @@ p.bold {
 .no-pad-list .item .item-content {
   padding: 16px; }
 
+.strong {
+  font-weight: 700; }
+
 .nav-left {
   text-align: left; }
 

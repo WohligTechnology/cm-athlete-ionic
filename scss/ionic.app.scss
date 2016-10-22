@@ -881,6 +881,10 @@ p.bold {
   }
 }
 
+.strong {
+  font-weight: 700;
+}
+
 @import "www/lib/ionic-calendar/dist/css/calendar.min";
 .monthview-selected {
   background-color: $balanced;

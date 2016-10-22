@@ -1,14 +1,24 @@
 <ion-view view-title="Notifications">
     <ion-content>
         <ion-list class="no-pad-list">
-            <ion-item class="item-text-wrap" ui-sref="app.competition-detail" ng-repeat="d in notifications">
+            <ion-item class="item-text-wrap" ng-repeat="d in notifications">
 
                 <!-- Competition -->
                 <div ng-if="d.type == 'Competition'">
-                    <h2>You have been assigned to the following competition "{{d.name}}"</h2>
-                    <p class="text-right">View More</p>
-                    <ion-option-button class="button-positive">Accept</ion-option-button>
-                    <ion-option-button class="button-assertive">Reject</ion-option-button>
+                    <p>You have been assigned to the following competition: <span class="strong">{{d.name}}</span></p>
+                    <button class="button button-small button-stable pull-right" ui-sref="app.competition-detail">View More</button>
+                    <button class="button button-small button-positive">Accept</button>
+                    <button class="button button-small button-assertive" ng-click="reason()">Reject</button>
+                </div>
+
+                <!-- Coach Accept/Reject -->
+                <div ng-if="d.type == 'coachAssign'">
+                    <p>{{d.name}} {{d.surname}} accepted your coaching request</p>
+                </div>
+
+                <!-- New Blog -->
+                <div ng-if="d.type == 'blog'" ui-sref="app.blogdetail">
+                    <p>New Blog: {{d.name}}</p>
                 </div>
 
             </ion-item>
