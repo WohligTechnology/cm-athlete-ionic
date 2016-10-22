@@ -222,47 +222,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('CompetitionCtrl', function ($scope, $ionicModal) {
-  $scope.data = [{
-    name: 'Nike Marathon London',
-    startDate: '14 January, 2017',
-    endDate: '15 January, 2017',
-    keyCompetition: true,
-    assignedAthletes: [{
-      name: 'Van Gough',
-      img: 'img/img-placeholder.png'
-    }]
-  }, {
-    name: 'Puma Marathon Manchester',
-    startDate: '14 January, 2017',
-    endDate: '15 January, 2017',
-    keyCompetition: false,
-    assignedAthletes: [{
-      name: 'Van Gough',
-      img: 'img/img-placeholder.png'
-    }]
-  }];
-})
-
-.controller('CompetitionCreateCtrl', function ($scope, $ionicModal) {
-
-  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
-
-  $scope.closeModal = function () {
-    $scope.modal.hide();
-  };
-
-  $scope.addAthlete = function () {
-    $scope.modal.show();
-  };
-
-})
-
 .controller('CompetitionDetailCtrl', function ($scope, $ionicModal) {
 
   $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
@@ -379,22 +338,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 })
 
 .controller('InjuriesCreateCtrl', function ($scope, $ionicModal) {
-
-  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
-
-  $scope.closeModal = function () {
-    $scope.modal.hide();
-  };
-
-  $scope.addAthlete = function () {
-    $scope.modal.show();
-  };
-
   $scope.data = {
     name: '300M Running',
     startDate: new Date("January 14, 2017 11:13:00"),
@@ -408,7 +351,10 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
       img: 'img/img-placeholder.png'
     }],
   };
+})
 
+.controller('InjuriesDetailCtrl', function ($scope, $ionicModal) {
+  $scope.data = {};
 })
 
 
@@ -712,12 +658,20 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     coachingFocus: ['Sprinting', 'Hurdles'],
     specialisations: ['Children in Athletics', 'First aid']
   };
-
-  $scope.readMore = function () {
-    $scope.read = !$scope.read;
-    $ionicScrollDelegate.resize();
-  };
 })
 
+.controller('NotificationsCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
+  $scope.notifications = [{
+    name: 'Nike Marathon London',
+    type: 'Competition',
+    startDate: '14 January, 2017',
+    endDate: '15 January, 2017',
+    keyCompetition: true,
+    assignedAthletes: [{
+      name: 'Van Gough',
+      img: 'img/img-placeholder.png'
+    }]
+  }, ];
+})
 
 ;

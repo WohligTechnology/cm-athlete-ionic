@@ -138,16 +138,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
     })
 
-    .state('app.competition', {
-        url: '/competition',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/competition.html',
-                controller: 'CompetitionCtrl'
-            }
-        }
-    })
-
     .state('app.charts', {
         url: '/charts',
         views: {
@@ -230,6 +220,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
     })
 
+    .state('app.notifications', {
+        url: '/notifications',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/notifications.html',
+                controller: 'NotificationsCtrl'
+            }
+        }
+    })
+
     .state('app.training-diary', {
         url: '/training-diary',
         views: {
@@ -294,10 +294,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             limit: '@readMoreLimit'
         },
         transclude: true,
-        template: '<span ng-transclude ng-bind-html="text"></span><a href="javascript:;" class="read-more" ng-click="toggleReadMore()" ng-bind="label"></a>',
+        template: '<span ng-transclude ng-bind-html="text"></span><a href="javascript:;" class="read-more" ng-click="toggleReadMore()" ng-if="applyLimit" ng-bind="label"></a>',
         link: function (scope /*, element, attrs */ ) {
 
             var originalText = scope.text;
+            scope.applyLimit = false;
+            if (scope.text.length >= scope.limit) {
+                scope.applyLimit = true;
+            }
 
             scope.label = scope.labelExpand;
 

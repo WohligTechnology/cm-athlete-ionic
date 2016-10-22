@@ -35,11 +35,6 @@
                 <p>{{coach.gender}}</p>
             </ion-item>
             <ion-item class="item-text-wrap item-long">
-                <h3>About</h3>
-                <p class="read-more text-justified" ng-class="{'auto-height': read==true}">{{coach.about}}</p>
-                <p class="text-right bold" ng-click="readMore()">Show <span ng-if="!read">More</span><span ng-if="read">Less</span></p>
-            </ion-item>
-            <ion-item class="item-text-wrap item-long">
                 <h3>Coaching Focus</h3>
                 <p>
                     <span class="tag-box" ng-repeat="c in coach.coachingFocus">{{c}}</span>
@@ -50,6 +45,19 @@
                 <p>
                     <span class="tag-box" ng-repeat="s in coach.specialisations">{{s}}</span>
                 </p>
+            </ion-item>
+            <ion-item class="item-text-wrap item-long">
+                <h3>Experience</h3>
+                <p class="text-justified" read-more="coach.experience" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+            </ion-item>
+            <ion-item class="item-text-wrap item-long">
+                <h3>Expertise</h3>
+                <p class="text-justified" read-more="coach.expertise" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+            </ion-item>
+            <ion-item class="item-text-wrap item-long">
+                <h3>Coaching Achievements</h3>
+                <p class="text-justified" read-more="coach.coachingAchievements" read-more-limit="140" read-more-label-expand="Read More"
+                    read-more-label-collapse="Read Less"></p>
             </ion-item>
         </ion-list>
         <div class="padding-horizontal">

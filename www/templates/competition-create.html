@@ -14,6 +14,10 @@
                 <input type="date" ng-model="data.endDate" ng-disabled="isDisabled">
             </ion-item>
             <ion-toggle toggle-class="toggle-positive" ng-model="data.keyCompetition" ng-disabled="isDisabled">Key Competition</ion-toggle>
+            <ion-item class="item-input item-block">
+                <span class="input-label">Competition Details</span>
+                <textarea auto-grow type="details" ng-model="data.details" required></textarea>
+            </ion-item>
         </ion-list>
         <div class="padding-horizontal">
             <div class="button-bar">

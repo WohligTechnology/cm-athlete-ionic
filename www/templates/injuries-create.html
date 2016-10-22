@@ -1,6 +1,6 @@
-<ion-view view-title="Testing">
+<ion-view view-title="Injury">
     <ion-nav-buttons side="right">
-        <a class="button button-clear" ui-sref="app.testing">Save</a>
+        <a class="button button-clear" ui-sref="app.injuries">Save</a>
     </ion-nav-buttons>
     <ion-content>
         <ion-list class="pro-edit text-rite">
@@ -9,15 +9,20 @@
                 <input type="text" ng-model="data.name">
             </ion-item>
             <ion-item class="item-input">
-                <span class="input-label">Start Date</span>
-                <input type="date" ng-model="data.startDate">
+                <span class="input-label">Injury Date</span>
+                <input type="date" ng-model="data.injuryDate">
+            </ion-item>
+            <ion-item class="item-input item-select">
+                <span class="input-label">Severity</span>
+                <select type="date" ng-model="data.severity"></select>
+            </ion-item>
             </ion-item>
             <ion-item class="item-input">
-                <span class="input-label">End Date</span>
-                <input type="date" ng-model="data.endDate">
+                <span class="input-label">Resume Training Date</span>
+                <input type="date" ng-model="data.resumeDate">
             </ion-item>
             <ion-item class="item-input">
-                <textarea ng-model="data.details" rows="4" placeholder="Details"></textarea>
+                <textarea auto-grow ng-model="data.details" rows="4" placeholder="Details"></textarea>
             </ion-item>
             <div class="item item-divider item-icon-right" ng-click="addAthlete();">Assign Athletes <i class="icon ion-ios-plus-empty"></i></div>
             <ion-item class="item-name item-avatar" ng-repeat="d in data.assignedAthletes" ng-if="data.assignedAthletes">

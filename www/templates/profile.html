@@ -45,32 +45,25 @@
       </ion-item>
       <ion-item class="item-text-wrap item-long">
         <h3>About</h3>
-        <p class="read-more text-justified" ng-class="{'auto-height': read==true}">{{profileData.about}}</p>
-        <p class="text-right bold" ng-click="readMore()">Show <span ng-if="!read">More</span><span ng-if="read">Less</span></p>
+        <p class="text-justified" read-more="profileData.about" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
       </ion-item>
       <ion-item class="item-text-wrap item-long">
         <h3>Events</h3>
-        <p>
-          {{profileData.events}}
-        </p>
+        <p class="text-justified" read-more="profileData.events" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
       </ion-item>
       <ion-item class="item-text-wrap item-long">
         <h3>Achievement / Personal bests</h3>
-        <p>
-          {{profileData.achievements}}
-        </p>
+        <p class="text-justified" read-more="profileData.achievements" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
       </ion-item>
       <ion-item class="item-text-wrap item-long">
         <h3>Previous Season Review</h3>
-        <p>
-          {{profileData.previousSeasonReview}}
-        </p>
+        <p class="text-justified" read-more="profileData.previousSeasonReview" read-more-limit="140" read-more-label-expand="Read More"
+          read-more-label-collapse="Read Less"></p>
       </ion-item>
       <ion-item class="item-text-wrap item-long">
         <h3>Personal Goals</h3>
-        <p>
-          {{profileData.personalGoals}}
-        </p>
+        <p class="text-justified" read-more="profileData.personalGoals" read-more-limit="140" read-more-label-expand="Read More"
+          read-more-label-collapse="Read Less"></p>
       </ion-item>
     </ion-list>
   </ion-content>

@@ -1,0 +1,17 @@
+<ion-view view-title="Notifications">
+    <ion-content>
+        <ion-list class="no-pad-list">
+            <ion-item class="item-text-wrap" ui-sref="app.competition-detail" ng-repeat="d in notifications">
+
+                <!-- Competition -->
+                <div ng-if="d.type == 'Competition'">
+                    <h2>You have been assigned to the following competition "{{d.name}}"</h2>
+                    <p class="text-right">View More</p>
+                    <ion-option-button class="button-positive">Accept</ion-option-button>
+                    <ion-option-button class="button-assertive">Reject</ion-option-button>
+                </div>
+
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
