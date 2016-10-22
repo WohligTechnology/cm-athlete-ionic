@@ -673,7 +673,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     var myPopup = $ionicPopup.show({
       template: '<textarea auto-grow type="password" ng-model="data.message"><textarea>',
       title: '<h4>Reject Competition!</h4>',
-      subTitle: 'Please enter some message!',
+      subTitle: 'Please enter some reason',
       scope: $scope,
       buttons: [{
         text: 'Cancel'
