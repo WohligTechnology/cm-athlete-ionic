@@ -1,4 +1,4 @@
-<ion-view view-title="Injury">
+<ion-view view-title="{{title}} Injury">
     <ion-nav-buttons side="right">
         <a class="button button-clear" ui-sref="app.injuries">Save</a>
     </ion-nav-buttons>
@@ -14,21 +14,18 @@
             </ion-item>
             <ion-item class="item-input item-select">
                 <span class="input-label">Severity</span>
-                <select type="date" ng-model="data.severity"></select>
+                <select type="date" ng-model="data.severity" ng-options="s as s for s in severity">
+                    <option value="">Select</option>
+                </select>
             </ion-item>
             </ion-item>
             <ion-item class="item-input">
                 <span class="input-label">Resume Training Date</span>
                 <input type="date" ng-model="data.resumeDate">
             </ion-item>
-            <ion-item class="item-input">
-                <textarea auto-grow ng-model="data.details" rows="4" placeholder="Details"></textarea>
-            </ion-item>
-            <div class="item item-divider item-icon-right" ng-click="addAthlete();">Assign Athletes <i class="icon ion-ios-plus-empty"></i></div>
-            <ion-item class="item-name item-avatar" ng-repeat="d in data.assignedAthletes" ng-if="data.assignedAthletes">
-                <img ng-src="{{d.img}}">
-                <h2>{{d.name}}</h2>
-                <ion-option-button class="button-assertive">Remove</ion-option-button>
+            <ion-item class="item-input item-block">
+                <span class="input-label">Prescribing Practitioner</span>
+                <textarea auto-grow ng-model="data.prescribingPractitioner" rows="4"></textarea>
             </ion-item>
         </ion-list>
         <div class="padding-horizontal">

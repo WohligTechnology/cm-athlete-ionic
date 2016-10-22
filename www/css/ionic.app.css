@@ -10273,6 +10273,8 @@ p.bold {
 
 .item.icon-c-l .item-content {
   padding-left: 60px; }
+  .item.icon-c-l .item-content .ln-first-aid:before {
+    margin-top: -6px; }
 
 .icon.icon-circled {
   background-color: #c4c4c4;

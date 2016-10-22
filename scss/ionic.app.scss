@@ -597,6 +597,11 @@ p.bold {
 
 .item.icon-c-l .item-content {
   padding-left: 60px;
+  .ln-first-aid {
+    &:before {
+      margin-top: -6px;
+    }
+  }
 }
 
 .icon.icon-circled {

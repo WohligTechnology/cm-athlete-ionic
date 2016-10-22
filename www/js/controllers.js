@@ -257,30 +257,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-
-.controller('InjuriesCtrl', function ($scope, $ionicModal) {
-  $scope.data = [{
-    name: '800M Running',
-    startDate: '14 January, 2017',
-    endDate: '15 January, 2017',
-    details: '',
-    assignedAthletes: [{
-      name: 'Van Gough',
-      img: 'img/img-placeholder.png'
-    }],
-  }, {
-    name: '5KM Cycling',
-    startDate: '14 January, 2017',
-    endDate: '15 January, 2017',
-    details: '',
-    assignedAthletes: [{
-      name: 'Van Gough',
-      img: 'img/img-placeholder.png'
-    }],
-  }];
-
-})
-
 .controller('ChartsCtrl', function ($scope, $ionicModal) {
   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
   $scope.series = ['Series A', 'Series B'];
@@ -337,24 +313,40 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
+.controller('InjuriesCtrl', function ($scope, $ionicModal) {
+  $scope.data = [{
+    name: 'Leg Injury',
+    injuryDate: new Date("January 14, 2017 11:13:00"),
+    severity: 'Minor',
+    resumeDate: new Date("January 15, 2017 11:13:00"),
+    prescribingPractitioner: ''
+  }, {
+    name: 'Arm Injury',
+    injuryDate: new Date("January 14, 2017 11:13:00"),
+    severity: 'Minor',
+    resumeDate: new Date("January 15, 2017 11:13:00"),
+    prescribingPractitioner: ''
+  }];
+
+})
+
 .controller('InjuriesCreateCtrl', function ($scope, $ionicModal) {
-  $scope.data = {
-    name: '300M Running',
-    startDate: new Date("January 14, 2017 11:13:00"),
-    endDate: new Date("January 15, 2017 11:13:00"),
-    details: '300M Running on Ronal Ground',
-    assignedAthletes: [{
-      name: 'Van Gough',
-      img: 'img/img-placeholder.png'
-    }, {
-      name: 'Samuel Trump',
-      img: 'img/img-placeholder.png'
-    }],
-  };
+  $scope.data = {};
+  $scope.title = 'Add';
+  $scope.severity = ['Minor', 'Moderate', 'Severe'];
+
 })
 
 .controller('InjuriesDetailCtrl', function ($scope, $ionicModal) {
-  $scope.data = {};
+  $scope.data = {
+    name: 'Leg Injury',
+    injuryDate: new Date("January 14, 2017 11:13:00"),
+    severity: 'Minor',
+    resumeDate: new Date("January 15, 2017 11:13:00"),
+    prescribingPractitioner: ''
+  };
+  $scope.title = 'Edit';
+  $scope.severity = ['Minor', 'Moderate', 'Severe'];
 })
 
 

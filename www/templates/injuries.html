@@ -5,9 +5,9 @@
     <ion-content>
         <ion-list>
             <ion-item class="item-icon-left icon-c-l" ui-sref="app.injuries-detail" ng-repeat="d in data">
-                <i class="icon icon-circled ln-speed-fast"></i>
+                <i class="icon icon-circled ln-first-aid" ng-class="{'assertive': live==true}"></i>
                 <h2>{{d.name}}</h2>
-                <p>{{d.startDate}} - {{d.endDate}}</p>
+                <p>{{d.injuryDate|date:'dd MMMM yyyy'}} - {{d.resumeDate|date:'dd MMMM yyyy'}}</p>
                 <ion-option-button class="button-assertive"><i class="icon ln-trash"></i></ion-option-button>
             </ion-item>
         </ion-list>
