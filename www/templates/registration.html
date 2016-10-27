@@ -33,18 +33,14 @@
           </label>
           <label class="item item-input item-select">
             <span class="input-label">Gender</span>
-            <select name="gender" ng-model="formData.gender">
+            <select name="gender" ng-model="formData.gender" ng-options="g.value as g.name for g in gender">
               <option value="" selected>Select</option>
-              <option value="{{g.value}}" ng-repeat="g in gender">{{g.name}}</option>
             </select>
           </label>
-
-
         </div>
         <div class="text-center m20 padding-horizontal">
           <button class="button button-positive button-block" type="submit">Register Now</button>
         </div>
     </form>
-
   </ion-content>
 </ion-view>
