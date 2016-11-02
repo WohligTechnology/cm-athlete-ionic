@@ -639,7 +639,10 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     credentials: 'Level 4',
     about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
     coachingFocus: ['Sprinting', 'Hurdles'],
-    specialisations: ['Children in Athletics', 'First aid']
+    specialisations: ['Children in Athletics', 'First aid'],
+    experience: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    expertise: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    coachingAchievements: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   };
 })
 

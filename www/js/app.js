@@ -276,10 +276,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       end = '...';
     }
 
-    if (text.length <= length || text.length - end.length <= length) {
-      return text;
-    } else {
-      return String(text).substring(0, length - end.length) + end;
+    if (text) {
+      if (text.length <= length || text.length - end.length <= length) {
+        return text;
+      } else {
+        return String(text).substring(0, length - end.length) + end;
+      }
     }
   };
 })
@@ -299,8 +301,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
       var originalText = scope.text;
       scope.applyLimit = false;
-      if (scope.text.length >= scope.limit) {
-        scope.applyLimit = true;
+
+      if (scope.text) {
+        if (scope.text.length >= scope.limit) {
+          scope.applyLimit = true;
+        }
       }
 
       scope.label = scope.labelExpand;
