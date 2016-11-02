@@ -332,7 +332,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('InjuriesCreateCtrl', function ($scope, $ionicModal) {
   $scope.data = {};
-  $scope.title = 'Add';
+  $scope.title = 'Create';
   $scope.severity = ['Minor', 'Moderate', 'Severe'];
 
 })
