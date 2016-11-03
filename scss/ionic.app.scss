@@ -898,6 +898,14 @@ p.bold {
   text-align: center;
 }
 
+.stripped {
+  .item {
+    &:nth-child(odd) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
 @import "www/lib/ionic-calendar/dist/css/calendar.min";
 .monthview-selected {
   background-color: $balanced;
