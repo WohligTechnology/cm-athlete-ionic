@@ -160,22 +160,22 @@ $ionicons-font-path: "../lib/ionic/fonts" !default; // Include all of Ionic
   .item {
     border: none;
     padding: 14px 16px;
+    p {
+      text-align: justify;
+      &::after {
+        clear: both;
+      }
+      &::before,
+      &::after {
+        display: table;
+        content: "";
+        line-height: 0;
+      }
+    }
     &.item-long {
       h3 {
         margin: 0 0 5px;
         float: none;
-      }
-      p {
-        text-align: justify;
-        &::after {
-          clear: both;
-        }
-        &::before,
-        &::after {
-          display: table;
-          content: "";
-          line-height: 0;
-        }
       }
     }
     .item-content {
