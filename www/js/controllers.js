@@ -101,14 +101,12 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     title: 'The Strongest Woman I’ve Ever Known',
     author: 'Matt Damon',
     image: 'http://d2gd8qsu8uml9u.cloudfront.net/uploads/AP_4657469935821-680x384.jpg',
-    date: '4th October 2015',
-    rating: '4.5'
+    date: '4th October 2015'
   }, {
     title: 'What You Dont Know About: Being a GM',
     author: 'Matt Damon',
     image: 'http://d2gd8qsu8uml9u.cloudfront.net/uploads/AP_234024109023-680x340.jpg',
-    date: '3rd November 2015',
-    rating: '3.5'
+    date: '3rd November 2015'
   }];
 
   $scope.like = 0;
