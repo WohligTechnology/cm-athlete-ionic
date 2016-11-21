@@ -4,6 +4,36 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
+.controller('RegistrationCtrl', function ($scope, $state, $ionicPopup, MyServices) {
+
+  $scope.formData = {};
+
+  $scope.gender = ['Male', 'Female'];
+
+  MyServices.getCountries(function (data) {
+    $scope.countries = data;
+  });
+
+  $scope.submit = function (data) {
+    var myPopup = $ionicPopup.show({
+      template: '<p>Do you agree to the Coach Mentor Terms of Service and Privacy Policy?</p>',
+      title: 'Terms & Conditions',
+      scope: $scope,
+      buttons: [{
+        text: 'No'
+      }, {
+        text: '<b>Yes</b>',
+        type: 'button-positive',
+        onTap: function (e) {
+          console.log(data);
+          $state.go('app.profile');
+        }
+      }]
+    });
+  };
+
+})
+
 .controller('LoginCtrl', function ($scope, $ionicModal, $timeout) {
   $ionicModal.fromTemplateUrl('templates/modal/forgot-password.html', {
     scope: $scope,
@@ -349,62 +379,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.severity = ['Minor', 'Moderate', 'Severe'];
 })
 
-
-.controller('RegistrationCtrl', function ($scope, $state, $ionicPopup, MyServices) {
-
-  $scope.formData = {};
-  $scope.coachingFocus = [
-    'Sprinting', 'Middle Distance', 'Endurance', 'Throws', 'Jumps', 'Hurdles', 'Hill/Fell Running', 'Cross Country'
-  ];
-  $scope.specialisations = [
-    'Coaching athletes with a disability', 'Coaching female athletes', 'Eating disorders', 'First aid', 'Long-term athlete development', 'Mentored practice', 'Strength and conditioning', 'Fitness in Running and Walking', 'Children in Athletics'
-  ];
-
-  $scope.submit = function (data) {
-    // An elaborate, custom popup
-    var myPopup = $ionicPopup.show({
-      template: '<p>Do you agree to the Coach Mentor Terms of Service and Privacy Policy?</p>',
-      title: 'Terms & Conditions',
-      scope: $scope,
-      buttons: [{
-        text: 'No'
-      }, {
-        text: '<b>Yes</b>',
-        type: 'button-positive',
-        onTap: function (e) {
-          console.log(data);
-          $state.go('app.profile');
-        }
-      }]
-    });
-  };
-
-  $scope.gender = [{
-    name: 'Male',
-    value: 'Male'
-  }, {
-    name: 'Female',
-    value: 'Female'
-  }];
-
-  $scope.credentials = [{
-    name: 'Level 1',
-    value: 'Level 1'
-  }, {
-    name: 'Level 2',
-    value: 'Level 2'
-  }, {
-    name: 'Level 3',
-    value: 'Level 3'
-  }, {
-    name: 'Level 4',
-    value: 'Level 4'
-  }];
-
-  $scope.countries = MyServices.getCountries();
-
-})
-
 .controller('EditProfileCtrl', function ($scope, $state, MyServices, $ionicModal, $filter) {
   $scope.formData = {
     name: 'Usain',
@@ -430,15 +404,11 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     $state.go('app.profile');
   };
 
-  $scope.gender = [{
-    name: 'Male',
-    value: 'Male'
-  }, {
-    name: 'Female',
-    value: 'Female'
-  }];
+  $scope.gender = ['Male', 'Female'];
 
-  $scope.countries = MyServices.getCountries();
+  MyServices.getCountries(function (data) {
+    $scope.countries = data;
+  });
 
   $ionicModal.fromTemplateUrl('templates/modal/password.html', {
     id: 1,

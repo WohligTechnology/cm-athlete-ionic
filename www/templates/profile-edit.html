@@ -39,7 +39,7 @@
           </label>
           <label class="item item-input item-select">
             <span class="input-label">Gender</span>
-            <select name="gender" ng-model="formData.gender" ng-options="g.value as g.name for g in gender">
+            <select name="gender" ng-model="formData.gender" ng-options="g as g for g in gender">
               <option value="">Select</option>
             </select>
           </label>
