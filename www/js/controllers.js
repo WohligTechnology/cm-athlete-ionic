@@ -14,6 +14,29 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     $scope.countries = data;
   });
 
+  //Password Validator
+  $scope.valid1 = false;
+  $scope.valid2 = false;
+  $scope.passwordValidator = function (password) {
+    $scope.passwordValidate = true;
+    if (password && password.length >= 8) {
+      $scope.valid1 = true;
+    } else {
+      $scope.valid1 = false;
+    }
+    if (/([a-zA-Z])/.test(password) && /([0-9])/.test(password)) {
+      $scope.valid2 = true;
+    } else {
+      $scope.valid2 = false;
+    }
+    if ($scope.valid1 && $scope.valid2) {
+      $scope.passwordValidate = false;
+    } else {
+      $scope.passwordValidate = true;
+    }
+  };
+
+  //Terms Popup
   $scope.submit = function (data) {
     var myPopup = $ionicPopup.show({
       template: '<p>Do you agree to the Coach Mentor Terms of Service and Privacy Policy?</p>',
@@ -69,13 +92,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     achievements: '-',
     previousSeasonReview: '-',
     personalGoals: '-'
-  };
-
-  $scope.read = false;
-
-  $scope.readMore = function () {
-    $scope.read = !$scope.read;
-    $ionicScrollDelegate.resize();
   };
 
 })
@@ -547,11 +563,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
     coachingFocus: ['Sprinting', 'Hurdles'],
     specialisations: ['Children in Athletics', 'First aid']
-  };
-
-  $scope.readMore = function () {
-    $scope.read = !$scope.read;
-    $ionicScrollDelegate.resize();
   };
 
   $scope.subscribeNow = function () {
