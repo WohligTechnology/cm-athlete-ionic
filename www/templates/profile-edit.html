@@ -1,7 +1,4 @@
 <ion-view view-title="Edit Profile">
-  <ion-nav-buttons side="right">
-    <button class="button button-clear" type="button" ng-click="submit(formData);">Save</button>
-  </ion-nav-buttons>
   <ion-content>
     <form name="formName" ng-submit="submit(formData);">
       <div class="pic-edit">
@@ -12,39 +9,39 @@
       </div>
       <div class="pro-edit text-rite">
         <div class="list">
-          <label class="item item-input">
+          <label class="item item-input" ng-class="{'err': formName.name.$invalid && formName.name.$touched}">
             <span class="input-label">Forename*</span>
-            <input type="text" placeholder="Name" name="name" ng-model="formData.name" maxlength="35" required>
+            <input type="text" name="name" ng-model="formData.name" maxlength="35" required>
           </label>
-          <label class="item item-input">
+          <label class="item item-input" ng-class="{'err': formName.surname.$invalid && formName.surname.$touched}">
             <span class="input-label">Surname*</span>
-            <input type="text" placeholder="Surname" name="surname" ng-model="formData.surname" maxlength="35" required>
+            <input type="text" name="surname" ng-model="formData.surname" maxlength="35" required>
           </label>
-          <label class="item item-input">
-            <span class="input-label">Email Address*</span>
-            <input type="email" placeholder="Email Address" name="email" ng-model="formData.email" required>
+          <label class="item item-input" ng-class="{'err': formName.email.$invalid && formName.email.$touched}">
+            <span class="input-label">Email Address  <i class="icon ion-android-lock"></i></span>
+            <input type="email" name="email" ng-model="formData.email" required readonly>
           </label>
           <label class="item item-input" ng-click="changePassword()">
             <span class="input-label">Change Password</span>
-            <input type="password" placeholder="Enter password" name="password" ng-model="dummyPassword" readonly>
+            <input type="password" name="password" ng-model="dummyPassword" readonly>
           </label>
-          <label class="item item-input item-select">
+          <label class="item item-input item-select" ng-class="{'err': formName.gender.$invalid && formName.gender.$touched}">
             <span class="input-label">Country*</span>
             <select name="country" ng-model="formData.country" ng-options="c.name as c.name for c in countries" required>
               <option value="">Select</option>
             </select>
           </label>
-          <label class="item item-input item-select">
+          <label class="item item-input item-select" ng-class="{'err': formName.gender.$invalid && formName.gender.$touched}">
             <span class="input-label">Gender*</span>
             <select name="gender" ng-model="formData.gender" ng-options="g as g for g in gender" required>
               <option value="">Select</option>
             </select>
           </label>
           <label class="item item-input">
-            <span class="input-label">Phone Number*</span>
-            <input type="tel" placeholder="Phone Number" name="contact" ng-model="formData.contact" required>
+            <span class="input-label">Phone Number <i class="icon ion-android-lock"></i></span>
+            <input type="tel" name="contact" ng-model="formData.contact" required readonly>
           </label>
-          <label class="item item-input">
+          <label class="item item-input" ng-class="{'err': formName.dob.$invalid && formName.dob.$touched}">
             <span class="input-label">Date of Birth*</span>
             <input type="date" name="dob" ng-model="formData.dob" required>
           </label>

@@ -35,7 +35,7 @@
             <br>
             <span><i class="icon ion-alert-circled assertive" ng-class="{'ion-checkmark balanced': valid2}"></i> Alphanumeric characters</span>
           </ion-item>
-          <label class="item item-input" ng-class="{'err': passwordValidate}">
+          <label class="item item-input" ng-class="{'err': passwordInvalid}">
             <span class="input-label">Password</span>
             <input type="password" name="password" ng-change="passwordValidator(formData.password);" maxlength="15" ng-model="formData.password" required>
             </label>
@@ -51,7 +51,7 @@
           </label>
         </div>
         <div class="text-center m20 padding-horizontal">
-          <button class="button button-positive button-block" ng-disabled="formName.$invalid" type="submit">Register Now</button>
+          <button class="button button-positive button-block" ng-disabled="formName.$invalid || passwordInvalid" type="submit">Register Now</button>
         </div>
     </form>
   </ion-content>
