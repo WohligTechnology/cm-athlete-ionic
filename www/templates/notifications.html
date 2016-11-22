@@ -5,8 +5,10 @@
         <!-- Competition -->
         <div ng-if="d.type == 'Competition'">
           <p ui-sref="app.competition-detail">You have been assigned to the following competition: <span class="strong">{{d.name}}</span>.</p>
-          <button class="button button-small button-positive">Accept</button>
-          <button class="button button-small button-assertive" ng-click="reason()">Reject</button>
+          <div class="button-bar">
+            <button class="button button-small button-positive">Accept</button>
+            <button class="button button-small button-assertive" ng-click="reason()">Reject</button>
+          </div>
         </div>
         <!-- Coach Accept/Reject -->
         <div ng-if="d.type == 'coachAssign'">
