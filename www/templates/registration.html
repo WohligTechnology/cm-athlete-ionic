@@ -25,15 +25,11 @@
             <span class="input-label">Email Address</span>            
             <input type="email" name="email" ng-model="formData.email" required>
           </label>
-          <label class="item item-input" ng-class="{'err': formName.dob.$invalid && formName.dob.$touched}">
-            <span class="input-label">Date of Birth</span>
-            <input type="date" name="dob" ng-model="formData.dob" required>
-          </label>
           <ion-item class="item-divider item-text-wrap small-text">
             Password must contain: <br>
-            <span> <i class="icon ion-alert-circled assertive" ng-class="{'ion-checkmark balanced': valid1}"></i> Atleast 8 characters</span>
+            <span> <i class="icon ion-alert-circled assertive" ng-class="{'ion-checkmark balanced': valid1}"></i> atleast 8 &amp; atmost 15 characters</span>
             <br>
-            <span><i class="icon ion-alert-circled assertive" ng-class="{'ion-checkmark balanced': valid2}"></i> Alphanumeric characters</span>
+            <span><i class="icon ion-alert-circled assertive" ng-class="{'ion-checkmark balanced': valid2}"></i> alphanumeric characters</span>
           </ion-item>
           <label class="item item-input" ng-class="{'err': passwordInvalid}">
             <span class="input-label">Password</span>
@@ -43,6 +39,10 @@
             <span class="input-label">Confirm Password</span>
             <input type="password" name="repassword" ng-model="formData.repassword" maxlength="15" required>
           </label>
+          <label class="item item-input" ng-class="{'err': formName.dob.$invalid && formName.dob.$touched}">
+            <span class="input-label">Date of Birth</span>
+            <input type="date" name="dob" ng-model="formData.dob" required>
+          </label>
           <label class="item item-input item-select" ng-class="{'err': formName.gender.$invalid && formName.gender.$touched}">
             <span class="input-label">Gender</span>
             <select name="gender" ng-model="formData.gender" ng-options="g as g for g in gender" required>
@@ -51,7 +51,8 @@
           </label>
         </div>
         <div class="text-center m20 padding-horizontal">
-          <button class="button button-positive button-block" ng-disabled="formName.$invalid || passwordInvalid" type="submit">Register Now</button>
+          <button class="button button-positive button-block" ng-disabled="formName.$invalid || passwordInvalid || formData.password != formData.repassword"
+            type="submit">Register Now</button>
         </div>
     </form>
   </ion-content>
