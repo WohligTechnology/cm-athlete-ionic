@@ -474,6 +474,29 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     }
   };
 
+  //Password Validator
+  $scope.passwordData = {};
+  $scope.valid1 = false;
+  $scope.valid2 = false;
+  $scope.passwordValidator = function (password) {
+    $scope.passwordInvalid = true;
+    if (password && password.length >= 8) {
+      $scope.valid1 = true;
+    } else {
+      $scope.valid1 = false;
+    }
+    if (/([a-zA-Z])/.test(password) && /([0-9])/.test(password)) {
+      $scope.valid2 = true;
+    } else {
+      $scope.valid2 = false;
+    }
+    if ($scope.valid1 && $scope.valid2) {
+      $scope.passwordInvalid = false;
+    } else {
+      $scope.passwordInvalid = true;
+    }
+  };
+
 })
 
 .controller('SearchCoachesCtrl', function ($scope, $ionicModal) {
