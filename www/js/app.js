@@ -246,6 +246,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('ageConvert', function () {
   function calculateAge(birthday) { // birthday is a date
+    birthday = new Date(birthday);
     var ageDifMs = Date.now() - birthday.getTime();
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
@@ -379,4 +380,29 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
 
   };
-});
+})
+
+
+.filter('uploadpath', function () {
+  return function (input, width, height, style) {
+    var other = "";
+    if (width && width !== "") {
+      other += "&width=" + width;
+    }
+    if (height && height !== "") {
+      other += "&height=" + height;
+    }
+    if (style && style !== "") {
+      other += "&style=" + style;
+    }
+    if (input) {
+      if (input.indexOf('https://') == -1) {
+        return imgpath + "?file=" + input + other;
+      } else {
+        return input;
+      }
+    }
+  };
+})
+
+;

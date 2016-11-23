@@ -14,8 +14,9 @@
     <ion-content class="top-statusbar">
       <ion-list>
         <ion-item class="item-avatar" menu-close ui-sref="app.profile" ui-sref-active="on">
-          <img src="img/profile-pic.png">
-          <h2>Usain Bolt</h2>
+          <div class="img-avatar" style="background-image: url({{profileData.profilePic | uploadpath}});" ng-if="profileData.profilePic"></div>
+          <div class="img-avatar" style="background-image: url(img/img-placeholder.png);" ng-if="!profileData.profilePic"></div>
+          <h2>{{profileData.name}} {{profileData.surname}}</h2>
           <p>Athlete</p>
         </ion-item>
         <ion-item class="item-icon-left" menu-close ui-sref="app.notifications" ui-sref-active="on">
@@ -43,7 +44,7 @@
         <ion-item class="item-icon-left" menu-close ui-sref="app.analytics" ui-sref-active="on">
           <i class="icon ln-chart-growth"></i> Analytics
         </ion-item>
-        <ion-item class="item-icon-left" menu-close ui-sref="login">
+        <ion-item class="item-icon-left" menu-close ng-click="logout()">
           <i class="icon ln-power"></i> Log out
         </ion-item>
       </ion-list>

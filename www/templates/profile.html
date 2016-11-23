@@ -7,11 +7,15 @@
     <a class="button button-icon icon ln-earth ln-fit" ui-sref="app.notifications"><span class="badge-icon assertive-bg">1</span></a>
   </ion-nav-buttons>
   <ion-content class="white-profile">
+    <div class="warning-bar assertive-bg text-center" ui-sref="app.edit-profile" ng-if="profileIncomplete()">
+      <i class="ion ion-alert-circled"></i> Please complete your profile!
+    </div>
     <div class="picture-hold">
       <div class="zd">
-        <div class="dp" style="background-image: url({{profileData.image}});"></div>
+        <div class="dp" style="background-image: url({{profileData.profilePic | uploadpath}});" ng-if="profileData.profilePic"></div>
+        <div class="dp" style="background-image: url(img/img-placeholder.png);" ng-if="!profileData.profilePic"></div>
         <h3>{{profileData.name}} {{profileData.surname}}</h3>
-        <p>{{profileData.dob | ageConvert}}</p>
+        <p ng-if="profileData.country">{{profileData.country}}</p>
         <div class="main-info">
           <div class="row">
             <div class="col">
@@ -19,23 +23,19 @@
               <p>Gender</p>
             </div>
             <div class="col">
-              <h3><span ng-if="!profileData.sport">-</span>{{profileData.sport}}</h3>
-              <p>Sport</p>
+              <h3>{{profileData.dob | ageConvert}}</h3>
+              <p>Age</p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <ion-list class="stripped">
-      <ion-item class="item-text-wrap">
-        <h3>Country</h3>
-        <p>{{profileData.country}}</p>
-      </ion-item>
-      <ion-item class="item-text-wrap">
+      <ion-item class="item-text-wrap" ng-if="profileData.contact">
         <h3>Phone Number</h3>
         <p>{{profileData.contact}}</p>
       </ion-item>
-      <ion-item class="item-text-wrap">
+      <ion-item class="item-text-wrap" ng-if="profileData.email">
         <h3>Email Address</h3>
         <p>{{profileData.email}}</p>
       </ion-item>
@@ -44,23 +44,27 @@
         <p>{{profileData.dob | date:'dd MMMM, yyyy'}}</p>
       </ion-item>
       <ion-item class="item-text-wrap item-long">
+        <h3>Sport</h3>
+        <p class="text-justified" read-more="profileData.sports" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+      </ion-item>
+      <ion-item class="item-text-wrap item-long" ng-if="profileData.about">
         <h3>About</h3>
         <p class="text-justified" read-more="profileData.about" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
       </ion-item>
-      <ion-item class="item-text-wrap item-long">
+      <ion-item class="item-text-wrap item-long" ng-if="profileData.events">
         <h3>Events</h3>
         <p class="text-justified" read-more="profileData.events" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
       </ion-item>
-      <ion-item class="item-text-wrap item-long">
+      <ion-item class="item-text-wrap item-long" ng-if="profileData.achievements">
         <h3>Achievement / Personal bests</h3>
         <p class="text-justified" read-more="profileData.achievements" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
       </ion-item>
-      <ion-item class="item-text-wrap item-long">
+      <ion-item class="item-text-wrap item-long" ng-if="profileData.previousSeasonReview">
         <h3>Previous Season Review</h3>
         <p class="text-justified" read-more="profileData.previousSeasonReview" read-more-limit="140" read-more-label-expand="Read More"
           read-more-label-collapse="Read Less"></p>
       </ion-item>
-      <ion-item class="item-text-wrap item-long">
+      <ion-item class="item-text-wrap item-long" ng-if="profileData.personalGoals">
         <h3>Personal Goals</h3>
         <p class="text-justified" read-more="profileData.personalGoals" read-more-limit="140" read-more-label-expand="Read More"
           read-more-label-collapse="Read Less"></p>

@@ -979,6 +979,12 @@ p.bold {
   left: 0;
 }
 
+.warning-bar {
+  color: white;
+  font-size: 14px;
+  padding: 10px;
+}
+
 @import "www/lib/ionic-calendar/dist/css/calendar.min";
 .monthview-selected {
   background-color: $balanced;

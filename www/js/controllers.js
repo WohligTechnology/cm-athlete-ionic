@@ -1,18 +1,42 @@
 angular.module('starter.controllers', ['starter.services', 'checklist-model', 'chart.js', 'ui.rCalendar'])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
-
+.controller('LoadingCtrl', function ($scope, $ionicModal, $timeout, $state, $rootScope, MyServices, $ionicHistory) {
+  $scope.loadingData = MyServices.getUser();
+  if ($scope.loadingData.accessToken) {
+    $state.go('app.profile');
+  } else {
+    $state.go('login');
+  }
 })
 
-.controller('RegistrationCtrl', function ($scope, $state, $ionicPopup, MyServices) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $state) {
+  $scope.profileData = MyServices.getUser();
+
+  // Log out
+  $scope.logout = function () {
+    $.jStorage.flush();
+    $state.go('login');
+  };
+})
+
+.controller('RegistrationCtrl', function ($scope, $state, $ionicPopup, MyServices, $ionicLoading, $filter) {
 
   $scope.formData = {};
 
   $scope.gender = ['Male', 'Female'];
 
-  MyServices.getCountries(function (data) {
-    $scope.countries = data;
-  });
+  $scope.maxDate = $filter('date')(new Date(), 'yyyy-MM-dd');
+
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
 
   //Password Validator
   $scope.valid1 = false;
@@ -36,8 +60,24 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     }
   };
 
+  //Submit Form
+  $scope.submitData = function (formData) {
+    $scope.showLoading('Please wait...', 10000);
+    MyServices.register(formData, function (data) {
+      if (data.value === true) {
+        $scope.formData = {};
+        $scope.hideLoading();
+        $scope.showLoading('Registration Successful!', 2000);
+        $state.go('login');
+      } else {
+        $scope.hideLoading();
+        $scope.showLoading('Registration Failed!', 2000);
+      }
+    });
+  };
+
   //Terms Popup
-  $scope.submit = function (data) {
+  $scope.termsPopup = function (data) {
     var myPopup = $ionicPopup.show({
       template: '<p>Do you agree to the Coach Mentor Terms of Service and Privacy Policy?</p>',
       title: 'Terms & Conditions',
@@ -48,8 +88,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
         text: '<b>Yes</b>',
         type: 'button-positive',
         onTap: function (e) {
-          console.log(data);
-          $state.go('app.profile');
+          $scope.submitData(data);
         }
       }]
     });
@@ -57,7 +96,10 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('LoginCtrl', function ($scope, $ionicModal, $timeout) {
+.controller('LoginCtrl', function ($scope, $state, $ionicPopup, MyServices, $ionicLoading, $ionicModal, $ionicHistory) {
+  $ionicHistory.clearCache();
+  $ionicHistory.clearHistory();
+  $ionicHistory.removeBackView();
   $ionicModal.fromTemplateUrl('templates/modal/forgot-password.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -70,31 +112,234 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.closeModal = function () {
     $scope.modal.hide();
   };
+
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+
+  //Submit Form
+  $scope.submitData = function (formData) {
+    $scope.showLoading('Please wait...', 10000);
+    MyServices.login(formData, function (data) {
+      if (data.value === true) {
+        $scope.formData = {};
+        $scope.hideLoading();
+        $scope.showLoading('Login Successful!', 2000);
+        MyServices.setUser(data.data);
+        $state.go('app.profile');
+      } else {
+        $scope.hideLoading();
+        $scope.showLoading(data.data.message, 2000);
+      }
+    });
+  };
 })
 
 .controller('ForgotPasswordCtrl', function ($scope, $ionicModal, $timeout) {
 
 })
 
-.controller('ProfileCtrl', function ($scope, $ionicScrollDelegate) {
-  $scope.profileData = {
-    name: 'Usain',
-    surname: 'Bolt',
-    image: 'img/profile-pic.png',
-    email: 'sachin@gmail.com',
-    gender: 'Male',
-    contact: '+919098765324',
-    dob: new Date("September 7, 1989"),
-    country: 'United Kingdom',
-    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
-    sport: 'Running',
-    events: '400m Relay, 32KM Marathon',
-    achievements: '-',
-    previousSeasonReview: '-',
-    personalGoals: '-'
+.controller('ProfileCtrl', function ($scope, $ionicScrollDelegate, $ionicHistory, MyServices, $ionicLoading) {
+  $ionicHistory.clearCache();
+  $ionicHistory.clearHistory();
+  $ionicHistory.removeBackView();
+  $scope.profileData = MyServices.getUser();
+
+  //Profile Incomplete Check
+  $scope.profileIncomplete = function () {
+    if (!$scope.profileData.country || !$scope.profileData.contact || !$scope.profileData.about || !$scope.profileData.events || !$scope.profileData.achievements || !$scope.profileData.previousSeasonReview || !$scope.profileData.personalGoals) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+})
+
+
+.controller('EditProfileCtrl', function ($scope, $state, MyServices, $ionicModal, $filter, $ionicLoading) {
+  $scope.formData = MyServices.getUser();
+  $scope.formData.dob = new Date($scope.formData.dob);
+  $scope.dummyPassword = '12345678';
+
+  $scope.maxDate = $filter('date')(new Date(), 'yyyy-MM-dd');
+
+  $scope.gender = ['Male', 'Female'];
+
+  MyServices.getCountries(function (data) {
+    $scope.countries = data;
+  });
+
+  //Profile Incomplete Check
+  $scope.profileIncomplete = function () {
+    if (!$scope.formData.country || !$scope.formData.contact || !$scope.formData.about || !$scope.formData.events || !$scope.formData.achievements || !$scope.formData.previousSeasonReview || !$scope.formData.personalGoals) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+
+  //Password Validator
+  $scope.passwordData = {};
+  $scope.valid1 = false;
+  $scope.valid2 = false;
+  $scope.passwordValidator = function (password) {
+    $scope.passwordInvalid = true;
+    if (password && password.length >= 8 && password.length <= 15) {
+      $scope.valid1 = true;
+    } else {
+      $scope.valid1 = false;
+    }
+    if (/([a-zA-Z])/.test(password) && /([0-9])/.test(password)) {
+      $scope.valid2 = true;
+    } else {
+      $scope.valid2 = false;
+    }
+    if ($scope.valid1 && $scope.valid2) {
+      $scope.passwordInvalid = false;
+    } else {
+      $scope.passwordInvalid = true;
+    }
+  };
+
+  //Submit Form
+  $scope.submitData = function (formData) {
+    $scope.showLoading('Please wait...', 10000);
+    MyServices.editProfile(formData, function (data) {
+      if (data.value === true) {
+        $scope.hideLoading();
+        MyServices.setUser(data.data);
+        $scope.showLoading('Profile Updated!', 2000);
+        $state.go('app.profile');
+      } else {
+        $scope.hideLoading();
+        $scope.showLoading('Please Try Again!', 2000);
+      }
+    });
+  };
+
+  MyServices.getCountries(function (data) {
+    $scope.countries = data;
+  });
+
+
+  // Update Password
+  $ionicModal.fromTemplateUrl('templates/modal/password.html', {
+    id: 1,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modalPassword = modal;
+  });
+
+  $scope.passwordData = {};
+  $scope.changePassword = function () {
+    $scope.passwordData.accessToken = $scope.formData.accessToken;
+    $scope.modalPassword.show();
+  };
+  $scope.submitPassword = function (formData) {
+    $scope.showLoading('Please wait...', 10000);
+    MyServices.changePassword(formData, function (data) {
+      if (data.value === true) {
+        $scope.passwordData = {};
+        $scope.hideLoading();
+        $scope.showLoading('Password Updated!', 2000);
+        $state.go('app.profile');
+        $scope.closeModal();
+      } else {
+        $scope.hideLoading();
+        $scope.showLoading('Please Try Again!', 2000);
+      }
+    });
+  };
+
+  $scope.closeModal = function () {
+    $scope.modalPassword.hide();
+  };
+
+  //Password Validator
+  $scope.passwordData = {};
+  $scope.valid1 = false;
+  $scope.valid2 = false;
+  $scope.passwordValidator = function (password) {
+    $scope.passwordInvalid = true;
+    if (password && password.length >= 8 && password.length <= 15) {
+      $scope.valid1 = true;
+    } else {
+      $scope.valid1 = false;
+    }
+    if (/([a-zA-Z])/.test(password) && /([0-9])/.test(password)) {
+      $scope.valid2 = true;
+    } else {
+      $scope.valid2 = false;
+    }
+    if ($scope.valid1 && $scope.valid2) {
+      $scope.passwordInvalid = false;
+    } else {
+      $scope.passwordInvalid = true;
+    }
+  };
+
+
+  // Upload Profile Pic
+  $scope.selectImage = function () {
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.FILE_URI,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    };
+    $cordovaCamera.getPicture(options).then(function (imageURI) {
+      $scope.profileImage = imageURI;
+      $scope.uploadImage($scope.profileImage);
+    }, function (err) {
+      // error
+    });
+  };
+
+  //Upload Image
+  $scope.uploadImage = function (imageURI) {
+    $scope.showLoading('Uploading Image...', 10000);
+    $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
+      .then(function (result) {
+        // Success!
+        console.log(result.response);
+        result.response = JSON.parse(result.response);
+        $scope.formData.profilePic = result.response.data[0];
+        $scope.submitData($scope.formData);
+      }, function (err) {
+        // Error
+        $scope.hideLoading();
+        $scope.showLoading('Error!', 2000);
+      }, function (progress) {
+        // constant progress updates
+      });
   };
 
 })
+
 
 .controller('BlogCtrl', function ($scope) {
   $scope.data = [{
@@ -391,112 +636,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   };
   $scope.title = 'Edit';
   $scope.severity = ['Minor', 'Moderate', 'Severe'];
-})
-
-.controller('EditProfileCtrl', function ($scope, $state, MyServices, $ionicModal, $filter) {
-  $scope.formData = {
-    name: 'Usain',
-    surname: 'Bolt',
-    image: 'img/profile-pic.png',
-    email: 'sachin@gmail.com',
-    gender: 'Male',
-    contact: '+919098765324',
-    dob: new Date("September 7, 1989"),
-    country: 'United Kingdom',
-    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
-    sport: 'Running',
-    events: '400m Relay, 32KM Marathon',
-    achievements: '-',
-    previousSeasonReview: '-',
-    personalGoals: '-'
-  };
-
-  $scope.dummyPassword = '12345678';
-
-  $scope.submit = function (data) {
-    console.log(data);
-    $state.go('app.profile');
-  };
-
-  $scope.gender = ['Male', 'Female'];
-
-  MyServices.getCountries(function (data) {
-    $scope.countries = data;
-  });
-
-  $ionicModal.fromTemplateUrl('templates/modal/password.html', {
-    id: 1,
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modalPassword = modal;
-  });
-  $ionicModal.fromTemplateUrl('templates/modal/price.html', {
-    id: 2,
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modalPrice = modal;
-  });
-  $ionicModal.fromTemplateUrl('templates/modal/coaching-limit.html', {
-    id: 3,
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modalLimit = modal;
-  });
-  $scope.changePassword = function () {
-    $scope.modalPassword.show();
-  };
-  $scope.changePrice = function () {
-    $scope.modalPrice.show();
-  };
-  $scope.changeLimit = function () {
-    $scope.modalLimit.show();
-  };
-  $scope.closeModal = function () {
-    $scope.modalPassword.hide();
-    $scope.modalPrice.hide();
-    $scope.modalLimit.hide();
-  };
-
-  $scope.rangePrice = function (val) {
-    var intVal = parseInt(val);
-    if (intVal >= 1 && intVal <= 500) {
-      $scope.formData.askingPrice = intVal;
-    }
-  };
-
-  $scope.rangeLimit = function (val) {
-    var intVal = parseInt(val);
-    if (intVal >= 1 && intVal <= 200) {
-      $scope.formData.coachingLimit = intVal;
-    }
-  };
-
-  //Password Validator
-  $scope.passwordData = {};
-  $scope.valid1 = false;
-  $scope.valid2 = false;
-  $scope.passwordValidator = function (password) {
-    $scope.passwordInvalid = true;
-    if (password && password.length >= 8 && password.length <= 15) {
-      $scope.valid1 = true;
-    } else {
-      $scope.valid1 = false;
-    }
-    if (/([a-zA-Z])/.test(password) && /([0-9])/.test(password)) {
-      $scope.valid2 = true;
-    } else {
-      $scope.valid2 = false;
-    }
-    if ($scope.valid1 && $scope.valid2) {
-      $scope.passwordInvalid = false;
-    } else {
-      $scope.passwordInvalid = true;
-    }
-  };
-
 })
 
 .controller('SearchCoachesCtrl', function ($scope, $ionicModal) {

@@ -33,7 +33,7 @@ angular.module('starter.services', [])
 
       register: function (formData, callback) {
         $http({
-          url: adminurl + 'Athlete/register',
+          url: adminurl + 'Athlete/registerAthlete',
           method: 'POST',
           data: formData
         }).success(callback);
@@ -41,7 +41,7 @@ angular.module('starter.services', [])
 
       login: function (formData, callback) {
         $http({
-          url: adminurl + 'Athlete/login',
+          url: adminurl + 'Athlete/athleteLogin',
           method: 'POST',
           data: formData
         }).success(callback);
@@ -50,7 +50,7 @@ angular.module('starter.services', [])
       editProfile: function (formData, callback) {
         console.log(formData);
         $http({
-          url: adminurl + 'Athlete/updateProfile',
+          url: adminurl + 'Athlete/updateAthleteProfile',
           method: 'POST',
           data: formData
         }).success(callback);
@@ -58,7 +58,7 @@ angular.module('starter.services', [])
 
       changePassword: function (formData, callback) {
         $http({
-          url: adminurl + 'Athlete/resetPassword',
+          url: adminurl + 'Athlete/resetPasswordAthlete',
           method: 'POST',
           data: formData
         }).success(callback);
