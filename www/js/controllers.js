@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['starter.services', 'checklist-model', 'chart.js', 'ui.rCalendar', 'ngcordova'])
+angular.module('starter.controllers', ['starter.services', 'checklist-model', 'chart.js', 'ui.rCalendar', 'ngCordova'])
 
 .controller('LoadingCtrl', function ($scope, $ionicModal, $timeout, $state, $rootScope, MyServices, $ionicHistory) {
   $scope.loadingData = MyServices.getUser();
