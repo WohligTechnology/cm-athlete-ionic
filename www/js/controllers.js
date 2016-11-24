@@ -337,7 +337,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
         // constant progress updates
       });
   };
-
 })
 
 

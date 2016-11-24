@@ -25,8 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
     .state('loading', {
     url: '/loading',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
+    templateUrl: 'templates/loading.html',
     controller: 'LoadingCtrl'
   })
 
