@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['starter.services', 'checklist-model', 'chart.js', 'ui.rCalendar'])
+angular.module('starter.controllers', ['starter.services', 'checklist-model', 'chart.js', 'ui.rCalendar', 'ngcordova'])
 
 .controller('LoadingCtrl', function ($scope, $ionicModal, $timeout, $state, $rootScope, MyServices, $ionicHistory) {
   $scope.loadingData = MyServices.getUser();
@@ -163,7 +163,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 })
 
 
-.controller('EditProfileCtrl', function ($scope, $state, MyServices, $ionicModal, $filter, $ionicLoading) {
+.controller('EditProfileCtrl', function ($scope, $state, MyServices, $ionicModal, $filter, $ionicLoading, $cordovaCamera, $cordovaFileTransfer) {
   $scope.formData = MyServices.getUser();
   $scope.formData.dob = new Date($scope.formData.dob);
   $scope.dummyPassword = '12345678';
