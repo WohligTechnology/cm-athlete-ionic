@@ -15,15 +15,15 @@
           </div>
           <label class="item item-input" ng-class="{'err': formName.name.$invalid && formName.name.$touched}">
             <span class="input-label">Forename</span>
-            <input type="text" name="name" ng-model="formData.name" maxlength="35" required>
+            <input type="text" name="name" ng-model="formData.name" maxlength="35" ng-pattern="onlyAplha" required>
           </label>
           <label class="item item-input" ng-class="{'err': formName.surname.$invalid && formName.surname.$touched}">
             <span class="input-label">Surname</span>
-            <input type="text" name="surname" ng-model="formData.surname" maxlength="35" required>
+            <input type="text" name="surname" ng-model="formData.surname" maxlength="35" ng-pattern="onlyAplha" required>
           </label>
           <label class="item item-input" ng-class="{'err': formName.email.$invalid && formName.email.$touched}">
             <span class="input-label">Email Address</span>            
-            <input type="email" name="email" ng-model="formData.email" required>
+            <input type="email" name="email" ng-model="formData.email" ng-pattern="validEmail" required>
           </label>
           <ion-item class="item-divider item-text-wrap small-text">
             Password must contain: <br>

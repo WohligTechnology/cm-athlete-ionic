@@ -27,6 +27,9 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
   $scope.maxDate = $filter('date')(new Date(), 'yyyy-MM-dd');
 
+  $scope.onlyAplha = /^[a-zA-Z_]+$/;
+  $scope.validEmail = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+
   //Loading
   $scope.showLoading = function (value, time) {
     $ionicLoading.show({
@@ -171,6 +174,9 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.maxDate = $filter('date')(new Date(), 'yyyy-MM-dd');
 
   $scope.gender = ['Male', 'Female'];
+
+  $scope.onlyAplha = /^[a-zA-Z_]+$/;
+  $scope.validEmail = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
 
   MyServices.getCountries(function (data) {
     $scope.countries = data;
