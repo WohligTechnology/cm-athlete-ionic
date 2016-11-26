@@ -535,16 +535,16 @@ p.bold {
 }
 
 .error-msg {
-   color: $assertive;
-    top: 0;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    font-size: 11px;
-    background-color: #f1f1f1;
-    padding: 0px 10px;
-    border-radius: 6px;
+  color: $assertive;
+  top: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  font-size: 11px;
+  background-color: #f1f1f1;
+  padding: 0px 10px;
+  border-radius: 6px;
 }
 
 .sp-reg {
@@ -975,11 +975,6 @@ p.bold {
   color: white;
   font-size: 14px;
   padding: 10px;
-}
-
-input[type=password] {
-  -webkit-user-select: auto !important;
-  -webkit-touch-callout: default !important;
 }
 
 @import "www/lib/ionic-calendar/dist/css/calendar.min";
