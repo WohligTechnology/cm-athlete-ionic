@@ -149,13 +149,38 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('ProfileCtrl', function ($scope, $ionicScrollDelegate, $ionicHistory, MyServices, $ionicLoading) {
+.controller('ProfileCtrl', function ($scope, $ionicScrollDelegate, $ionicHistory, $rootScope, MyServices, $ionicLoading) {
   $ionicHistory.clearCache();
   $ionicHistory.clearHistory();
   $ionicHistory.removeBackView();
   $scope.profileData = MyServices.getUser();
 
-  //Profile Incomplete Check
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+
+  //Reload Profile
+  $scope.reloadProfile = function () {
+    MyServices.getProfile($scope.profileData, function (data) {
+      if (data.value === true) {
+        MyServices.setUser(data.data);
+        $scope.$broadcast('scroll.refreshComplete');
+      } else {
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.showLoading('Error Updating Profile!', 1000);
+      }
+    });
+  };
+  $scope.reloadProfile();
+
+//Profile Incomplete Check
   $scope.profileIncomplete = function () {
     if (!$scope.profileData.country || !$scope.profileData.contact || !$scope.profileData.about || !$scope.profileData.events || !$scope.profileData.achievements || !$scope.profileData.previousSeasonReview || !$scope.profileData.personalGoals) {
       return true;
@@ -164,7 +189,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     }
   };
 })
-
 
 .controller('EditProfileCtrl', function ($scope, $state, MyServices, $ionicModal, $filter, $ionicLoading, $cordovaCamera, $cordovaFileTransfer) {
   $scope.formData = MyServices.getUser();

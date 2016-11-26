@@ -48,9 +48,16 @@ angular.module('starter.services', [])
       },
 
       editProfile: function (formData, callback) {
-        console.log(formData);
         $http({
           url: adminurl + 'Athlete/updateAthleteProfile',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+
+      getProfile: function (formData, callback) {
+        $http({
+          url: adminurl + 'Coach/getAthleteProfile',
           method: 'POST',
           data: formData
         }).success(callback);
