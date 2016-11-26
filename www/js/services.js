@@ -57,7 +57,7 @@ angular.module('starter.services', [])
 
       getProfile: function (formData, callback) {
         $http({
-          url: adminurl + 'Coach/getAthleteProfile',
+          url: adminurl + 'Athlete/getAthleteProfile',
           method: 'POST',
           data: formData
         }).success(callback);

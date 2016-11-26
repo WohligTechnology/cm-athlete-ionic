@@ -30,10 +30,11 @@
         </div>
       </div>
     </div>
+    <ion-refresher on-refresh="reloadProfile()"></ion-refresher>
     <ion-list class="stripped">
-      <ion-item class="item-text-wrap" ng-if="profileData.contact">
+      <ion-item class="item-text-wrap" ng-if="profileData.mobile">
         <h3>Phone Number</h3>
-        <p>{{profileData.contact}}</p>
+        <p>{{profileData.mobile}}</p>
       </ion-item>
       <ion-item class="item-text-wrap" ng-if="profileData.email">
         <h3>Email Address</h3>
