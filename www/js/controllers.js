@@ -214,7 +214,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
   //Profile Incomplete Check
   $scope.profileIncomplete = function () {
-    if (!$scope.profileData.country || !$scope.profileData.mobile || !$scope.profileData.about || !$scope.profileData.events || !$scope.profileData.achievements || !$scope.profileData.previousSeasonReview) {
+    if (!$scope.profileData.country || !$scope.profileData.mobile || !$scope.profileData.sports || !$scope.profileData.about || !$scope.profileData.events || !$scope.profileData.achievements || !$scope.profileData.previousSeasonReview) {
       return true;
     } else {
       return false;
@@ -240,7 +240,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
   //Profile Incomplete Check
   $scope.profileIncomplete = function () {
-    if (!$scope.formData.country || !$scope.formData.mobile || !$scope.formData.about || !$scope.formData.events || !$scope.formData.achievements || !$scope.formData.previousSeasonReview) {
+    if (!$scope.formData.country || !$scope.formData.mobile || !$scope.profileData.sports || !$scope.formData.about || !$scope.formData.events || !$scope.formData.achievements || !$scope.formData.previousSeasonReview) {
       return true;
     } else {
       return false;

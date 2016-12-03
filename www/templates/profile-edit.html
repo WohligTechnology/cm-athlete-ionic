@@ -36,10 +36,6 @@
             <span class="input-label">Date of Birth</span>
             <input type="date" name="dob" ng-model="formData.dob" max="{{maxDate}}" required>
           </label>
-          <label class="item item-input item-block" ng-class="{'err': formName.sports.$invalid && formName.sports.$touched}">
-            <span class="input-label">Sport</span>
-            <textarea auto-grow rows="3" name="sports" ng-model="formData.sports" required></textarea>            
-          </label>
           <div class="item item-divider small-text" ng-if="profileIncomplete()">
             Please enter below details to complete your profile.
           </div>
@@ -68,6 +64,10 @@
           <label class="item item-input item-block" ng-class="{'err': formName.previousSeasonReview.$invalid && formName.previousSeasonReview.$touched}">
             <span class="input-label">Previous Season Review</span>
             <textarea auto-grow rows="3" name="previousSeasonReview" ng-model="formData.previousSeasonReview" required></textarea>
+          </label>
+          <label class="item item-input item-block" ng-class="{'err': formName.sports.$invalid && formName.sports.$touched}">
+            <span class="input-label">Sports</span>
+            <textarea auto-grow rows="3" name="sports" ng-model="formData.sports" required></textarea>            
           </label>
         </div>
       </div>
