@@ -1,4 +1,4 @@
-var adminurl = "http://wohlig.io/api/";
+var adminurl = "http://wohlig.io:1337/api/";
 // var adminurl = "http://192.168.2.78/api/";
 var imgurl = adminurl + "upload/";
 
@@ -13,7 +13,7 @@ angular.module('starter.services', [])
     } else {
       requestCredentials = {
         accessToken: $.jStorage.get("userProfile").accessToken[0],
-        accessType: "Coach"
+        accessType: "Athlete"
       };
     }
 
@@ -32,7 +32,7 @@ angular.module('starter.services', [])
         $.jStorage.set("userProfile", userProfile);
         requestCredentials = {
           accessToken: $.jStorage.get("userProfile").accessToken[0],
-          accessType: "Coach"
+          accessType: "Athlete"
         };
       },
 
@@ -89,9 +89,12 @@ angular.module('starter.services', [])
       },
       getAthleteMyPlans: function (formData, callback) {
         formData = _.merge(formData, requestCredentials);
-        $http.post(adminurl + 'athlete/getAthleteMyPlans', formData).success(function (data) {
-          callback(data);
-        });
+        console.log(formData);
+        $http({
+          url: adminurl + 'Athlete/getAthleteMyPlans',
+          method: 'POST',
+          data: formData
+        }).success(callback);
       },
       saveAnswer: function (formData, callback) {
         formData = _.merge(formData, requestCredentials);

@@ -6,7 +6,7 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <div ng-if="!showComment">
+    <div class="feedback-form" ng-if="!showComment">
       <form name="feedbackForm" ng-submit="submitFeedback(feedback);closeModal()">
         <div ng-repeat="f in feedback">
           <div class="item item-text-wrap" ng-class="{'form-invalid': formName['textarea' + $index].$invalid && formName['textarea' + $index].$touched}"

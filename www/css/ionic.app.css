@@ -10661,3 +10661,6 @@ p.bold {
     height: 20px;
     vertical-align: bottom;
     border-radius: 100%; }
+
+.feedback-form .item textarea {
+  width: 100%; }
