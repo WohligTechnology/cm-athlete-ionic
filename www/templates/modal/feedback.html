@@ -1,0 +1,58 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-positive bar bar-header">
+    <h1 class="title">{{dayInfo.title}}</h1>
+    <div class="buttons">
+      <button class="button button-clear button-icon ln-cross ln-fit" ng-click="closeModal()"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div ng-if="!showComment">
+      <form name="feedbackForm" ng-submit="submitFeedback(feedback);closeModal()">
+        <div ng-repeat="f in feedback">
+          <div class="item item-text-wrap" ng-class="{'form-invalid': formName['textarea' + $index].$invalid && formName['textarea' + $index].$touched}"
+            ng-if="f.type=='Text Area'">
+            <label>{{f.name}}:</label>
+            <textarea ng-if="!makeDisable" name="textarea{{$index}}" class="form-control" ng-model="f.answer" required></textarea>
+            <p ng-if="makeDisable">{{f.answer}}</p>
+          </div>
+          <div class="item item-text-wrap" ng-class="{'form-invalid': formData['checkbox' + $index] == ''}" ng-if="f.type=='Checkbox'">
+            <label>{{f.name}}:</label>
+            <br>
+            <label class="checkbox-inline custom-look" ng-repeat="v in f.values track by $index"><input type="checkbox" ng-disabled="makeDisable" name="checkbox{{$index}}" checklist-model="f.answer" checklist-value="v"> {{v}}</label>
+            <input type="hidden" name="checkbox" ng-model="f.answer" required>
+          </div>
+          <div class="item item-text-wrap" ng-init="$super = $index;" ng-class="{'form-invalid': formName['radio2' + $index+$super].$invalid && formName['radio2' + $index+$super].$touched}"
+            ng-if="f.type=='Radio Button'">
+            <label>{{f.name}}:</label>
+            <br>
+            <label class="radio-inline custom-look" ng-repeat="v in f.values track by $index"><input ng-disabled="makeDisable" type="radio" name="radio{{$index}}{{$super}}" ng-model="f.answer" ng-value="v"> {{v}}</label>
+            <input type="hidden" name="radio2{{$index}}{{$super}}" ng-model="f.answer" required>
+          </div>
+          <div class="item item-text-wrap" ng-class="{'form-invalid': formData['list' + $index] == ''}" ng-if="f.type=='List/Menu'">
+            <label>{{f.name}}:</label>
+            <br>
+            <label class="checkbox-list custom-look" ng-repeat="v in f.values track by $index"><input ng-disabled="makeDisable" type="checkbox" name="list{{$index}}" checklist-model="f.answer" checklist-value="v"> {{v}}</label>
+            <input type="hidden" name="list" ng-model="f.answer" required>
+          </div>
+        </div>
+        <div class="padding" ng-if="!makeDisable">
+          <button class="button button-positive button-block" ng-disabled="feedbackForm.$invalid" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div ng-show="showComment">
+      <form name="commentForm" ng-submit="submitComment();closeModal();">
+        <ion-list>
+          <ion-item class="item-input item-stacked-label">
+            <label class="input-label">Comment</label>
+            <textarea name="comment" ng-model="commentData.comment" row="6" maxlength="200" required></textarea>
+          </ion-item>
+          <div class="text-right small-text"><span>{{200-commentData.comment.length}} characters left</span></div>
+        </ion-list>
+        <div class="padding">
+          <button class="button button-positive button-block" type="submit" ng-disabled="commentForm.$invalid">Submit</button>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-modal-view>

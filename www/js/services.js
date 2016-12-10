@@ -1,4 +1,4 @@
-var adminurl = "http://coachmentor.wohlig.com/api/";
+var adminurl = "http://wohlig.io/api/";
 // var adminurl = "http://192.168.2.78/api/";
 var imgurl = adminurl + "upload/";
 
@@ -10,6 +10,11 @@ angular.module('starter.services', [])
     var userProfile = $.jStorage.get("userProfile");
     if (!userProfile) {
       userProfile = {};
+    } else {
+      requestCredentials = {
+        accessToken: $.jStorage.get("userProfile").accessToken[0],
+        accessType: "Coach"
+      };
     }
 
     var returnval = {};
@@ -25,6 +30,10 @@ angular.module('starter.services', [])
       setUser: function (data) {
         _.assignIn(userProfile, data);
         $.jStorage.set("userProfile", userProfile);
+        requestCredentials = {
+          accessToken: $.jStorage.get("userProfile").accessToken[0],
+          accessType: "Coach"
+        };
       },
 
       getUser: function () {
@@ -77,6 +86,18 @@ angular.module('starter.services', [])
           method: 'POST',
           data: formData
         }).success(callback);
+      },
+      getAthleteMyPlans: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http.post(adminurl + 'athlete/getAthleteMyPlans', formData).success(function (data) {
+          callback(data);
+        });
+      },
+      saveAnswer: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http.post(adminurl + 'trainingPlan/saveAnswer', formData).success(function (data) {
+          callback(data);
+        });
       },
     };
   });

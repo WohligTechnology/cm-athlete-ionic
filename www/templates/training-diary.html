@@ -2,17 +2,19 @@
   <ion-nav-title>
     {{viewTitle}}
   </ion-nav-title>
-  <div class="tabs tabs-light tabs-color-positive">
+  <div class="tabs tabs-light tabs-color-positive" ng-if="athleteData.length">
     <a class="tab-item" ng-click="changeView('agendaDay')" ng-class="{'active': activeView == 'agendaDay'}">Day</a>
     <a class="tab-item" ng-click="changeView('agendaWeek')" ng-class="{'active': activeView == 'agendaWeek'}">Week</a>
     <a class="tab-item" ng-click="changeView('month')" ng-class="{'active': activeView == 'month'}">Month</a>
   </div>
   <ion-nav-buttons side="right">
-    <button class="button button-clear button-icon ln-calendar ln-fit" ng-click="navigate('today')"></button>
-    <button class="button button-clear button-icon ion-ios-arrow-left" ng-click="navigate('prev')"></button>
-    <button class="button button-clear button-icon ion-ios-arrow-right" ng-click="navigate('next')"></button>
+    <div ng-if="athleteData.length">
+      <button class="button button-clear button-icon ln-calendar ln-fit" ng-click="navigate('today')"></button>
+      <button class="button button-clear button-icon ion-ios-arrow-left" ng-click="navigate('prev')"></button>
+      <button class="button button-clear button-icon ion-ios-arrow-right" ng-click="navigate('next')"></button>
+    </div>
   </ion-nav-buttons>
   <ion-content class="has-tabs">
-    <div ui-calendar="uiConfig.calendar" calendar="trainingDiary" ng-model="eventSources">
+    <div ng-if="athleteData.length" class="calendar" ng-model="athleteDiary" calendar="trainingDiary" ui-calendar="uiConfig.calendar"></div>
   </ion-content>
 </ion-view>

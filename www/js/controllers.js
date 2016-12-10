@@ -519,7 +519,39 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.data = {};
   $scope.messages = [{
     userId: 'he',
-    text: 'Hello! Welcome to Coach Mentor!',
+    text: 'Hi Matt, how did you find the session?',
+    time: $scope.timeStamp()
+  }, {
+    userId: 'me',
+    text: 'Good, I managed to hit my target times, legs are feeling quite tired now.',
+    time: $scope.timeStamp()
+  }, {
+    userId: 'he',
+    text: 'Good, I suggest you rehab today ready for tomorrow’s session.',
+    time: $scope.timeStamp()
+  }, {
+    userId: 'he',
+    text: 'Stretch, foam roll etc, please refer to rehab programme attached with your Training Plan',
+    time: $scope.timeStamp()
+  }, {
+    userId: 'me',
+    text: 'Will do, thanks.',
+    time: $scope.timeStamp()
+  }, {
+    userId: 'me',
+    text: 'James, a question regarding the session on the 27th November, you have set three sets however still struggling with the legs from last week, shall I drop a set or take the reps slower and get it finished?',
+    time: $scope.timeStamp()
+  }, {
+    userId: 'he',
+    text: 'Stick with the two sets, get it done in flats. I will adapt your training plan for you.',
+    time: $scope.timeStamp()
+  }, {
+    userId: 'me',
+    text: 'Thanks James',
+    time: $scope.timeStamp()
+  }, {
+    userId: 'me',
+    text: 'Session complete, have submitted my times in session feedback',
     time: $scope.timeStamp()
   }];
 
@@ -614,49 +646,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     [65, 59, 80, 81, 56, 55, 40],
     [28, 48, 40, 19, 86, 27, 90]
   ];
-})
-
-.controller('TrainingDiaryCtrl', function ($scope, $ionicModal, uiCalendarConfig) {
-  $scope.eventSources = [{
-    color: '#fbd12e',
-    events: [{
-      title: '5k Plan - Form 1',
-      start: moment($scope.startDate).toDate(),
-      end: moment($scope.startDate).add(5, "days").toDate(),
-      allDay: true
-    }]
-  }, {
-    color: '#bada555',
-    events: [{
-      title: '5k Plan - Form 2',
-      start: moment($scope.startDate).add(5, "days").toDate(),
-      end: moment($scope.startDate).add(10, "days").toDate(),
-      allDay: true
-    }],
-  }];
-
-  /* Change View */
-  $scope.activeView = 'month';
-  $scope.changeView = function (view) {
-    uiCalendarConfig.calendars.trainingDiary.fullCalendar('changeView', view);
-    $scope.activeView = view;
-  };
-
-  //Navigate Buttons
-  $scope.navigate = function (val) {
-    uiCalendarConfig.calendars.trainingDiary.fullCalendar(val);
-  };
-
-  $scope.uiConfig = {
-    calendar: {
-      height: 450,
-      editable: true,
-      eventClick: $scope.formClick,
-      viewRender: function (view) {
-        $scope.viewTitle = view.title;
-      }
-    }
-  };
 })
 
 .controller('InjuriesCtrl', function ($scope, $ionicModal) {
@@ -846,17 +835,17 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('NotificationsCtrl', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopup) {
   $scope.notifications = [{
-    name: 'Nike Marathon London',
+    name: 'Loughborough International',
     type: 'Competition',
-    startDate: '14 January, 2017',
-    endDate: '15 January, 2017',
+    startDate: '22nd May, 2017',
+    endDate: '22nd May, 2017',
     keyCompetition: true
   }, {
-    name: 'Mathew',
-    surname: 'Dodge',
+    name: 'James',
+    surname: 'Coney',
     type: 'coachAssign'
   }, {
-    name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    name: 'Use of Resistance Bands',
     type: 'blog'
   }, ];
 
@@ -877,6 +866,157 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
         }
       }, ]
     });
+  };
+})
+
+.controller('TrainingDiaryCtrl', function ($scope, $ionicModal, $ionicLoading, uiCalendarConfig, MyServices) {
+
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+
+  //Feedback Modal
+  $ionicModal.fromTemplateUrl('templates/modal/feedback.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function () {
+    $scope.modal.show();
+  };
+
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
+
+  $scope.getAthletePlan = function () {
+    $scope.athleteData = [];
+    MyServices.getAthleteMyPlans({}, function (data) {
+      if (_.isArray(data.data)) {
+        $scope.athleteData = data.data;
+        parsePlanToCalender(data.data);
+      } else {
+        $scope.athleteData = [];
+      }
+
+    });
+  };
+  $scope.getAthletePlan();
+  $scope.athleteData = [];
+  $scope.trainingDiary = [];
+
+  function parsePlanToCalender(Plans) {
+    $scope.trainingDiary = [];
+    $scope.downloads = Plans;
+    _.each(Plans, function (plan) {
+      var startDays = 0;
+      _.each(plan.trainingForms, function (form) {
+        form.trainingPlan = plan._id;
+        var obj = {
+          color: form.form.colorCode,
+          events: [{
+            title: "• " + form.form.name + " - " + plan.name,
+            start: moment(plan.startDate).add(startDays, "days").toDate(),
+            end: moment(plan.startDate).add(startDays, "days").add(form.duration, 'days').toDate(),
+            allDay: true,
+            planForm: form,
+            colorCode: form.form.colorCode
+          }],
+        };
+        startDays += form.duration;
+        if (!_.isEmpty(form.comment)) {
+          var obj2 = _.cloneDeep(obj);
+          obj2.color = "#444";
+          obj2.events[0].title = "Comment: " + form.comment;
+          $scope.trainingDiary.push(obj2);
+        }
+        $scope.trainingDiary.push(obj);
+      });
+    });
+    changePendingForm();
+  }
+
+  /* alert on eventClick */
+  $scope.dairyClick = function (obj) {
+    $scope.dayInfo = obj;
+    $scope.formInfo = obj.planForm;
+
+    if (obj.planForm.answer && obj.planForm.answer.length > 0) {
+      $scope.feedback = obj.planForm.answer;
+      $scope.makeDisable = true;
+    } else {
+      $scope.feedback = obj.planForm.form.formFields;
+      $scope.makeDisable = false;
+    }
+
+    var m = moment(obj.end._d);
+    if (moment().isSameOrAfter(m)) {
+      $scope.openModal();
+    }
+  };
+
+  $scope.dayClick = function (date, jsEvent, view) {
+    console.log(date);
+  };
+
+  var changePendingForm = function () {
+    console.log($scope.trainingDiary);
+    $scope.pendingForm = [];
+    _.each($scope.trainingDiary, function (events) {
+      _.each(events.events, function (obj) {
+        var m = moment(obj.end);
+        if (!(obj.planForm.answer && obj.planForm.answer.length > 0) && moment().isSameOrAfter(m)) {
+          $scope.pendingForm.push(obj);
+        }
+      });
+    });
+    console.log($scope.pendingForm);
+  };
+
+  $scope.submitFeedback = function () {
+    var obj = {};
+    obj.trainingPlan = $scope.formInfo.trainingPlan;
+    obj.trainingForm = $scope.formInfo._id;
+    obj.trainingFormStart = "";
+    obj.trainingFormEnd = "";
+    obj.answer = $scope.formInfo.form.formFields;
+    MyServices.saveAnswer(obj, function (data) {
+      $scope.showLoading('Feedback Submitted Successfully', 2000);
+      $scope.getAthletePlan();
+    });
+  };
+
+  /* Change View */
+  $scope.activeView = 'month';
+  $scope.changeView = function (view) {
+    uiCalendarConfig.calendars.athleteDiary.fullCalendar('changeView', view);
+    $scope.activeView = view;
+  };
+
+  //Navigate Buttons
+  $scope.navigate = function (val) {
+    uiCalendarConfig.calendars.athleteDiary.fullCalendar(val);
+  };
+
+  $scope.uiConfig = {
+    calendar: {
+      firstDay: 1,
+      height: 450,
+      editable: false,
+      eventClick: $scope.dairyClick,
+      viewRender: function (view) {
+        $scope.viewTitle = view.title;
+      }
+    }
   };
 })
 
