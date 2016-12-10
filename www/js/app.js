@@ -422,4 +422,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   };
 })
 
+.filter('localurl', function () {
+  return function (url) {
+    return 'img/coach/' + url + '.jpg';
+  };
+})
+
 ;

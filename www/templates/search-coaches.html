@@ -9,7 +9,7 @@
         <button class="button button-small icon ln-magnifier"></button>
       </ion-item>
       <ion-item class="item-avatar" ui-sref="app.search-coaches-detail" ng-repeat="c in coaches">
-        <img ng-src="{{c.image}}">
+        <img ng-src="{{c.image|localurl}}">
         <h2>{{c.name}} {{c.surname}}</h2>
         <p>{{c.credentials}}</p>
         <span class="full" ng-if="c.full">Fully Subscribed</span>

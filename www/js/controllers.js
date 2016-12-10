@@ -28,7 +28,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.maxDate = $filter('date')(new Date(), 'yyyy-MM-dd');
 
   $scope.onlyAplha = /^[a-zA-Z_]+$/;
-  $scope.validEmail = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+  $scope.validEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   //Loading
   $scope.showLoading = function (value, time) {
@@ -232,7 +232,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.gender = ['Male', 'Female'];
 
   $scope.onlyAplha = /^[a-zA-Z_]+$/;
-  $scope.validEmail = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+  $scope.validEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   MyServices.getCountries(function (data) {
     $scope.countries = data;
@@ -404,15 +404,29 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('BlogCtrl', function ($scope) {
   $scope.data = [{
-    title: 'The Strongest Woman I’ve Ever Known',
-    author: 'Matt Damon',
-    image: 'http://d2gd8qsu8uml9u.cloudfront.net/uploads/AP_4657469935821-680x384.jpg',
-    date: '4th October 2015'
+    title: 'Use of Resistance Bands',
+    image: 'http://cimg1.ibsrv.net/cimg/www.fitday.com/693x350_100-1/349/resistance-20band-107349.jpg',
+    date: '4th October 2015',
+    ratingup: '10',
+    ratingdown: '3',
+  }, {
+    title: 'Event Preparation for U18 European Champs',
+    image: 'https://c1.staticflickr.com/9/8661/28418185866_552e4d0e65_b.jpg',
+    date: '4th October 2015',
+    ratingup: '15',
+    ratingdown: '2',
+  }, {
+    title: 'The Strongest Woman I’ ve Ever Known',
+    image: 'http://www.ooyuz.com/images/2016/8/13/1473787848785.jpg',
+    date: '4th October 2015',
+    ratingup: '12',
+    ratingdown: '3',
   }, {
     title: 'What You Dont Know About: Being a GM',
-    author: 'Matt Damon',
     image: 'http://d2gd8qsu8uml9u.cloudfront.net/uploads/AP_234024109023-680x340.jpg',
-    date: '3rd November 2015'
+    date: '3rd November 2015',
+    ratingup: '23',
+    ratingdown: '1',
   }];
 
   $scope.like = 0;
@@ -650,17 +664,23 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('InjuriesCtrl', function ($scope, $ionicModal) {
   $scope.data = [{
-    name: 'Leg Injury',
-    injuryDate: new Date("January 14, 2017 11:13:00"),
+    name: 'Hamstring Soreness',
+    injuryDate: new Date('29 November, 2016'),
     severity: 'Minor',
-    resumeDate: new Date("January 15, 2017 11:13:00"),
-    prescribingPractitioner: ''
+    resumeDate: new Date('3 December, 2016'),
+    prescribingPractitioner: 'Christine Ball'
   }, {
-    name: 'Arm Injury',
-    injuryDate: new Date("January 14, 2017 11:13:00"),
-    severity: 'Minor',
-    resumeDate: new Date("January 15, 2017 11:13:00"),
-    prescribingPractitioner: ''
+    name: 'Planter fasciitis ',
+    injuryDate: new Date('1 October, 2016'),
+    severity: 'Severe',
+    resumeDate: new Date('1 November, 2016'),
+    prescribingPractitioner: 'Christine Ball'
+  }, {
+    name: 'Broken Shoulder',
+    injuryDate: new Date('1 May, 2016'),
+    severity: 'Major',
+    resumeDate: new Date('1 August, 2016'),
+    prescribingPractitioner: 'Dr Beanlands'
   }];
 
 })
@@ -674,11 +694,11 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('InjuriesDetailCtrl', function ($scope, $ionicModal) {
   $scope.data = {
-    name: 'Leg Injury',
-    injuryDate: new Date("January 14, 2017 11:13:00"),
+    name: 'Hamstring Soreness',
+    injuryDate: new Date('29 November, 2016'),
     severity: 'Minor',
-    resumeDate: new Date("January 15, 2017 11:13:00"),
-    prescribingPractitioner: ''
+    resumeDate: new Date('3 December, 2016'),
+    prescribingPractitioner: 'Christine Ball'
   };
   $scope.title = 'Edit';
   $scope.severity = ['Minor', 'Moderate', 'Severe'];
@@ -699,17 +719,74 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   };
 
   $scope.coaches = [{
-    name: 'Matt',
-    surname: 'Smith',
-    image: 'img/img-placeholder.png',
-    credentials: 'Level 2',
-    full: false
+    "name": "Emma",
+    "surname": "Smith",
+    "credentials": "Level 2",
+    "yearsCoaching": 17,
+    "image": "emma-smith"
   }, {
-    name: 'John',
-    surname: 'Damon',
-    image: 'img/img-placeholder.png',
-    credentials: 'Level 1',
-    full: true
+    "name": "Tom",
+    "surname": "Banks",
+    "credentials": "Level 3",
+    "yearsCoaching": 33,
+    "image": "tom-banks",
+    "full": true
+  }, {
+    "name": "Aravind",
+    "surname": "Chandra",
+    "credentials": "Level 1",
+    "yearsCoaching": 7,
+    "image": "aravind-chandra"
+  }, {
+    "name": "Rose",
+    "surname": "Swinbury",
+    "credentials": "Level 1",
+    "yearsCoaching": 2,
+    "image": "rose-swinbury"
+  }, {
+    "name": "Edward",
+    "surname": "Eubank",
+    "credentials": "Level 2",
+    "yearsCoaching": 9,
+    "image": "edward-eubank"
+  }, {
+    "name": "Yohann",
+    "surname": "Diniz",
+    "credentials": "Level 2",
+    "yearsCoaching": 4,
+    "image": "yohann-diniz"
+  }, {
+    "name": "Ewan",
+    "surname": "McKinnon",
+    "credentials": "Level 3",
+    "yearsCoaching": 12,
+    "image": "ewan-mckinnon",
+    "full": true
+  }, {
+    "name": "Dominic ",
+    "surname": "Green",
+    "credentials": "Level 2",
+    "yearsCoaching": 14,
+    "image": "dominic-green"
+  }, {
+    "name": "Sara",
+    "surname": "Pascoe",
+    "credentials": "Level 3",
+    "yearsCoaching": 15,
+    "image": "sara-pascoe"
+  }, {
+    "name": "Beth",
+    "surname": "Devos",
+    "credentials": "Level 4",
+    "yearsCoaching": 18,
+    "image": "beth-devos"
+  }, {
+    "name": "John",
+    "surname": "Bradbury",
+    "credentials": "Level 4",
+    "yearsCoaching": 21,
+    "image": "john-bradbury",
+    "full": true
   }];
 
   $ionicModal.fromTemplateUrl('templates/modal/coach-filter.html', {
@@ -756,19 +833,22 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 .controller('SearchCoachesDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopup) {
 
   $scope.coaches = {
-    name: 'Matt',
+    name: 'Emma',
     surname: 'Smith',
-    image: 'img/img-placeholder.png',
-    yearsCoaching: '2',
-    gender: 'Male',
-    dob: new Date('24 April, 1973'),
+    image: 'emma-smith',
+    yearsCoaching: '17',
+    gender: 'Female',
+    dob: new Date('5/27/1965'),
     country: 'United Kingdom',
-    askingPrice: '100',
+    askingPrice: '30',
     credentials: 'Level 2',
     subscriptionFull: false,
-    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
-    coachingFocus: ['Sprinting', 'Hurdles'],
-    specialisations: ['Children in Athletics', 'First aid']
+    about: 'Uklevel 2 coach specialising in sprint events - 60m, 100m, 200m and 400m. Many of my athletes have represented their country and competed nationally.',
+    coachingFocus: ['Sprinting'],
+    specialisations: ['Strength and Conditioning'],
+    experience: 'Multiple county sprinters and county champions',
+    expertise: 'Strength and Conditioning',
+    coachingAchievements: 'Worked with many county and national athletes'
   };
 
   $scope.subscribeNow = function () {
@@ -812,12 +892,12 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('CoachDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
   $scope.coach = {
-    name: 'Matt',
-    surname: 'Smith',
-    subscriptionFee: '200',
-    image: 'img/img-placeholder.png',
-    acceptedDate: new Date('13 May, 2016'),
-    renewalDate: new Date('12 June, 2016'),
+    name: 'James',
+    surname: 'Coney',
+    subscriptionFee: '30',
+    image: 'james-coney',
+    acceptedDate: new Date('13 November, 2016'),
+    renewalDate: new Date('14 December, 2016'),
     subscriptionType: 'Monthly',
     yearsCoaching: '2',
     gender: 'Male',
@@ -904,12 +984,17 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
       if (_.isArray(data.data)) {
         $scope.athleteData = data.data;
         parsePlanToCalender(data.data);
+        $scope.hideLoading();
       } else {
         $scope.athleteData = [];
+        $scope.showLoading('Loading...', 10000);
+        $scope.hideLoading();
       }
 
     });
   };
+  $scope.showLoading('Loading...', 10000);
+
   $scope.getAthletePlan();
   $scope.athleteData = [];
   $scope.trainingDiary = [];
