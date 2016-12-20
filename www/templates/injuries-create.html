@@ -1,32 +1,44 @@
 <ion-view view-title="{{title}} Injury">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-trash-outline" ng-click="deletePop(injuryId);" type="buttton" ng-if="title == 'Edit'"></button>
+  </ion-nav-buttons>
   <ion-content>
-    <ion-list class="pro-edit text-rite">
-      <ion-item class="item-input">
-        <span class="input-label">Injury Name</span>
-        <input type="text" ng-model="data.name">
-      </ion-item>
-      <ion-item class="item-input">
-        <span class="input-label">Injury Date</span>
-        <input type="date" ng-model="data.injuryDate">
-      </ion-item>
-      <ion-item class="item-input item-select">
-        <span class="input-label">Severity</span>
-        <select type="date" ng-model="data.severity" ng-options="s as s for s in severity">
+    <form name="formName" ng-submit="submitData(formData);">
+      <ion-list class="pro-edit text-rite">
+        <ion-item class="item-input" ng-class="{'err':formName.name.$invalid && formName.name.$touched}">
+          <span class="input-label">Injury Name</span>
+          <input type="text" name="name" ng-model="formData.name" required>
+          <span class="error-msg" ng-show="formName.name.$invalid && formName.name.$touched">Invalid Name</span>
+        </ion-item>
+        <ion-item class="item-input item-select" ng-class="{'err':formName.severity.$invalid && formName.severity.$touched}">
+          <span class="input-label">Severity</span>
+          <select name="severity" ng-model="formData.severity" ng-options="s as s for s in severity" required>
           <option value="">Select</option>
         </select>
-      </ion-item>
-      </ion-item>
-      <ion-item class="item-input">
-        <span class="input-label">Resume Training Date</span>
-        <input type="date" ng-model="data.resumeDate">
-      </ion-item>
-      <ion-item class="item-input item-block">
-        <span class="input-label">Prescribing Practitioner</span>
-        <textarea auto-grow ng-model="data.prescribingPractitioner" rows="4"></textarea>
-      </ion-item>
-    </ion-list>
-    <div class="padding-horizontal">
-      <button class="button button-positive button-block" ui-sref="app.testing">Save</button>
-    </div>
+          <span class="error-msg" ng-show="formName.severity.$invalid && formName.severity.$touched">Please Select Severity</span>
+        </ion-item>
+        <ion-item class="item-input" ng-class="{'err':formName.injuryDate.$invalid && formName.injuryDate.$touched}">
+          <span class="input-label">Injury Date</span>
+          <input type="date" name="injuryDate" ng-model="formData.injuryDate" ng-change="matchDate()" min="{{today}}" required>
+          <span class="error-msg" ng-show="formName.injuryDate.$invalid && formName.injuryDate.$touched">Invalid Injury Date</span>
+        </ion-item>
+        <ion-item class="item-input" ng-class="{'err':formName.resumeTrainingDate.$invalid && formName.resumeTrainingDate.$touched}">
+          <span class="input-label">Resume Training Date</span>
+          <input type="date" name="resumeTrainingDate" min="{{formData.injuryDate | date:'yyyy-MM-dd'}}" ng-model="formData.resumeTrainingDate"
+            required>
+          <span class="error-msg" ng-show="formName.resumeTrainingDate.$invalid && formName.resumeTrainingDate.$touched">Invalid Resume Training Date</span>
+        </ion-item>
+        <ion-item class="item-input item-block" ng-class="{'err':formName.prescribingPractitioner.$invalid && formName.prescribingPractitioner.$touched}">
+          <span class="input-label">Prescribing Practitioner</span>
+          <textarea auto-grow name="prescribingPractitioner" ng-model="formData.prescribingPractitioner" maxlength="1200" rows="4"
+            required></textarea>
+          <span class="error-msg" ng-show="formName.prescribingPractitioner.$invalid && formName.prescribingPractitioner.$touched">Invalid Prescribing Practitioner</span>
+        </ion-item>
+      </ion-list>
+      <div class="padding-horizontal">
+        <button class="button button-positive button-block" type="submit" ng-disabled="formName.$invalid">Save</button>
+      </div>
+    </form>
   </ion-content>
 </ion-view>
+required

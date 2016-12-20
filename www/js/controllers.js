@@ -662,46 +662,311 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   ];
 })
 
-.controller('InjuriesCtrl', function ($scope, $ionicModal) {
-  $scope.data = [{
-    name: 'Hamstring Soreness',
-    injuryDate: new Date('29 November, 2016'),
-    severity: 'Minor',
-    resumeDate: new Date('3 December, 2016'),
-    prescribingPractitioner: 'Christine Ball'
-  }, {
-    name: 'Planter fasciitis ',
-    injuryDate: new Date('1 October, 2016'),
-    severity: 'Severe',
-    resumeDate: new Date('1 November, 2016'),
-    prescribingPractitioner: 'Christine Ball'
-  }, {
-    name: 'Broken Shoulder',
-    injuryDate: new Date('1 May, 2016'),
-    severity: 'Major',
-    resumeDate: new Date('1 August, 2016'),
-    prescribingPractitioner: 'Dr Beanlands'
-  }];
-
-})
-
-.controller('InjuriesCreateCtrl', function ($scope, $ionicModal) {
-  $scope.data = {};
-  $scope.title = 'Create';
-  $scope.severity = ['Minor', 'Moderate', 'Severe'];
-
-})
-
-.controller('InjuriesDetailCtrl', function ($scope, $ionicModal) {
-  $scope.data = {
-    name: 'Hamstring Soreness',
-    injuryDate: new Date('29 November, 2016'),
-    severity: 'Minor',
-    resumeDate: new Date('3 December, 2016'),
-    prescribingPractitioner: 'Christine Ball'
+.controller('InjuryCtrl', function ($scope, $ionicModal, MyServices, $ionicLoading, $ionicPopup) {
+  $scope.currentPage = 1;
+  var i = 0;
+  $scope.allInjury = [];
+  $scope.search = {
+    keyword: ""
   };
-  $scope.title = 'Edit';
+  $scope.more = {
+    Data: true
+  };
+
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+
+
+  //On Change Search Function
+  $scope.searchChange = function (keywordChange) {
+    if (keywordChange === '') {
+      $scope.allInjury = [];
+      $scope.showAllInjury(keywordChange);
+    } else {
+      $scope.showAllInjury(keywordChange);
+    }
+  };
+
+  //Get All Competiton
+  $scope.showAllInjury = function (keywordChange) {
+    if (keywordChange) {
+      $scope.currentPage = 1;
+      $scope.allInjury = [];
+    }
+    MyServices.searchInjury({
+      page: $scope.currentPage,
+      keyword: $scope.search.keyword
+    }, ++i, function (data, ini) {
+      if (ini == i) {
+        if (data.value) {
+          _.forEach(data.data.results, function (value) {
+            $scope.allInjury.push(value);
+          });
+          $scope.totalItems = data.data.total;
+          if ($scope.totalItems > $scope.allInjury.length) {
+            $scope.currentPage++;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          } else {
+            $scope.more.Data = false;
+          }
+        } else {
+          $scope.showLoading('Error Loading Injurys', 2000);
+        }
+      }
+    });
+  };
+
+  //Load More
+  $scope.loadMore = function () {
+    $scope.showAllInjury();
+  };
+
+  //Delete Popup
+  $scope.deletePop = function (id) {
+    $scope.myPopup = $ionicPopup.show({
+      template: '<p>Are you sure want to delete the injury?</p>',
+      title: 'Confirmation Message',
+      scope: $scope,
+      buttons: [{
+        text: 'No'
+      }, {
+        text: '<b>Yes</b>',
+        type: 'button-positive',
+        onTap: function (e) {
+          $scope.deleteInjury(id);
+        }
+      }]
+    });
+  };
+  $scope.deleteInjury = function (id) {
+    $scope.showLoading("Loading...", 10000);
+    if (id) {
+      MyServices.deleteInjury({
+        _id: id
+      }, function (data) {
+        if (data.value) {
+          $scope.allInjury = [];
+          $scope.showAllInjury();
+          $scope.hideLoading();
+          $scope.showLoading("Injury Deleted", 2000);
+        } else {
+          $scope.hideLoading();
+          $scope.showLoading("Error Deleting Injury", 2000);
+        }
+      });
+    }
+  };
+})
+
+.controller('InjuryCreateCtrl', function ($scope, $ionicModal, $ionicLoading, MyServices, $ionicPopup, $stateParams, $filter, $state) {
+  $scope.title = 'Create';
+  $scope.selectAthlete = {};
+  $scope.formData = {};
+  $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
   $scope.severity = ['Minor', 'Moderate', 'Severe'];
+
+  //Match start date & end date
+  $scope.matchDate = function () {
+    $scope.formData.resumeTrainingDate = $scope.formData.injuryDate;
+  };
+
+  //Select Athletes Modal
+  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
+  $scope.addAthlete = function () {
+    $scope.modal.show();
+    $scope.getAthlete('');
+  };
+  //Search Athlete API
+  var j = 0;
+  $scope.getAthlete = function (search) {
+    MyServices.searchAthlete({
+      keyword: search
+    }, ++j, function (data, ci) {
+      if (ci == j) {
+        $scope.athletes = data.data.results;
+      }
+    });
+  };
+  //Remove Selected Athlete
+  $scope.removeAthlete = function (pos) {
+    $scope.formData.athlete.splice(pos, 1);
+  };
+  //Match Selected
+  $scope.matchAthlete = function () {
+    $scope.formData.athlete = $scope.selectAthlete.array;
+  };
+
+
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+
+  //Submit Form
+  $scope.submitData = function (formData) {
+    $scope.showLoading('Please wait...', 15000);
+    MyServices.saveInjury(formData, function (data) {
+      if (data.value === true) {
+        $scope.hideLoading();
+        $scope.showLoading('Injury Created', 2000);
+        $state.go('app.injuries');
+      } else {
+        $scope.hideLoading();
+        $scope.showLoading(data.data.message, 2000);
+      }
+    });
+  };
+})
+
+.controller('InjuryDetailCtrl', function ($scope, $ionicModal, $ionicLoading, MyServices, $ionicPopup, $stateParams, $filter, $state) {
+  $scope.title = 'Edit';
+  $scope.formData = {};
+  $scope.selectAthlete = {};
+  $scope.injuryId = $stateParams.id;
+  $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
+  $scope.severity = ['Minor', 'Moderate', 'Severe'];
+
+  //Match start date & end date
+  $scope.matchDate = function () {
+    $scope.formData.resumeTrainingDate = $scope.formData.injuryDate;
+  };
+
+  //Select Athletes
+  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
+  $scope.addAthlete = function () {
+    $scope.modal.show();
+    $scope.getAthlete('');
+  };
+  //Search Athlete API
+  var j = 0;
+  $scope.getAthlete = function (search) {
+    MyServices.searchAthlete({
+      keyword: search
+    }, ++j, function (data, ci) {
+      if (ci == j) {
+        $scope.athletes = data.data.results;
+      }
+    });
+  };
+  //Remove Selected Athlete
+  $scope.removeAthlete = function (pos) {
+    $scope.formData.athlete.splice(pos, 1);
+  };
+  //Match Selected
+  $scope.matchAthlete = function () {
+    $scope.formData.athlete = $scope.selectAthlete.array;
+  };
+
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+
+  //Submit Form
+  $scope.submitData = function (formData) {
+    $scope.showLoading('Please wait...', 15000);
+    MyServices.updateInjury(formData, function (data) {
+      if (data.value === true) {
+        $scope.hideLoading();
+        $scope.showLoading('Injury Edited', 2000);
+        $state.go('app.injuries');
+      } else {
+        $scope.hideLoading();
+        $scope.showLoading('Error Editing Injury', 2000);
+      }
+    });
+  };
+
+  //get one edit
+  if ($stateParams.id) {
+    MyServices.getOneInjury({
+      _id: $stateParams.id
+    }, function (response) {
+      if (response.data) {
+        $scope.formData = response.data;
+        $scope.selectAthlete.array = $scope.formData.athlete = response.data.athlete;
+        if ($scope.formData.resumeTrainingDate) {
+          $scope.formData.injuryDate = new Date($scope.formData.injuryDate);
+          $scope.formData.resumeTrainingDate = new Date($scope.formData.resumeTrainingDate);
+        }
+      } else {
+        $scope.formData = {};
+      }
+    });
+  }
+
+  //Delete Popup
+  $scope.deletePop = function (id) {
+    $scope.myPopup = $ionicPopup.show({
+      template: '<p>Are you sure want to delete the injury?</p>',
+      title: 'Confirmation Message',
+      scope: $scope,
+      buttons: [{
+        text: 'No'
+      }, {
+        text: '<b>Yes</b>',
+        type: 'button-positive',
+        onTap: function (e) {
+          $scope.deleteInjury(id);
+        }
+      }]
+    });
+  };
+  $scope.deleteInjury = function (id) {
+    $scope.showLoading("Loading...", 10000);
+    if (id) {
+      MyServices.deleteInjury({
+        _id: id
+      }, function (data) {
+        if (data.value) {
+          $scope.hideLoading();
+          $scope.showLoading("Injury Deleted", 2000);
+          $state.go('app.injuries');
+
+        } else {
+          $scope.hideLoading();
+          $scope.showLoading("Error Deleting Injury", 2000);
+        }
+      });
+    }
+  };
+
 })
 
 .controller('SearchCoachesCtrl', function ($scope, $ionicModal) {

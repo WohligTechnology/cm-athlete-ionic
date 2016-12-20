@@ -4,13 +4,21 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item class="item-icon-left icon-c-l" ui-sref="app.injuries-detail" ng-repeat="d in data">
+      <form ng-submit="searchChange(search.keyword)" class="item item-input-inset">
+        <label class="item-input-wrapper"><input type="search" ng-change="searchChange(search.keyword)" ng-model="search.keyword" placeholder="Competition Name"></label>
+        <button class="button button-small icon ln-magnifier" type="submit"></button>
+      </form>
+      <ion-item ng-if="allInjury.length == 0 && !more.Data">
+        No Injuries found.
+      </ion-item>
+      <ion-item class="item-icon-left icon-c-l" ui-sref="app.injuries-detail({id:d._id})" ng-repeat="d in allInjury">
         <i class="icon icon-circled ln-first-aid" ng-class="{'assertive': live==true}"></i>
         <h2>{{d.name}}</h2>
-        <p>{{d.injuryDate|date:'dd MMMM yyyy'}} - {{d.resumeDate|date:'dd MMMM yyyy'}}</p>
-        <ion-option-button class="button-assertive"><i class="icon ln-trash"></i></ion-option-button>
+        <p>{{d.injuryDate|date:'dd MMMM, yyyy'}} - {{d.resumeTrainingDate|date:'dd MMMM, yyyy'}}</p>
+        <ion-option-button class="button-assertive" ng-click="deletePop(d._id)"><i class="icon ion-ios-trash-outline"></i></ion-option-button>
       </ion-item>
     </ion-list>
+    <ion-infinite-scroll ng-if="more.Data" on-infinite="loadMore();" distance="1%"></ion-infinite-scroll>
     </div>
   </ion-content>
 </ion-view>

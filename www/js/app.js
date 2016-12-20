@@ -177,10 +177,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
   .state('app.injuries', {
     url: '/injuries',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/injuries.html',
-        controller: 'InjuriesCtrl'
+        controller: 'InjuryCtrl'
       }
     }
   })
@@ -191,17 +192,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: 'templates/injuries-create.html',
-        controller: 'InjuriesCreateCtrl'
+        controller: 'InjuryCreateCtrl'
       }
     }
   })
 
   .state('app.injuries-detail', {
-    url: '/injuries/detail',
+    url: '/injuries/:id',
     views: {
       'menuContent': {
         templateUrl: 'templates/injuries-create.html',
-        controller: 'InjuriesDetailCtrl'
+        controller: 'InjuryDetailCtrl'
       }
     }
   })

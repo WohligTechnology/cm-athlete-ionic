@@ -1,5 +1,5 @@
-var adminurl = "http://coachmentor.wohlig.com/api/";
-// var adminurl = "http://192.168.2.78/api/";
+// var adminurl = "http://coachmentor.wohlig.com/api/";
+var adminurl = "http://wohlig.io/api/";
 var imgurl = adminurl + "upload/";
 
 var imgpath = imgurl + "readFile";
@@ -102,5 +102,49 @@ angular.module('starter.services', [])
           callback(data);
         });
       },
+
+      saveInjury: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'AthleteInjury/save',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+      updateInjury: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'AthleteInjury/updateAthleteInjury',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+      deleteInjury: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'AthleteInjury/delete',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+      getOneInjury: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'AthleteInjury/findOne',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+      searchInjury: function (formData, i, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'AthleteInjury/search',
+          method: 'POST',
+          data: formData
+        }).success(function (data) {
+          callback(data, i);
+        });
+      },
+
     };
   });
