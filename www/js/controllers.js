@@ -177,6 +177,22 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   };
 })
 
+.controller('PersonalGoalsCtrl', function ($scope, $state, $ionicPopup, MyServices, $ionicLoading, $ionicModal, $ionicHistory) {
+  $scope.personalgoals = [];
+  $scope.getPersonalGoals = function () {
+    $scope.personalgoals = undefined;
+    MyServices.getKeyAthleteCompetitions(function (data) {
+      if (data.value) {
+        $scope.personalgoals = data.data;
+      } else {
+        $scope.personalgoals = [];
+      }
+    });
+  };
+  $scope.getPersonalGoals();
+})
+
+
 .controller('ForgotPasswordCtrl', function ($scope, $ionicModal, $timeout) {
 
 })
@@ -402,60 +418,127 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 })
 
 
-.controller('BlogCtrl', function ($scope) {
-  $scope.data = [{
-    title: 'Use of Resistance Bands',
-    image: 'http://cimg1.ibsrv.net/cimg/www.fitday.com/693x350_100-1/349/resistance-20band-107349.jpg',
-    date: '4th October 2015',
-    ratingup: '10',
-    ratingdown: '3',
-  }, {
-    title: 'Event Preparation for U18 European Champs',
-    image: 'https://c1.staticflickr.com/9/8661/28418185866_552e4d0e65_b.jpg',
-    date: '4th October 2015',
-    ratingup: '15',
-    ratingdown: '2',
-  }, {
-    title: 'The Strongest Woman I’ ve Ever Known',
-    image: 'http://www.ooyuz.com/images/2016/8/13/1473787848785.jpg',
-    date: '4th October 2015',
-    ratingup: '12',
-    ratingdown: '3',
-  }, {
-    title: 'What You Dont Know About: Being a GM',
-    image: 'http://d2gd8qsu8uml9u.cloudfront.net/uploads/AP_234024109023-680x340.jpg',
-    date: '3rd November 2015',
-    ratingup: '23',
-    ratingdown: '1',
-  }];
+.controller('BlogCtrl', function ($scope, $ionicModal, MyServices, $ionicLoading, $ionicPopup) {
+  $scope.currentPage = 1;
+  var i = 0;
+  $scope.allBlog = [];
+  $scope.search = {
+    keyword: ""
+  };
+  $scope.more = {
+    Data: true
+  };
 
-  $scope.like = 0;
-  $scope.goLike = function (val) {
-    $scope.like = val;
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+
+  //On Change Search Function
+  $scope.searchChange = function (keywordChange) {
+    if (keywordChange === '') {
+      $scope.allBlog = [];
+      $scope.showAllBlog(keywordChange);
+    } else {
+      $scope.showAllBlog(keywordChange);
+    }
+  };
+
+  //Get All blog
+  $scope.showAllBlog = function (keywordChange) {
+    if (keywordChange) {
+      $scope.currentPage = 1;
+      $scope.allBlog = [];
+    }
+    MyServices.searchBlogForAthlete({
+      page: $scope.currentPage,
+      keyword: $scope.search.keyword
+    }, ++i, function (data, ini) {
+      if (ini == i) {
+        if (data.value) {
+          console.log(data.data.results.reactions);
+          _.forEach(data.data.results, function (value) {
+            console.log(value);
+            $scope.allBlog.push(value);
+          });
+          $scope.totalItems = data.data.total;
+          if ($scope.totalItems > $scope.allBlog.length) {
+            $scope.currentPage++;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          } else {
+            $scope.more.Data = false;
+          }
+        } else {
+          $scope.showLoading('Error Loading Blogs', 2000);
+        }
+      }
+    });
+  };
+
+  //Load More
+  $scope.loadMore = function () {
+    $scope.showAllBlog();
   };
   $scope.toggle = function () {
     $scope.searchBlog = !$scope.searchBlog;
   };
 })
 
-.controller('BlogDetailCtrl', function ($scope, $ionicModal) {
-  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
+.controller('BlogDetailCtrl', function ($scope, $ionicModal, $ionicLoading, MyServices, $ionicPopup, $stateParams, $filter, $state) {
+  $scope.formData = {};
+  $scope.blogId = $stateParams.id;
 
-  $scope.closeModal = function () {
-    $scope.modal.hide();
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
   };
 
-  $scope.shareAthlete = function () {
-    $scope.modal.show();
-  };
-  $scope.like = 0;
+  //get one edit
+  if ($stateParams.id) {
+    MyServices.getOneBlogForAthlete({
+      _id: $stateParams.id
+    }, function (response) {
+      if (response.data) {
+        $scope.formData = response.data;
+      } else {
+        $scope.formData = {};
+      }
+    });
+  }
+
+  //Reactions
+  $scope.athlete = MyServices.getUser();
   $scope.goLike = function (val) {
-    $scope.like = val;
+    if (val) {
+      MyServices.reactToBlog({
+        type: val,
+        _id: $stateParams.id
+      }, function (response) {
+        if (response.value) {
+          $scope.formData = response.data;
+        } else {}
+      });
+    } else {
+      MyServices.removeReaction({
+        _id: $stateParams.id
+      }, function (response) {
+        if (response.value) {
+          $scope.formData = response.data;
+        } else {}
+      });
+    }
   };
 
 })

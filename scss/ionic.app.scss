@@ -268,6 +268,10 @@ p.bold {
   font-weight: bold;
 }
 
+.item .small-font {
+  font-size: 12px;
+}
+
 .share {
   .item {
     padding: 0;
@@ -963,6 +967,9 @@ p.bold {
 
 .stripped {
   .item {
+    a {
+      background-color: transparent !important;
+    }
     &:nth-child(odd) {
       background-color: rgba(0, 0, 0, 0.05);
     }

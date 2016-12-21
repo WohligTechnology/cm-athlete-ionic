@@ -46,6 +46,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+  .state('app.personal-goals', {
+    url: '/personal-goals',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/personal-goals.html',
+        controller: 'PersonalGoalsCtrl'
+      }
+    }
+  })
+
   .state('login', {
     url: '/login',
     cache: false,
@@ -77,6 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
   .state('app.blog', {
     url: '/blog',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/blog.html',
@@ -85,8 +96,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.blogdetail', {
-    url: '/blog/detail',
+  .state('app.blog-detail', {
+    url: '/blog/:id',
     views: {
       'menuContent': {
         templateUrl: 'templates/blog-detail.html',

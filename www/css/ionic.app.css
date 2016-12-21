@@ -9986,6 +9986,9 @@ p.bold {
   font-size: 12px;
   font-weight: bold; }
 
+.item .small-font {
+  font-size: 12px; }
+
 .share .item {
   padding: 0;
   font-size: 14px; }
@@ -10568,6 +10571,9 @@ p.bold {
   bottom: -9px;
   right: 1px;
   text-align: center; }
+
+.stripped .item a {
+  background-color: transparent !important; }
 
 .stripped .item:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.05); }

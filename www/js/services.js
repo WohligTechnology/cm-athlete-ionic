@@ -146,5 +146,50 @@ angular.module('starter.services', [])
         });
       },
 
+      getOneBlogForAthlete: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'Blog/findOneAthleteBlog',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+      reactToBlog: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'Blog/react',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+      removeReaction: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'Blog/removeReaction',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+      searchBlogForAthlete: function (formData, i, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'Blog/searchForAthlete',
+          method: 'POST',
+          data: formData
+        }).success(function (data) {
+          callback(data, i);
+        });
+      },
+
+      getKeyAthleteCompetitions: function (callback) {
+        var formData = {};
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'Competition/getKeyAthleteCompetitions',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+
     };
   });

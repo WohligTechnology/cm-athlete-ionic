@@ -32,6 +32,10 @@
     </div>
     <ion-refresher on-refresh="reloadProfile()"></ion-refresher>
     <ion-list class="stripped">
+      <ion-item ui-sref="app.personal-goals">
+        <h3>Persoanl Goals</h3>
+        <p>View All <i class="icon ion-ios-arrow-forward"></i></p>
+      </ion-item>
       <ion-item class="item-text-wrap" ng-if="profileData.mobile">
         <h3>Phone Number</h3>
         <p>{{profileData.mobile}}</p>

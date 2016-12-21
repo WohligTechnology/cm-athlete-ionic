@@ -1,0 +1,22 @@
+<ion-view>
+  <ion-nav-title>
+    Personal Goals
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <a class="button button-icon icon ln-pencil ln-fit" ui-sref="app.edit-profile"></a>
+    <a class="button button-icon icon ln-earth ln-fit" ui-sref="app.notifications"><span class="badge-icon assertive-bg">3</span></a>
+  </ion-nav-buttons>
+  <ion-content class="white-profile">
+    <ion-list class="stripped">
+      <ion-item ng-if="personalgoals.length == 0">No Personal Goals found.</ion-item>
+      <ion-item ng-if="personalgoals.length > 0" class="item-text-wrap item-long" ng-repeat="p in personalgoals">
+        <h3>{{p.name}}</h3>
+        <p class="small-font">
+          <i class="icon ln-calendar positive"></i> {{p.startDate|date:'dd MMMM, yyyy'}} -
+          <i class="icon ln-calendar positive"></i> {{p.endDate|date:'dd MMMM, yyyy'}}
+        </p>
+        <p class="text-justified" read-more="p.details" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

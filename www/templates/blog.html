@@ -3,31 +3,31 @@
     <button type="button" class="button button-icon ln-magnifier ln-fit" ng-click="toggle();"></button>
   </ion-nav-buttons>
   <ion-content class="blog-detail">
-    <ion-list ng-if="searchBlog">
-      <ion-item class="item-input-inset">
-        <label class="item-input-wrapper"><input type="text" placeholder="Search Blog"></label>
-        <button class="button button-small icon ln-magnifier"></button>
-      </ion-item>
-    </ion-list>
-    <div class="list card" ng-repeat="d in data">
+    <form ng-if="searchBlog" ng-submit="searchChange(search.keyword)" class="item item-input-inset">
+      <label class="item-input-wrapper"><input type="search" ng-change="searchChange(search.keyword)" ng-model="search.keyword" placeholder="Blog Title"></label>
+      <button class="button button-small icon ln-magnifier" type="submit"></button>
+    </form>
+    <div class="list" ng-if="allBlog.length == 0 && !more.Data">
+      <ion-item>No Blog(s) found.</ion-item>
+    </div>
+    <div class="list card" ng-if="allBlog.length > 0" ui-sref="app.blog-detail({id: d._id})" ng-repeat="d in allBlog">
       <div class="item item-body">
         <div class="item-content">
           <p class="author">
-            <img src="img/coach/james-coney.jpg"> James Coney
+            <img ng-src="{{d.author.profilePic|uploadpath}}"> {{d.author.name}} {{d.author.surname}}
           </p>
         </div>
-        <img class="full-image" ng-src="{{d.image}}" ui-sref="app.blogdetail">
+        <img class="full-image" ng-src="{{d.image|uploadpath}}">
         <div class="item-content">
-          <h4 class="card-title" ui-sref="app.blogdetail">
-            {{d.title}}
-          </h4>
+          <h4 class="card-title">{{d.title}}</h4>
           <div class="more-info">
-            <span class="small-text pull-right">{{d.date}}</span>
-            <span class="th" ng-class="{'up': like==1}" ng-click="goLike(1)"><i class="icon ion-thumbsup"></i> 20</span>
-            <span class="th" ng-class="{'dn': like==-1}" ng-click="goLike(-1)"><i class="icon ion-thumbsdown"></i> 4</span>
+            <span class="small-text pull-right">{{d.publishingDate|date:'dd MMMM, yyyy'}}</span>
+            <span class="th" ng-class="{'up': d.myReaction=='Like'}"><i class="icon ion-thumbsup"></i> {{d.likes}}</span>
+            <span class="th" ng-class="{'dn': d.myReaction=='Dislike'}"><i class="icon ion-thumbsdown"></i> {{d.dislikes}}</span>
           </div>
         </div>
       </div>
     </div>
+    <ion-infinite-scroll ng-if="more.Data" on-infinite="loadMore();" distance="1%"></ion-infinite-scroll>
   </ion-content>
 </ion-view>
