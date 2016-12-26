@@ -1,20 +1,20 @@
 <ion-view view-title="My Coach">
-    <ion-content start-y="53">
-        <ion-list>
-            <ion-item class="item-input-inset">
-                <label class="item-input-wrapper"><input type="text" placeholder="Coach Name"></label>
-                <button class="button button-small icon ln-magnifier"></button>
-            </ion-item>
-            <ion-item class="item-avatar" ui-sref="app.coach-detail" ng-repeat="m in coach">
-                <img ng-src="{{m.image}}">
-                <h2>{{m.name}} {{m.surname}}</h2>
-                <p>
-                    <i class="icon ln-calendar3"></i>
-                    <span>{{m.acceptedDate | date:'dd MMMM, yyyy'}}</span> - <span>{{m.renewalDate | date:'dd MMMM, yyyy'}}</span>
-                </p>
-                <span class="badge badge-positive chat-badge">{{m.subscriptionType | limitTo:1}}</span>
-                <ion-option-button class="button-assertive">Unsubscribe</ion-option-button>
-            </ion-item>
-        </ion-list>
-    </ion-content>
+  <ion-content start-y="53">
+    <ion-list>
+      <ion-item class="item-input-inset">
+        <label class="item-input-wrapper"><input type="text" placeholder="Coach Name"></label>
+        <button class="button button-small icon ln-magnifier"></button>
+      </ion-item>
+      <ion-item class="item-avatar" ui-sref="app.coach-detail" ng-repeat="m in coach">
+        <img ng-src="{{(m.image)||'img/img-placeholder.png'}}">
+        <h2>{{m.name}} {{m.surname}}</h2>
+        <p>
+          <i class="icon ln-calendar3"></i>
+          <span>{{m.acceptedDate | date:'dd MMMM, yyyy'}}</span> - <span>{{m.renewalDate | date:'dd MMMM, yyyy'}}</span>
+        </p>
+        <span class="badge badge-positive chat-badge">{{m.subscriptionType | limitTo:1}}</span>
+        <ion-option-button class="button-assertive">Unsubscribe</ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
 </ion-view>

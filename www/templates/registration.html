@@ -16,14 +16,17 @@
           <label class="item item-input" ng-class="{'err': formName.name.$invalid && formName.name.$touched}">
             <span class="input-label">Forename</span>
             <input type="text" name="name" ng-model="formData.name" maxlength="35" ng-pattern="onlyAplha" required>
+            <span class="error-msg" ng-show="formName.name.$invalid && formName.name.$touched">Please enter valid Forename</span>
           </label>
           <label class="item item-input" ng-class="{'err': formName.surname.$invalid && formName.surname.$touched}">
             <span class="input-label">Surname</span>
             <input type="text" name="surname" ng-model="formData.surname" maxlength="35" ng-pattern="onlyAplha" required>
+            <span class="error-msg" ng-show="formName.surname.$invalid && formName.surname.$touched">Please enter valid Surname</span>
           </label>
           <label class="item item-input" ng-class="{'err': formName.email.$invalid && formName.email.$touched}">
             <span class="input-label">Email Address</span>            
             <input type="email" name="email" ng-model="formData.email" ng-pattern="validEmail" required>
+            <span class="error-msg" ng-show="formName.email.$invalid && formName.email.$touched">Please enter valid Email Address</span>
           </label>
           <ion-item class="item-divider item-text-wrap small-text">
             Password must contain: <br>
@@ -34,20 +37,24 @@
           <label class="item item-input" ng-class="{'err': passwordInvalid}">
             <span class="input-label">Password</span>
             <input type="password" no-paste name="password" ng-change="passwordValidator(formData.password);" maxlength="15" ng-model="formData.password" required>
+            <span class="error-msg" ng-show="formName.password.$invalid && formName.password.$touched">Please enter valid Password</span>
             </label>
           <label class="item item-input" ng-if="formData.password" ng-class="{'err':formData.repassword !== formData.password,'err succ':formData.repassword === formData.password}">
             <span class="input-label">Confirm Password</span>
             <input type="password" no-paste name="repassword" ng-model="formData.repassword" maxlength="15" required>
+            <span class="error-msg" ng-show="formData.repassword !== formData.password">Passwords donot match</span>
           </label>
           <label class="item item-input" ng-class="{'err': formName.dob.$invalid && formName.dob.$touched}">
             <span class="input-label">Date of Birth</span>
             <input type="date" name="dob" ng-model="formData.dob" max="{{maxDate}}" required>
+            <span class="error-msg" ng-show="formName.dob.$invalid && formName.dob.$touched">Please enter valid Date of Birth</span>
           </label>
           <label class="item item-input item-select" ng-class="{'err': formName.gender.$invalid && formName.gender.$touched}">
             <span class="input-label">Gender</span>
             <select name="gender" ng-model="formData.gender" ng-options="g as g for g in gender" required>
               <option value="" selected>Select</option>
             </select>
+            <span class="error-msg" ng-show="formName.gender.$invalid && formName.gender.$touched">Please select Gender</span>
           </label>
         </div>
         <div class="text-center m20 padding-horizontal">

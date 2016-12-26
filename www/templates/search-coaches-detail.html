@@ -3,7 +3,7 @@
     <div class="picture-hold picture-pad">
       <div class="zd">
         <span class="full sm" ng-if="subscriptionFull"><i class="ion ion-alert-circled"></i> Fully Subscribed</span>
-        <div class="dp" style="background-image: url('{{coaches.image|localurl}}');"></div>
+        <div class="dp" style="background-image: url({{(coaches.image|localurl)||'img/img-placeholder.png'}});"></div>
         <h3>{{coaches.name}} {{coaches.surname}}</h3>
         <p class="badged positive-bg">{{coaches.credentials}}</p>
       </div>

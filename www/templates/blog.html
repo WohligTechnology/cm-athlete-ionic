@@ -14,7 +14,7 @@
       <div class="item item-body">
         <div class="item-content">
           <p class="author">
-            <img ng-src="{{d.author.profilePic|uploadpath}}"> {{d.author.name}} {{d.author.surname}}
+            <img ng-src="{{(d.author.profilePic | uploadpath)||'img/img-placeholder.png'}}"> {{d.author.name}} {{d.author.surname}}
           </p>
         </div>
         <img class="full-image" ng-src="{{d.image|uploadpath}}">

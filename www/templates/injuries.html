@@ -1,11 +1,11 @@
-<ion-view view-title="Injuries">
+<ion-view view-title="My Injuries">
   <ion-nav-buttons side="right">
     <a class="button button-clear icon ion-ios-plus-empty" ui-sref="app.injuries-create"></a>
   </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <form ng-submit="searchChange(search.keyword)" class="item item-input-inset">
-        <label class="item-input-wrapper"><input type="search" ng-change="searchChange(search.keyword)" ng-model="search.keyword" placeholder="Competition Name"></label>
+        <label class="item-input-wrapper"><input type="search" ng-change="searchChange(search.keyword)" ng-model="search.keyword" placeholder="Injury Name"></label>
         <button class="button button-small icon ln-magnifier" type="submit"></button>
       </form>
       <ion-item ng-if="allInjury.length == 0 && !more.Data">

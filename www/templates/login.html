@@ -9,10 +9,12 @@
           <label class="item item-input ps-relative" ng-class="{'err': formName.email.$invalid && formName.email.$touched}">
             <i class="ln-envelope"></i>
             <input type="email" placeholder="Email Address" ng-model="formData.email" name="email" required>
+            <span class="error-msg" ng-show="formName.email.$invalid && formName.email.$touched">Please enter valid Email Address</span>
           </label>
           <label class="item item-input ps-relative" ng-class="{'err': formName.password.$invalid && formName.password.$touched}">
             <i class="ln-lock"></i>
             <input type="password" placeholder="Password" ng-model="formData.password" name="password" required>
+            <span class="error-msg" ng-show="formName.password.$invalid && formName.password.$touched">Please enter valid Password</span>
           </label>
           <div class="pull-right pr15">
             <a href="" class="color-primary" ng-click="openModal()">Forgot Password ?</a>

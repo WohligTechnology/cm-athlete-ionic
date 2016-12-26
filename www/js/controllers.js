@@ -171,7 +171,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
         $state.go('app.profile');
       } else {
         $scope.hideLoading();
-        $scope.showLoading(data.data.message, 2000);
+        $scope.showLoading(data.error.message, 2000);
       }
     });
   };
@@ -343,7 +343,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
         $scope.closeModal();
       } else {
         $scope.hideLoading();
-        $scope.showLoading('Please Try Again!', 2000);
+        $scope.showLoading(data.data.message, 2000);
       }
     });
   };
@@ -555,22 +555,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     $scope.modalChat.show();
   };
 
-  $ionicModal.fromTemplateUrl('templates/modal/group-chat.html', {
-    id: 2,
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modalGroup = modal;
-  });
-  $scope.newGroupChat = function () {
-    $scope.modalGroup.show();
-  };
-
-  $scope.closeModal = function () {
-    $scope.modalGroup.hide();
-    $scope.modalChat.hide();
-  };
-
   $scope.startChat = function () {
     $state.go('app.chatdetail');
     $scope.modalChat.hide();
@@ -701,41 +685,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('CompetitionDetailCtrl', function ($scope, $ionicModal) {
-
-  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
-
-  $scope.closeModal = function () {
-    $scope.modal.hide();
-  };
-
-  $scope.addAthlete = function () {
-    $scope.modal.show();
-  };
-
-  $scope.data = {
-    name: 'Nike Marathon London',
-    startDate: new Date("January 14, 2017 11:13:00"),
-    endDate: new Date("January 15, 2017 11:13:00"),
-    keyCompetition: true,
-    assignedAthletes: [{
-      name: 'Van Gough',
-      img: 'img/img-placeholder.png'
-    }, {
-      name: 'Samuel Trump',
-      img: 'img/img-placeholder.png'
-    }],
-  };
-
-  $scope.isDisabled = true;
-
-})
-
 .controller('AnalyticsCtrl', function ($scope, $ionicModal) {
   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
   $scope.series = ['Series A', 'Series B'];
@@ -850,7 +799,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 })
 
 .controller('InjuryCreateCtrl', function ($scope, $ionicModal, $ionicLoading, MyServices, $ionicPopup, $stateParams, $filter, $state) {
-  $scope.title = 'Create';
+  $scope.title = 'Add';
   $scope.selectAthlete = {};
   $scope.formData = {};
   $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
@@ -860,41 +809,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.matchDate = function () {
     $scope.formData.resumeTrainingDate = $scope.formData.injuryDate;
   };
-
-  //Select Athletes Modal
-  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
-  $scope.closeModal = function () {
-    $scope.modal.hide();
-  };
-  $scope.addAthlete = function () {
-    $scope.modal.show();
-    $scope.getAthlete('');
-  };
-  //Search Athlete API
-  var j = 0;
-  $scope.getAthlete = function (search) {
-    MyServices.searchAthlete({
-      keyword: search
-    }, ++j, function (data, ci) {
-      if (ci == j) {
-        $scope.athletes = data.data.results;
-      }
-    });
-  };
-  //Remove Selected Athlete
-  $scope.removeAthlete = function (pos) {
-    $scope.formData.athlete.splice(pos, 1);
-  };
-  //Match Selected
-  $scope.matchAthlete = function () {
-    $scope.formData.athlete = $scope.selectAthlete.array;
-  };
-
 
   //Loading
   $scope.showLoading = function (value, time) {
@@ -934,40 +848,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   //Match start date & end date
   $scope.matchDate = function () {
     $scope.formData.resumeTrainingDate = $scope.formData.injuryDate;
-  };
-
-  //Select Athletes
-  $ionicModal.fromTemplateUrl('templates/modal/add-athlete.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
-  $scope.closeModal = function () {
-    $scope.modal.hide();
-  };
-  $scope.addAthlete = function () {
-    $scope.modal.show();
-    $scope.getAthlete('');
-  };
-  //Search Athlete API
-  var j = 0;
-  $scope.getAthlete = function (search) {
-    MyServices.searchAthlete({
-      keyword: search
-    }, ++j, function (data, ci) {
-      if (ci == j) {
-        $scope.athletes = data.data.results;
-      }
-    });
-  };
-  //Remove Selected Athlete
-  $scope.removeAthlete = function (pos) {
-    $scope.formData.athlete.splice(pos, 1);
-  };
-  //Match Selected
-  $scope.matchAthlete = function () {
-    $scope.formData.athlete = $scope.selectAthlete.array;
   };
 
   //Loading

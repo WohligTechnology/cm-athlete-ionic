@@ -69,12 +69,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'RegistrationCtrl'
   })
 
-  .state('forgot-password', {
-    url: '/forgot-password',
-    templateUrl: 'templates/forgot-password.html',
-    controller: 'ForgotPasswordCtrl'
-  })
-
   .state('app.edit-profile', {
     url: '/edit-profile',
     views: {
@@ -162,26 +156,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       'menuContent': {
         templateUrl: 'templates/analytics.html',
         controller: 'AnalyticsCtrl'
-      }
-    }
-  })
-
-  .state('app.competition-create', {
-    url: '/competition-create',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/competition-create.html',
-        controller: 'CompetitionCreateCtrl'
-      }
-    }
-  })
-
-  .state('app.competition-detail', {
-    url: '/competition-detail',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/competition-create.html',
-        controller: 'CompetitionDetailCtrl'
       }
     }
   })

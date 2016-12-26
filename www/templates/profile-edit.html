@@ -3,8 +3,7 @@
     <form name="formName" ng-submit="submitData(formData);">
       <div class="pic-edit">
         <div class="ch-relative" ng-click="selectImage()">
-          <div class="dp" style="background-image: url({{formData.profilePic | uploadpath}});" ng-if="formData.profilePic"></div>
-          <div class="dp" style="background-image: url(img/img-placeholder.png);" ng-if="!formData.profilePic"></div>
+          <div class="dp" style="background-image: url({{(formData.profilePic | uploadpath)||'img/img-placeholder.png'}});"></div>
           <a class="button button-icon icon ln-pencil ln-fit"></a>
         </div>
       </div>
@@ -13,14 +12,17 @@
           <label class="item item-input" ng-class="{'err': formName.name.$invalid && formName.name.$touched}">
             <span class="input-label">Forename</span>
             <input type="text" name="name" ng-model="formData.name" maxlength="35" ng-pattern="onlyAplha" required>
+            <span class="error-msg" ng-show="formName.name.$invalid && formName.name.$touched">Please enter valid Forename</span>
           </label>
           <label class="item item-input" ng-class="{'err': formName.surname.$invalid && formName.surname.$touched}">
             <span class="input-label">Surname</span>
             <input type="text" name="surname" ng-model="formData.surname" maxlength="35" ng-pattern="onlyAplha" required>
+            <span class="error-msg" ng-show="formName.surname.$invalid && formName.surname.$touched">Please enter valid Surname</span>
           </label>
           <label class="item item-input">
             <span class="input-label">Email Address  <i class="icon ion-android-lock"></i></span>
             <input type="email" name="email" ng-model="formData.email" ng-pattern="validEmail" required readonly>
+            <span class="error-msg" ng-show="formName.email.$invalid && formName.email.$touched">Please enter valid Email Address</span>
           </label>
           <label class="item item-input" ng-click="changePassword()">
             <span class="input-label">Change Password</span>
@@ -31,10 +33,12 @@
             <select name="gender" ng-model="formData.gender" ng-options="g as g for g in gender" required>
               <option value="">Select</option>
             </select>
+            <span class="error-msg" ng-show="formName.gender.$invalid && formName.gender.$touched">Please select Gender</span>
           </label>
           <label class="item item-input" ng-class="{'err': formName.dob.$invalid && formName.dob.$touched}">
             <span class="input-label">Date of Birth</span>
             <input type="date" name="dob" ng-model="formData.dob" max="{{maxDate}}" required>
+            <span class="error-msg" ng-show="formName.dob.$invalid && formName.dob.$touched">Please enter valid Date of Birth</span>
           </label>
           <div class="item item-divider small-text" ng-if="profileIncomplete()">
             Please enter below details to complete your profile.
@@ -42,32 +46,39 @@
           <label class="item item-input" ng-class="{'err': formName.mobile.$invalid && formName.mobile.$touched}">
             <span class="input-label">Phone Number</span>
             <input type="tel" name="mobile" ng-model="formData.mobile" required>
+            <span class="error-msg" ng-show="formName.mobile.$invalid && formName.mobile.$touched">Please enter valid Phone Number</span>
           </label>
           <label class="item item-input item-select" ng-class="{'err': formName.gender.$invalid && formName.gender.$touched}">
             <span class="input-label">Country</span>
             <select name="country" ng-model="formData.country" ng-options="c.name as c.name for c in countries" required>
               <option value="">Select</option>
             </select>
+            <span class="error-msg" ng-show="formName.country.$invalid && formName.country.$touched">Please select Country</span>
           </label>
           <label class="item item-input item-block" ng-class="{'err': formName.about.$invalid && formName.about.$touched}">
             <span class="input-label">About</span>
-            <textarea auto-grow rows="3" name="about" ng-model="formData.about" required></textarea>
+            <textarea auto-grow rows="3" maxlength="1200" name="about" ng-model="formData.about" required></textarea>
+            <span class="error-msg" ng-show="formName.about.$invalid && formName.about.$touched">Please enter valid About</span>
           </label>
           <label class="item item-input item-block" ng-class="{'err': formName.events.$invalid && formName.events.$touched}">
             <span class="input-label">Events</span>
-            <textarea auto-grow rows="3" name="events" ng-model="formData.events" required></textarea>
+            <textarea auto-grow rows="3" maxlength="1200" name="events" ng-model="formData.events" required></textarea>
+            <span class="error-msg" ng-show="formName.events.$invalid && formName.events.$touched">Please enter valid Events</span>
           </label>
           <label class="item item-input item-block" ng-class="{'err': formName.achievements.$invalid && formName.achievements.$touched}">
             <span class="input-label">Achievement / Personal bests</span>
-            <textarea auto-grow rows="3" name="achievements" ng-model="formData.achievements" required></textarea>
+            <textarea auto-grow rows="3" maxlength="1200" name="achievements" ng-model="formData.achievements" required></textarea>
+            <span class="error-msg" ng-show="formName.achievements.$invalid && formName.achievements.$touched">Please enter valid Achievements</span>
           </label>
           <label class="item item-input item-block" ng-class="{'err': formName.previousSeasonReview.$invalid && formName.previousSeasonReview.$touched}">
             <span class="input-label">Previous Season Review</span>
-            <textarea auto-grow rows="3" name="previousSeasonReview" ng-model="formData.previousSeasonReview" required></textarea>
+            <textarea auto-grow rows="3" maxlength="1200" name="previousSeasonReview" ng-model="formData.previousSeasonReview" required></textarea>
+            <span class="error-msg" ng-show="formName.previousSeasonReview.$invalid && formName.previousSeasonReview.$touched">Please enter valid Previous Season Review</span>
           </label>
           <label class="item item-input item-block" ng-class="{'err': formName.sports.$invalid && formName.sports.$touched}">
             <span class="input-label">Sports</span>
-            <textarea auto-grow rows="3" name="sports" ng-model="formData.sports" required></textarea>            
+            <textarea auto-grow rows="3" maxlength="1200" name="sports" ng-model="formData.sports" required></textarea>            
+            <span class="error-msg" ng-show="formName.sports.$invalid && formName.sports.$touched">Please enter valid Sports</span>
           </label>
         </div>
       </div>
