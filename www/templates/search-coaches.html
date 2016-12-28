@@ -4,16 +4,20 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item class="item-input-inset">
-        <label class="item-input-wrapper"><input type="text" placeholder="Coach Name or Country"></label>
-        <button class="button button-small icon ln-magnifier"></button>
+      <form ng-submit="searchChange(search.keyword)" class="item item-input-inset">
+        <label class="item-input-wrapper"><input type="search" ng-change="searchChange(search.keyword)" ng-model="search.keyword" placeholder="Coach Name or Country"></label>
+        <button class="button button-small icon ln-magnifier" type="submit"></button>
+      </form>
+      <ion-item ng-if="allCoaches.length == 0 && !more.Data">
+        No Injuries found.
       </ion-item>
-      <ion-item class="item-avatar" ui-sref="app.search-coaches-detail" ng-repeat="c in coaches">
-        <img ng-src="{{(c.image|localurl)||'img/img-placeholder.png'}}">
+      <ion-item class="item-avatar" ui-sref="app.search-coaches-detail" ng-repeat="c in allCoaches">
+        <img ng-src="{{(c.profilePic|uploadpath)||'img/img-placeholder.png'}}">
         <h2>{{c.name}} {{c.surname}}</h2>
         <p>{{c.credentials}}</p>
         <span class="full" ng-if="c.full">Fully Subscribed</span>
       </ion-item>
     </ion-list>
+    <ion-infinite-scroll ng-if="more.Data" on-infinite="loadMore();" distance="1%"></ion-infinite-scroll>
   </ion-content>
 </ion-view>

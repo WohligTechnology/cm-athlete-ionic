@@ -191,5 +191,26 @@ angular.module('starter.services', [])
         }).success(callback);
       },
 
+      searchAllCoaches: function (formData, i, callback) {
+        formData = _.merge(formData, requestCredentials);
+        console.log(formData);
+        $http({
+          url: adminurl + 'coach/search',
+          method: 'POST',
+          data: formData
+        }).success(function (data) {
+          callback(data, i);
+        });
+      },
+      getOneCoaches: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'coach/getCoachProfile',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+
+
     };
   });

@@ -932,102 +932,25 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('SearchCoachesCtrl', function ($scope, $ionicModal) {
-  $ionicModal.fromTemplateUrl('templates/modal/coach.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
-  $scope.openModal = function () {
-    $scope.modal.show();
+.controller('SearchCoachesCtrl', function ($scope, $ionicModal, MyServices, $ionicLoading, $ionicPopup) {
+  $scope.currentPage = 1;
+  var i = 0;
+  $scope.allCoaches = [];
+  $scope.search = {
+    keyword: ""
   };
-  $scope.closeModal = function () {
-    $scope.modal.hide();
+  $scope.more = {
+    Data: true
   };
-
-  $scope.coaches = [{
-    "name": "Emma",
-    "surname": "Smith",
-    "credentials": "Level 2",
-    "yearsCoaching": 17,
-    "image": "emma-smith"
-  }, {
-    "name": "Tom",
-    "surname": "Banks",
-    "credentials": "Level 3",
-    "yearsCoaching": 33,
-    "image": "tom-banks",
-    "full": true
-  }, {
-    "name": "Aravind",
-    "surname": "Chandra",
-    "credentials": "Level 1",
-    "yearsCoaching": 7,
-    "image": "aravind-chandra"
-  }, {
-    "name": "Rose",
-    "surname": "Swinbury",
-    "credentials": "Level 1",
-    "yearsCoaching": 2,
-    "image": "rose-swinbury"
-  }, {
-    "name": "Edward",
-    "surname": "Eubank",
-    "credentials": "Level 2",
-    "yearsCoaching": 9,
-    "image": "edward-eubank"
-  }, {
-    "name": "Yohann",
-    "surname": "Diniz",
-    "credentials": "Level 2",
-    "yearsCoaching": 4,
-    "image": "yohann-diniz"
-  }, {
-    "name": "Ewan",
-    "surname": "McKinnon",
-    "credentials": "Level 3",
-    "yearsCoaching": 12,
-    "image": "ewan-mckinnon",
-    "full": true
-  }, {
-    "name": "Dominic ",
-    "surname": "Green",
-    "credentials": "Level 2",
-    "yearsCoaching": 14,
-    "image": "dominic-green"
-  }, {
-    "name": "Sara",
-    "surname": "Pascoe",
-    "credentials": "Level 3",
-    "yearsCoaching": 15,
-    "image": "sara-pascoe"
-  }, {
-    "name": "Beth",
-    "surname": "Devos",
-    "credentials": "Level 4",
-    "yearsCoaching": 18,
-    "image": "beth-devos"
-  }, {
-    "name": "John",
-    "surname": "Bradbury",
-    "credentials": "Level 4",
-    "yearsCoaching": 21,
-    "image": "john-bradbury",
-    "full": true
-  }];
-
   $ionicModal.fromTemplateUrl('templates/modal/coach-filter.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function (modal) {
     $scope.modal = modal;
   });
-
   $scope.closeModal = function () {
     $scope.modal.hide();
   };
-
   $scope.openFilter = function () {
     $scope.modal.show();
   };
@@ -1054,6 +977,62 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
   $scope.changeFilter = function (data) {
     $scope.filterActive = data;
+  };
+
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
+  };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+
+
+  //On Change Search Function
+  $scope.searchChange = function (keywordChange) {
+    if (keywordChange === '') {
+      $scope.allCoaches = [];
+      $scope.showAllCoaches(keywordChange);
+    } else {
+      $scope.showAllCoaches(keywordChange);
+    }
+  };
+
+  //Get All Competiton
+  $scope.showAllCoaches = function (keywordChange) {
+    if (keywordChange) {
+      $scope.currentPage = 1;
+      $scope.allCoaches = [];
+    }
+    MyServices.searchAllCoaches({
+      page: $scope.currentPage,
+      keyword: $scope.search.keyword
+    }, ++i, function (data, ini) {
+      if (ini == i) {
+        if (data.value) {
+          _.forEach(data.data.results, function (value) {
+            $scope.allCoaches.push(value);
+          });
+          $scope.totalItems = data.data.total;
+          if ($scope.totalItems > $scope.allCoaches.length) {
+            $scope.currentPage++;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          } else {
+            $scope.more.Data = false;
+          }
+        } else {
+          $scope.showLoading('Error Loading Injurys', 2000);
+        }
+      }
+    });
+  };
+
+  //Load More
+  $scope.loadMore = function () {
+    $scope.showAllCoaches();
   };
 
 })
