@@ -11,7 +11,7 @@
       <ion-item ng-if="allCoaches.length == 0 && !more.Data">
         No Injuries found.
       </ion-item>
-      <ion-item class="item-avatar" ui-sref="app.search-coaches-detail" ng-repeat="c in allCoaches">
+      <ion-item class="item-avatar" ui-sref="app.search-coaches-detail({id:c._id})" ng-repeat="c in allCoaches">
         <img ng-src="{{(c.profilePic|uploadpath)||'img/img-placeholder.png'}}">
         <h2>{{c.name}} {{c.surname}}</h2>
         <p>{{c.credentials}}</p>

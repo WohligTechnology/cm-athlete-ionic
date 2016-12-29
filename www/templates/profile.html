@@ -47,26 +47,25 @@
         <h3>Date of Birth</h3>
         <p>{{profileData.dob | date:'dd MMMM, yyyy'}}</p>
       </ion-item>
-      <ion-item class="item-text-wrap item-long">
+      <ion-item class="item-text-wrap item-long" ng-if="profileData.sports">
         <h3>Sport</h3>
-        <p class="text-justified" read-more="profileData.sports" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+        <p class="text-justified" read-more="profileData.sports" read-more-limit="140"></p>
       </ion-item>
       <ion-item class="item-text-wrap item-long" ng-if="profileData.about">
         <h3>About</h3>
-        <p class="text-justified" read-more="profileData.about" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+        <p class="text-justified" read-more="profileData.about" read-more-limit="140"></p>
       </ion-item>
       <ion-item class="item-text-wrap item-long" ng-if="profileData.events">
         <h3>Events</h3>
-        <p class="text-justified" read-more="profileData.events" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+        <p class="text-justified" read-more="profileData.events" read-more-limit="140"></p>
       </ion-item>
       <ion-item class="item-text-wrap item-long" ng-if="profileData.achievements">
         <h3>Achievement / Personal bests</h3>
-        <p class="text-justified" read-more="profileData.achievements" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+        <p class="text-justified" read-more="profileData.achievements" read-more-limit="140"></p>
       </ion-item>
       <ion-item class="item-text-wrap item-long" ng-if="profileData.previousSeasonReview">
         <h3>Previous Season Review</h3>
-        <p class="text-justified" read-more="profileData.previousSeasonReview" read-more-limit="140" read-more-label-expand="Read More"
-          read-more-label-collapse="Read Less"></p>
+        <p class="text-justified" read-more="profileData.previousSeasonReview" read-more-limit="140"></p>
       </ion-item>
     </ion-list>
   </ion-content>

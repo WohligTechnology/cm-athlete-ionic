@@ -3,7 +3,7 @@
     <div class="picture-hold picture-pad">
       <div class="zd">
         <span class="full sm" ng-if="subscriptionFull"><i class="ion ion-alert-circled"></i> Fully Subscribed</span>
-        <div class="dp" style="background-image: url({{(coaches.image|localurl)||'img/img-placeholder.png'}});"></div>
+        <div class="dp" style="background-image: url({{(coaches.profilePic|uploadpath)||'img/img-placeholder.png'}});"></div>
         <h3>{{coaches.name}} {{coaches.surname}}</h3>
         <p class="badged positive-bg">{{coaches.credentials}}</p>
       </div>
@@ -11,11 +11,11 @@
     <ion-list class="stripped">
       <ion-item class="item-text-wrap">
         <h3>Asking Price</h3>
-        <p>{{coaches.askingPrice | currency:'£':0}}</p>
+        <p>{{coaches.coachAskingPrice | currency:'£':0}}</p>
       </ion-item>
       <ion-item class="item-text-wrap">
         <h3>Years of Coaching</h3>
-        <p>{{coaches.yearsCoaching}} years</p>
+        <p>{{coaches.yearsOfCoaching}} years</p>
       </ion-item>
       <ion-item class="item-text-wrap">
         <h3>Country</h3>
@@ -41,18 +41,17 @@
           <span class="tag-box" ng-repeat="s in coaches.specialisations">{{s}}</span>
         </p>
       </ion-item>
-      <ion-item class="item-text-wrap item-long">
+      <ion-item class="item-text-wrap item-long" ng-if="coaches.expertise">
         <h3>Experience</h3>
-        <p class="text-justified" read-more="coaches.experience" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+        <p class="text-justified" ng-if="coaches.experience" read-more="coaches.experience" read-more-limit="140"></p>
       </ion-item>
-      <ion-item class="item-text-wrap item-long">
+      <ion-item class="item-text-wrap item-long" ng-if="coaches.expertise">
         <h3>Expertise</h3>
-        <p class="text-justified" read-more="coaches.expertise" read-more-limit="140" read-more-label-expand="Read More" read-more-label-collapse="Read Less"></p>
+        <p class="text-justified" read-more="coaches.expertise" read-more-limit="140"></p>
       </ion-item>
-      <ion-item class="item-text-wrap item-long">
+      <ion-item class="item-text-wrap item-long" ng-if="coaches.achievements">
         <h3>Coaching Achievements</h3>
-        <p class="text-justified" read-more="coaches.coachingAchievements" read-more-limit="140" read-more-label-expand="Read More"
-          read-more-label-collapse="Read Less"></p>
+        <p class="text-justified" read-more="coaches.achievements" read-more-limit="140"></p>
       </ion-item>
     </ion-list>
     <div class="padding-horizontal">

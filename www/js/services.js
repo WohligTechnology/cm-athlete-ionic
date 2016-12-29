@@ -193,7 +193,6 @@ angular.module('starter.services', [])
 
       searchAllCoaches: function (formData, i, callback) {
         formData = _.merge(formData, requestCredentials);
-        console.log(formData);
         $http({
           url: adminurl + 'coach/search',
           method: 'POST',
@@ -205,7 +204,7 @@ angular.module('starter.services', [])
       getOneCoaches: function (formData, callback) {
         formData = _.merge(formData, requestCredentials);
         $http({
-          url: adminurl + 'coach/getCoachProfile',
+          url: adminurl + 'coach/getOne',
           method: 'POST',
           data: formData
         }).success(callback);

@@ -1037,26 +1037,34 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('SearchCoachesDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopup) {
+.controller('SearchCoachesDetailCtrl', function ($scope, $ionicModal, $ionicLoading, $stateParams, MyServices, $ionicScrollDelegate, $ionicPopup) {
+  $scope.coaches = {};
 
-  $scope.coaches = {
-    name: 'Emma',
-    surname: 'Smith',
-    image: 'emma-smith',
-    yearsCoaching: '17',
-    gender: 'Female',
-    dob: new Date('5/27/1965'),
-    country: 'United Kingdom',
-    askingPrice: '30',
-    credentials: 'Level 2',
-    subscriptionFull: false,
-    about: 'Uklevel 2 coach specialising in sprint events - 60m, 100m, 200m and 400m. Many of my athletes have represented their country and competed nationally.',
-    coachingFocus: ['Sprinting'],
-    specialisations: ['Strength and Conditioning'],
-    experience: 'Multiple county sprinters and county champions',
-    expertise: 'Strength and Conditioning',
-    coachingAchievements: 'Worked with many county and national athletes'
+  //Loading
+  $scope.showLoading = function (value, time) {
+    $ionicLoading.show({
+      template: value,
+      duration: time
+    });
   };
+  $scope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+  $scope.showLoading('Please Wait...', 15000);
+  //get one edit
+  if ($stateParams.id) {
+    MyServices.getOneCoaches({
+      _id: $stateParams.id
+    }, function (response) {
+      if (response.data) {
+        $scope.coaches = response.data;
+        $scope.hideLoading();
+      } else {
+        $scope.showLoading('Error Loading Data!', 1000);
+        $scope.coaches = {};
+      }
+    });
+  }
 
   $scope.subscribeNow = function () {
     $scope.data = {};
