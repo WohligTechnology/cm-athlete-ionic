@@ -39,6 +39,7 @@
         <h3>Specialisations</h3>
         <p>
           <span class="tag-box" ng-repeat="s in coaches.specialisations">{{s}}</span>
+          <span class="tag-box" ng-if="coaches.specialisationOther" ng-bind="coaches.specialisationOther"></span>
         </p>
       </ion-item>
       <ion-item class="item-text-wrap item-long" ng-if="coaches.expertise">
