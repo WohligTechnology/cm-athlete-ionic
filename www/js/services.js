@@ -209,7 +209,22 @@ angular.module('starter.services', [])
           data: formData
         }).success(callback);
       },
-
+      sendRequestToCoach: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'athletecoaching/save',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+      getNotifications: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'athletecoaching/getRequest',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
 
     };
   });

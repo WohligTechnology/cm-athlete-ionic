@@ -1,0 +1,26 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-positive bar bar-header">
+    <h1 class="title">{{messageInfo.title}}</h1>
+    <div class="buttons">
+      <button class="button button-clear button-icon ln-cross ln-fit" ng-click="closeModal()"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form name="messageBox" ng-submit="submitMessage(messageData.data);closeModal();">
+      <ion-list>
+        <div class="item item-divider item-text-wrap small-text text-justified">
+          <span>
+             {{messageInfo.subTitle}}
+            </span>
+        </div>
+        <ion-item class="item-input item-stacked-label" ng-class="{'err': messageBox.data.$invalid && messageBox.data.$touched}">
+          <textarea name="data" ng-model="messageData.data" row="6" maxlength="200" required></textarea>
+          <span class="error-msg" ng-show="messageBox.data.$invalid && messageBox.data.$touched">Please enter below</span>
+        </ion-item>
+        <div class="text-right small-text"><span>{{200-messageData.data.length}} characters left</span></div>
+      </ion-list>
+      <div class="padding">
+        <button class="button button-positive button-block" type="submit" ng-disabled="messageBox.$invalid">Submit</button>
+      </div>
+    </form>
+</ion-modal-view>

@@ -1037,8 +1037,9 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 })
 
-.controller('SearchCoachesDetailCtrl', function ($scope, $ionicModal, $ionicLoading, $stateParams, MyServices, $ionicScrollDelegate, $ionicPopup) {
+.controller('SearchCoachesDetailCtrl', function ($scope, $ionicModal, $ionicLoading, $stateParams, MyServices, $state, $ionicScrollDelegate, $ionicPopup) {
   $scope.coaches = {};
+  $scope.athleteData = MyServices.getUser();
 
   //Loading
   $scope.showLoading = function (value, time) {
@@ -1050,7 +1051,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.hideLoading = function () {
     $ionicLoading.hide();
   };
-  $scope.showLoading('Please Wait...', 15000);
+  $scope.showLoading('Please wait...', 15000);
   //get one edit
   if ($stateParams.id) {
     MyServices.getOneCoaches({
@@ -1066,23 +1067,41 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     });
   }
 
-  $scope.subscribeNow = function () {
-    $scope.data = {};
-    var myPopup = $ionicPopup.show({
-      template: '<textarea auto-grow type="password" ng-model="data.message"><textarea>',
-      title: '<h4>Request Subscription</h4>',
-      subTitle: 'Please enter some message!',
-      scope: $scope,
-      buttons: [{
-        text: 'Cancel'
-      }, {
-        text: '<b>Send</b>',
-        type: 'button-positive',
-        onTap: function (e) {
-          console.log($scope.data.message);
-        }
-      }, ]
+  $scope.reqestToCoach = function (data) {
+    $scope.showLoading('Please wait...', 15000);
+    $scope.reqData = {
+      reason: data,
+      coach: $stateParams.id,
+      athlete: $scope.athleteData._id
+    };
+    MyServices.sendRequestToCoach($scope.reqData, function (response) {
+      if (response.value === true) {
+        $scope.hideLoading();
+        $scope.showLoading('Request Sent Successfully!', 2000);
+        $state.go('app.search-coaches');
+      }
     });
+  };
+
+  $ionicModal.fromTemplateUrl('templates/modal/message-box.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+    $scope.messageInfo = {
+      title: 'Request Subscription',
+      subTitle: 'Please enter some message!'
+    };
+  });
+  $scope.subscribeNow = function () {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
+
+  $scope.submitMessage = function (data) {
+    $scope.reqestToCoach(data);
   };
 
 })
@@ -1128,7 +1147,21 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   };
 })
 
-.controller('NotificationsCtrl', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopup) {
+.controller('NotificationsCtrl', function ($scope, MyServices, $ionicModal, $ionicScrollDelegate, $ionicPopup) {
+  $scope.athleteData = MyServices.getUser();
+
+  //get notifications
+  if ($scope.athleteData) {
+    MyServices.getNotifications({
+      Id: $scope.athleteData._id
+    }, function (response) {
+      if (response.value === true) {
+        $scope.notifications = response.data;
+        $scope.requestCount = $scope.notifications.length;
+      }
+    });
+  }
+
   $scope.notifications = [{
     name: 'Loughborough International',
     type: 'Competition',
