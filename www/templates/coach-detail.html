@@ -1,23 +1,24 @@
 <ion-view view-title="My Coach">
   <ion-content class="white-profile">
-    <div class="picture-hold picture-pad">
-      <div class="zd">
-        <div class="dp" style="background-image: url({{(coach.image|localurl)||'img/img-placeholder.png'}});"></div>
-        <h3>{{coach.name}} {{coach.surname}}</h3>
-        <p>{{coach.credentials}}</p>
-        <p class="badged positive-bg">{{coach.subscriptionType}}, {{coach.subscriptionFee | currency : '£' : 0}}</p>
+    <div ng-if="myCoachProfile">
+      <div class="picture-hold picture-pad">
+        <div class="zd">
+          <div class="dp" style="background-image: url({{(myCoachProfile.coach.profilePic|uploadpath)||'img/img-placeholder.png'}});"></div>
+          <h3>{{myCoachProfile.coach.name}} {{myCoachProfile.coach.surname}}</h3>
+          <p>{{myCoachProfile.coach.credentials}}</p>
+          <p class="badged positive-bg">{{myCoachProfile.subscriptionType}}, {{myCoachProfile.coach.coachAskingPrice | currency : '£' : 0}}</p>
+        </div>
       </div>
-    </div>
-    <ion-list class="stripped">
-      <ion-item class="item-text-wrap">
-        <h3>Subscription Since</h3>
-        <p>{{coach.acceptedDate | date:'dd MMMM, yyyy'}}</p>
-      </ion-item>
-      <ion-item class="item-text-wrap">
-        <h3>Next Renewal</h3>
-        <p>{{coach.renewalDate | date:'dd MMMM, yyyy'}}</p>
-      </ion-item>
-      <!--<ion-item class="item-text-wrap">
+      <ion-list class="stripped">
+        <ion-item class="item-text-wrap">
+          <h3>Subscription Since</h3>
+          <p>{{myCoachProfile.createdAt | date:'dd MMMM, yyyy'}}</p>
+        </ion-item>
+        <ion-item class="item-text-wrap">
+          <h3>Next Renewal</h3>
+          <p>{{(myCoachProfile.renewalDate | date:'dd MMMM, yyyy') || '-'}}</p>
+        </ion-item>
+        <!--<ion-item class="item-text-wrap">
         <h3>Years of Coaching</h3>
         <p>{{coach.yearsCoaching}} years</p>
       </ion-item>
@@ -58,9 +59,16 @@
         <p class="text-justified" read-more="coach.coachingAchievements" read-more-limit="140" read-more-label-expand="Read More"
           read-more-label-collapse="Read Less"></p>
       </ion-item>-->
-    </ion-list>
-    <div class="padding-horizontal">
-      <button class="button button-assertive button-block">Unsubscribe</button>
+      </ion-list>
+      <div class="padding-horizontal">
+        <button class="button button-assertive button-block" ng-click="Unsubscription(myCoachProfile._id)">Unsubscribe</button>
+      </div>
+    </div>
+    <div class="panel-content " ng-show="!myCoachProfile">
+      <h4>You haven't subscribed to any Coach</h5>
+    </div>
+    <div class="panel-content " ng-show="myCoachProfile == 'undefined'">
+      <h5>Loading</h5>
     </div>
   </ion-content>
 </ion-view>

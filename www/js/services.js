@@ -217,14 +217,49 @@ angular.module('starter.services', [])
           data: formData
         }).success(callback);
       },
-      getNotifications: function (formData, callback) {
+      getAthleteNotification: function (formData, i, callback) {
         formData = _.merge(formData, requestCredentials);
         $http({
-          url: adminurl + 'athletecoaching/getRequest',
+          url: adminurl + 'notificationathlete/getAthleteNotification',
+          method: 'POST',
+          data: formData
+        }).success(function (data) {
+          callback(data, i);
+        });
+      },
+      readathleteNotification: function (formData, i, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'notificationathlete/readathleteNotification',
+          method: 'POST',
+          data: formData
+        }).success(function (data) {
+          callback(data, i);
+        });
+      },
+      getMyCoach: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'athleteCoaching/getMyCoach',
           method: 'POST',
           data: formData
         }).success(callback);
       },
-
+      Unsubscribeacoach: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'athletecoaching/updateAthleteCoaching',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
+      paySubscription: function (formData, callback) {
+        formData = _.merge(formData, requestCredentials);
+        $http({
+          url: adminurl + 'athletecoaching/updateAthleteCoaching',
+          method: 'POST',
+          data: formData
+        }).success(callback);
+      },
     };
   });

@@ -1,0 +1,33 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-positive bar bar-header">
+    <h1 class="title">Pay Subscription</h1>
+    <button class="button button-icon ln-cross ln-fit" ng-click="closePayNow()"> </button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Pay Cost:</label>
+            <div ng-if="formData.subscriptionType != 'Yearly'">
+              <p>{{formData.coachPrice}}/month</p>
+            </div>
+            <div ng-if="formData.subscriptionType == 'Yearly'">
+              <p>{{formData.coachPrice * 11}}/yearly</p>
+            </div>
+            <label>Subscription Type:</label>
+            <select ng-model="formData.subscriptionType" class="form-control" name="subscriptionType" required>
+              <option ng-selected="true" value="">Select Subscription Type</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Yearly">Yearly</option>
+              </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-blue btn-round" ng-click="paySubscription(formData)" type="submit">Pay</button>
+      <button class="btn btn-red btn-round" ng-click="closePayNow()">Cancel</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

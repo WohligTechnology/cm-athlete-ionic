@@ -1,24 +1,24 @@
 <ion-modal-view>
-    <ion-header-bar class="bar-positive bar bar-header">
-        <button class="button button-clear" ng-click="selectedFilters={}">Clear</button>
-        <h1 class="title">Filter By</h1>
-        <button class="button button-icon ln-cross ln-fit" ng-click="closeModal()"> </button>
-    </ion-header-bar>
-    <div class="full-content">
-        <div class="colr">
-            <div class="part p1">
-                <ion-list>
-                    <ion-item ng-click="changeFilter($index)" ng-class="{'in':filterActive == $index}" ng-repeat="f in filterData">{{f.name}}</ion-item>
-                </ion-list>
-            </div>
-            <div class="part p2">
-                <ion-list ng-repeat="f in filterData" ng-show="filterActive == $index">
-                    <ion-checkbox ng-model="selectedFilters[v]" ng-repeat="v in f.value">{{v}}</ion-checkbox>
-                </ion-list>
-            </div>
-        </div>
+  <ion-header-bar class="bar-positive bar bar-header">
+    <button class="button button-clear" ng-click="selectedFilters={}">Clear</button>
+    <h1 class="title">Filter By</h1>
+    <button class="button button-icon ln-cross ln-fit" ng-click="closeModal()"> </button>
+  </ion-header-bar>
+  <div class="full-content">
+    <div class="colr">
+      <div class="part p1">
+        <ion-list>
+          <ion-item ng-click="changeFilter($index)" ng-class="{'in':filterActive == $index}" ng-repeat="f in filterData">{{f.name}}</ion-item>
+        </ion-list>
+      </div>
+      <div class="part p2">
+        <ion-list ng-repeat="f in filterData" ng-show="filterActive == $index">
+          <ion-checkbox ng-model="selectedFilters[v]" ng-change="pushSubCategory(v,f.name)" ng-repeat="v in f.value">{{v}}</ion-checkbox>
+        </ion-list>
+      </div>
     </div>
-    <ion-footer-bar class="bar-light sm">
-        <h1 class="title">Apply</h1>
-    </ion-footer-bar>
+  </div>
+  <ion-footer-bar class="bar-light sm">
+    <h1 class="title" ng-click="filterParameteres()">Apply</h1>
+  </ion-footer-bar>
 </ion-modal-view>

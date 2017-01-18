@@ -1,4 +1,5 @@
-angular.module('starter.controllers', ['starter.services', 'checklist-model', 'chart.js', 'ui.calendar', 'ngCordova'])
+// angular.module('starter.controllers', ['starter.services', 'checklist-model', 'chart.js', 'ui.calendar', 'ngCordova'])
+angular.module('starter.controllers', ['starter.services', 'checklist-model', 'ui.calendar', 'ngCordova'])
 
 .controller('LoadingCtrl', function ($scope, $ionicModal, $timeout, $state, $rootScope, MyServices, $ionicHistory) {
   $scope.loadingData = MyServices.getUser();
@@ -17,6 +18,9 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     $.jStorage.flush();
     $state.go('login');
   };
+
+  $scope.notificationCount = $.jStorage.get("notificationCount");
+
 })
 
 .controller('RegistrationCtrl', function ($scope, $state, $ionicPopup, MyServices, $ionicLoading, $filter, $ionicModal) {
@@ -228,6 +232,35 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   };
   $scope.reloadProfile();
 
+  var athlete = $scope.profileData._id;
+  var i = 0;
+
+  $scope.showAthleteNotification = function (athlete) {
+    $scope.totalItems = undefined;
+    $scope.athletenotifications = undefined;
+    $scope.currentPage = 1;
+    MyServices.getAthleteNotification({
+      Id: athlete,
+      page: $scope.currentPage
+    }, ++i, function (response, ini) {
+      if (ini == i) {
+        if (response.value == true) {
+          $scope.isAthlete = true;
+          $scope.athletenotifications = response.data.results;;
+          $scope.notificationCount = response.data.unreadcount;
+          $.jStorage.set("notificationCount", $scope.notificationCount);
+          $scope.maxRow = response.data.count;
+          $scope.totalItems = response.data.total;
+
+        } else {
+          $scope.athletenotifications = [];
+        }
+      }
+
+    })
+  }
+  $scope.showAthleteNotification(athlete);
+
   //Profile Incomplete Check
   $scope.profileIncomplete = function () {
     if (!$scope.profileData.country || !$scope.profileData.mobile || !$scope.profileData.sports || !$scope.profileData.about || !$scope.profileData.events || !$scope.profileData.achievements || !$scope.profileData.previousSeasonReview) {
@@ -403,7 +436,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     $cordovaFileTransfer.upload(adminurl + 'upload', imageURI)
       .then(function (result) {
         // Success!
-        console.log(result.response);
         result.response = JSON.parse(result.response);
         $scope.formData.profilePic = result.response.data[0];
         $scope.submitData($scope.formData);
@@ -464,7 +496,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
         if (data.value) {
           console.log(data.data.results.reactions);
           _.forEach(data.data.results, function (value) {
-            console.log(value);
             $scope.allBlog.push(value);
           });
           $scope.totalItems = data.data.total;
@@ -574,7 +605,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.sendMessage = function () {
 
     if ($scope.data.message !== '' && $scope.data.message) {
-      console.log($scope.data.message);
       $scope.messages.push({
         userId: 'me',
         text: $scope.data.message,
@@ -651,7 +681,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.sendMessage = function () {
 
     if ($scope.data.message !== '' && $scope.data.message) {
-      console.log($scope.data.message);
       $scope.messages.push({
         userId: 'me',
         text: $scope.data.message,
@@ -934,8 +963,9 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
 
 .controller('SearchCoachesCtrl', function ($scope, $ionicModal, MyServices, $ionicLoading, $ionicPopup) {
   $scope.currentPage = 1;
+  $scope.filter = {};
   var i = 0;
-  $scope.allCoaches = [];
+  // $scope.allCoaches = [];
   $scope.search = {
     keyword: ""
   };
@@ -968,7 +998,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     name: 'Credentials',
     value: ['Level 1', 'Level 2', 'Level 3', 'Level 4']
   }, {
-    name: 'Coaching Experience ',
+    name: 'Coaching Experience',
     value: ['0 - 5 years', '6 - 10 years', '11 - 15 years', '16 - 20 years', 'More than 20 years']
   }];
 
@@ -1001,15 +1031,16 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
     }
   };
 
-  //Get All Competiton
+  //Get All coaches
   $scope.showAllCoaches = function (keywordChange) {
+    $scope.allCoaches = [];
     if (keywordChange) {
       $scope.currentPage = 1;
-      $scope.allCoaches = [];
     }
     MyServices.searchAllCoaches({
       page: $scope.currentPage,
-      keyword: $scope.search.keyword
+      keyword: $scope.search.keyword,
+      filter: $scope.filter
     }, ++i, function (data, ini) {
       if (ini == i) {
         if (data.value) {
@@ -1024,7 +1055,7 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
             $scope.more.Data = false;
           }
         } else {
-          $scope.showLoading('Error Loading Injurys', 2000);
+          $scope.showLoading('Error Loading coaching', 2000);
         }
       }
     });
@@ -1034,6 +1065,81 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   $scope.loadMore = function () {
     $scope.showAllCoaches();
   };
+
+  $scope.filter.age = [];
+  $scope.filter.coachingFocus = [];
+  $scope.filter.gender = [];
+  $scope.filter.credentials = [];
+  $scope.filter.experience = [];
+  $scope.pushSubCategory = function (subcat, catName) {
+    var numberPattern = /\d+/g;
+    //age
+    if (catName == 'Age') {
+      // console.log($scope.selectedFilters[subcat]);
+      if ($scope.selectedFilters[subcat] == true) {
+        var agedata = subcat.match(numberPattern);
+        if (agedata.length > 1) {
+          var age = agedata[0] + "-" + agedata[1];
+        } else {
+          age = agedata[0];
+        }
+        $scope.filter.age.push(age);
+      } else {
+        var arraydata = $scope.filter.age.indexOf(subcat);
+        $scope.filter.age.splice(arraydata, 1);
+      }
+    }
+    //Coaching Focus
+    if (catName == 'Coaching Focus') {
+      if ($scope.selectedFilters[subcat] == true) {
+        $scope.filter.coachingFocus.push(subcat);
+      } else {
+        var arraydata = $scope.filter.coachingFocus.indexOf(subcat);
+        $scope.filter.coachingFocus.splice(arraydata, 1);
+      }
+    }
+
+    //Gender
+    if (catName == 'Gender') {
+      if ($scope.selectedFilters[subcat] == true) {
+        $scope.filter.gender.push(subcat);
+      } else {
+        var arraydata = $scope.filter.gender.indexOf(subcat);
+        $scope.filter.gender.splice(arraydata, 1);
+      }
+    }
+
+    //Credentials
+    if (catName == 'Credentials') {
+      if ($scope.selectedFilters[subcat] == true) {
+        $scope.filter.credentials.push(subcat);
+      } else {
+        var arraydata = $scope.filter.credentials.indexOf(subcat);
+        $scope.filter.credentials.splice(arraydata, 1);
+      }
+    }
+
+    //Coaching Experience
+    if (catName == 'Coaching Experience') {
+      if ($scope.selectedFilters[subcat] == true) {
+        var experiencedata = subcat.match(numberPattern);
+        if (experiencedata.length > 1) {
+          var experience = experiencedata[0] + "-" + experiencedata[1];
+        } else {
+          experience = experiencedata[0];
+        }
+        $scope.filter.experience.push(experience);
+      } else {
+        var arraydata = $scope.filter.experience.indexOf(subcat);
+        $scope.filter.experience.splice(arraydata, 1);
+      }
+    }
+  }
+
+  $scope.filterParameteres = function () {
+    $scope.showAllCoaches();
+    $scope.closeModal();
+  }
 
 })
 
@@ -1124,58 +1230,111 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   }];
 })
 
-.controller('CoachDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate) {
-  $scope.coach = {
-    name: 'James',
-    surname: 'Coney',
-    subscriptionFee: '30',
-    image: 'james-coney',
-    acceptedDate: new Date('13 November, 2016'),
-    renewalDate: new Date('14 December, 2016'),
-    subscriptionType: 'Monthly',
-    yearsCoaching: '2',
-    gender: 'Male',
-    dob: new Date('24 April, 1973'),
-    country: 'United Kingdom',
-    credentials: 'Level 4',
-    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod, turpis at auctor interdum, enim neque placerat diam, ac faucibus sem elit in sapien. Vivamus sodales et libero ac consectetur. Curabitur hendrerit lacus nisi, eget euismod felis gravida vitae. Nullam faucibus maximus eros, non facilisis magna tincidunt quis. Ut suscipit fringilla quam eu scelerisque. Proin orci lacus, condimentum eget urna at, aliquam pellentesque mauris. Aenean rutrum diam tortor, sed finibus nibh condimentum ac. Sed et blandit arcu.',
-    coachingFocus: ['Sprinting', 'Hurdles'],
-    specialisations: ['Children in Athletics', 'First aid'],
-    experience: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    expertise: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    coachingAchievements: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+.controller('CoachDetailCtrl', function ($scope, $ionicModal, $ionicScrollDelegate, MyServices, $ionicPopup) {
+  $scope.athleteData = MyServices.getUser();
+  var athleteId = $scope.athleteData._id;
+  $scope.unsubscribe = {};
+
+  $scope.myCoachProfile = undefined;
+  if (athleteId) {
+    MyServices.getMyCoach({
+      athleteId: athleteId
+    }, function (response) {
+      if (response.value == true) {
+        $scope.myCoachProfile = response.data;
+      } else {
+        $scope.myCoachProfile = "";
+      }
+    })
+  }
+
+  $scope.Unsubscription = function (athleteCoachId) {
+    $scope.unsubscribe._id = athleteCoachId;
+    $scope.unsubscribe.athleteID = athleteId;
+    $scope.data = {};
+    var myPopup = $ionicPopup.show({
+      template: '<textarea auto-grow type="password" ng-model="data.reason"><textarea>',
+      title: '<h4>Unsubscription!</h4>',
+      subTitle: 'Please enter some reason',
+      scope: $scope,
+      buttons: [{
+        text: 'Cancel'
+      }, {
+        text: '<b>Reject</b>',
+        type: 'button-assertive',
+        onTap: function (e) {
+          $scope.unsubscribeCoach();
+        }
+      }, ]
+    });
   };
+
+  $scope.unsubscribeCoach = function () {
+    $scope.unsubscribe.status = "Unsubscribe";
+    MyServices.Unsubscribeacoach($scope.unsubscribe, function (response) {
+      // if (response.value === true) {
+      // } else {
+      // }
+    })
+  }
+
 })
 
 .controller('NotificationsCtrl', function ($scope, MyServices, $ionicModal, $ionicScrollDelegate, $ionicPopup) {
   $scope.athleteData = MyServices.getUser();
+  var i = 0;
 
-  //get notifications
-  if ($scope.athleteData) {
-    MyServices.getNotifications({
-      Id: $scope.athleteData._id
-    }, function (response) {
-      if (response.value === true) {
-        $scope.notifications = response.data;
-        $scope.requestCount = $scope.notifications.length;
+  var athlete = $scope.athleteData._id;
+
+  $scope.showAthleteNotification = function (athlete) {
+    $scope.totalItems = undefined;
+    $scope.athletenotifications = undefined;
+    $scope.currentPage = 1;
+    MyServices.getAthleteNotification({
+      Id: athlete,
+      page: $scope.currentPage
+    }, ++i, function (response, ini) {
+      if (ini == i) {
+        if (response.value == true) {
+          $scope.isAthlete = true;
+          $scope.athletenotifications = response.data.results;;
+          $scope.notificationCount = response.data.unreadcount;
+          $scope.maxRow = response.data.count;
+          $scope.totalItems = response.data.total;
+
+        } else {
+          $scope.athletenotifications = [];
+        }
       }
-    });
-  }
 
-  $scope.notifications = [{
-    name: 'Loughborough International',
-    type: 'Competition',
-    startDate: '22nd May, 2017',
-    endDate: '22nd May, 2017',
-    keyCompetition: true
-  }, {
-    name: 'James',
-    surname: 'Coney',
-    type: 'coachAssign'
-  }, {
-    name: 'Use of Resistance Bands',
-    type: 'blog'
-  }, ];
+    })
+  }
+  $scope.showAthleteNotification(athlete);
+
+  $scope.readNotification = function () {
+    $scope.totalItems = undefined;
+    $scope.athletenotifications = undefined;
+    $scope.coachnotifications = undefined;
+    $scope.currentPage = 1;
+
+    MyServices.readathleteNotification({
+      Id: athlete,
+      page: $scope.currentPage
+    }, ++i, function (response, ini) {
+      if (ini == i) {
+        if (response.value == true) {
+          $scope.isAthlete = true;
+          $scope.athletenotifications = response.data.results;
+          $scope.maxRow = response.data.options.count;
+          $scope.totalItems = response.data.total;
+          $scope.showAthleteNotification(athlete);
+
+        } else {
+          $scope.athletenotifications = [];
+        }
+      }
+    })
+  }
 
   $scope.reason = function () {
     $scope.data = {};
@@ -1195,6 +1354,38 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
       }, ]
     });
   };
+
+  $scope.readNotification();
+
+  $ionicModal.fromTemplateUrl('templates/modal/modal-paynow.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+  $scope.closePayNow = function () {
+    $scope.modal.hide();
+  };
+  $scope.openPayNow = function (coachdata) {
+    $scope.formData = {};
+    $scope.formData.coachPrice = coachdata.coach.coachAskingPrice;
+    $scope.coachAthleyteId = coachdata._id;
+    $scope.modal.show();
+  };
+  $scope.paySubscription = function (subscriptionData) {
+    if (subscriptionData.subscriptionType == "Yearly") {
+      subscriptionData.coachAskingPrice = subscriptionData.coachPrice * 11;
+    }
+    subscriptionData._id = $scope.coachAthleyteId;
+    subscriptionData.status = "Active";
+    MyServices.paySubscription(subscriptionData, function (response) {
+      if (response.value == true) {
+        $scope.closePayNow();
+      } else {
+        $scope.closePayNow();
+      }
+    })
+  }
 })
 
 .controller('TrainingDiaryCtrl', function ($scope, $ionicModal, $ionicLoading, uiCalendarConfig, MyServices) {
@@ -1302,7 +1493,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
   };
 
   var changePendingForm = function () {
-    console.log($scope.trainingDiary);
     $scope.pendingForm = [];
     _.each($scope.trainingDiary, function (events) {
       _.each(events.events, function (obj) {
@@ -1312,7 +1502,6 @@ angular.module('starter.controllers', ['starter.services', 'checklist-model', 'c
         }
       });
     });
-    console.log($scope.pendingForm);
   };
 
   $scope.submitFeedback = function () {
