@@ -1,0 +1,52 @@
+<ion-view view-title="Events &amp; Competiton">
+  <ion-nav-buttons side="right">
+    <button type="button" class="button button-icon ln-magnifier ln-fit" ng-click="search();"></button>
+  </ion-nav-buttons>
+
+      <ion-tabs class=" tab-button tabs-top ">
+       <ion-tab title="Most Recent" >
+
+         <ion-content  class="">
+           <div class="has-tabs-top article-main" >
+             <div class="list list-inset" ng-if="searchshow">
+               <label class="item item-input search">
+                 <label for="" ng-click="searchpop();">All</label>
+
+                 <input type="text" placeholder="Search">
+                 <i class="icon ion-search placeholder-icon"></i>
+               </label>
+             </div>
+             <div class="">
+             <div class="card event" ng-repeat="list in Eventlist" ui-sref="app.event-detail">
+                 <div class="img-div">
+                     <img ng-src="{{list.img}}" class="full-image">
+                 </div>
+                 <div class="detail">
+                     <label class="textupper">{{list.title}}</label>
+                     <p class="pad-down textupper">{{list.place}}</p>
+                     <p class="textupper">{{list.date}}</p>
+                 </div>
+
+             </div>
+         </div>
+           </div>
+
+       </ion-content>
+       </ion-tab>
+       <ion-tab title="Most Popular" >
+         <ion-content  class="tab-content ">
+
+
+       </ion-content >
+       </ion-tab>
+       <ion-tab title="Near Me" >
+         <ion-content  class="tab-content ">
+
+
+       </ion-content >
+
+       </ion-tab>
+  </ion-tabs>
+
+
+</ion-view>

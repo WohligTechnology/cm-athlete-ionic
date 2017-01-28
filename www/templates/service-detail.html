@@ -1,0 +1,51 @@
+<ion-view view-title="Service Provider Details">
+  <ion-content  class="tab-content ">
+
+
+<div class="">
+    <div class=" ">
+      <div class="service" ng-click="serviceList();" >
+        <div class="profile-back">
+            Orthopedic Doctor
+        </div>
+        <div class="card service-card"  >
+            <div class="pro-div">
+              <div class="pro-img" >
+                <img ng-src="{{servicePopup.image}}" alt="...">
+              </div>
+              <div class="caption">
+                <h4>{{servicePopup.name}} {{servicePopup.surname}}</h4>
+                  <p>{{servicePopup.country}},{{servicePopup.city}}</p>
+                  <p >{{servicePopup.mailId}}</p>
+                  <p >{{servicePopup.website}}</p>
+              </div>
+            </div>
+            <!-- <div class="des">
+                <p>{{s.description}}</p>
+            </div> -->
+            <div class="enquire text-center">
+                <p class="text-center"><a href="#" class="btn btn-primary" role="button" style="text-decoration:none">Enquire Now</a></p>
+            </div>
+            <div class="about">
+                  <h4>About</h4>
+                  <div class="about-des" ng-bind-html="servicePopup.description"></div>
+            </div>
+            <div class=" gallery">
+                <h4>Gallery</h4>
+                <div class="row" ng-repeat="videolist1 in eventsGalleryDetaiLlist">
+                    <a class="col-50 pic-50" ng-repeat="videolist in videolist1">
+                        <img ng-src="{{videolist.img}}" class="full-image {{videolist.radius}}">
+                        <span class="{{videolist.classCircle}}"><img src="{{videolist.urlPlay}}"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+      </div>
+
+
+    </div>
+</div>
+
+</ion-content >
+</ion-view>

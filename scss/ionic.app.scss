@@ -1090,3 +1090,412 @@ p.bold {
     }
   }
 }
+.pro-img{
+  height: 150px;
+    width: 150px;
+    margin: 10px auto;
+    img{
+      height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    }
+}
+.pro-div{
+  background: #f6f6f6;
+  padding: 60px 10px 10px ;
+  text-align: center;
+}
+.profile-back{
+  position: absolute;
+    background: #004a9b;
+    padding: 7px;
+    color: #fff;
+    margin-top: 15px;
+}
+.service{
+  margin: 15px;
+  .service-card{
+    border: 1px solid #ddd;
+  }
+}
+.des{
+  padding: 10px;
+  p{
+    color: #777;
+    font-size: 13px;
+    text-align: center;
+  }
+}
+.caption{
+  h4{
+    color: #666;
+  }
+  p{
+    padding: 0;
+    margin: 0;
+    color: #777;
+    }
+
+}
+.profile-back:after{
+  content: '';
+border-top: 10px solid #1c2b4e;
+border-left: 10px solid transparent;
+position: absolute;
+top: 34px;
+left: 0px;
+}
+.article-card{
+  background: #f5f7f6;
+}
+.profie-sec{
+  margin: 10px;
+  .img-div{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    img{
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+    }
+  }
+  .details{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    h5{
+      margin: 0;
+      color: #505050;
+    }
+    label{
+      color: #777;
+    }
+  }
+  .eye{
+    padding: 1px 7px;
+    background: #d2d2d2;
+    color: #656565;
+    float: right;
+    border-radius: 5px;
+    i{
+      font-size: 28px;
+    }
+  }
+}
+.intro{
+  margin: 18px  0px 18px 18px;
+  color: #505050;
+
+  p{
+    display: inline-block;
+    width: 50%;
+  }
+
+}
+.right-div{
+  text-align: right;
+  display: inline-block;
+  margin-left: 1%;
+  .blue-box{
+    background-color: #1959a1;
+    color: #fff;
+    padding: 3px;
+    font-size: 9px;
+    display: inline-block;
+    width: 30%;
+    margin-right: 5px;
+    font-size: 15px;
+  }
+}
+.rating-blog{
+  display: block;
+  .rateup{
+    background-color: #fff;
+    border:1px solid #369e57;
+    color: #369e57;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin: 5px;
+    }
+  .ratedown{
+    color: #c70e17;
+    background-color: #fff;
+    border: 1px solid #c70e17;
+    padding: 5px 10px;
+      border-radius: 8px;
+    margin: 5px;
+    }
+}
+.ma-tabs{
+  top:93px;
+  margin-bottom: 20px;
+}
+.article-main {
+  position: absolute;
+  top: 93px;
+}
+.event{
+
+  background: #f6f6f6!important;
+  .detail{
+    margin: 10px;
+    p{
+      color: #777;
+    }
+  }
+}
+.market-div{
+  border-bottom: 1px solid white;
+border-top: 1px solid white;
+}
+.item-divider {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-height: 30px;
+    background-color: rgba(0, 0, 0, 0.19)!important;
+    color: #222;
+    font-weight: 500;
+    border-color: white!important;
+  }
+  .search{
+    padding: 0;
+    label{
+      background: transparent;
+      border: none;
+      padding: 6px 10px;
+      width: 50%;
+    }
+    input{
+      border-left: 1px solid grey;
+      margin-left: 10px;
+      padding-left: 10px;
+    }
+    i{
+      padding: 6px 12px;
+      background: #004a9b;
+      color: white;
+    }
+  }
+  .tab-button {
+    .tab-nav.tabs {
+
+      background-color: $positive;
+      // border-bottom: 1px solid white;
+      padding-bottom: 2px;
+
+    }
+
+    .tab-item {
+      color: white;
+      max-width: 100%;
+      font-size: 16px;
+    }
+
+    .tab-item.activated,
+    .tab-item.active,
+    .tab-item.tab-item-active {
+      color: white;
+      font-size: 16px;
+      border-bottom: 2px solid white;
+
+    }
+  }
+
+  .tabs-margin {
+    margin: 10px;
+  }
+
+.detail-div{
+  margin: 10px;
+  .img-div{
+    display: inline-block;
+    vertical-align: middle;
+    height: 50px;
+    img{
+      height: 100%;
+    }
+  }
+  .name{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    width: 80%;
+    p{
+      display: inline-block;
+      color: #777;
+      margin: 0;
+    }
+  }
+}
+.article-banner{
+  position: relative;
+  .banner{
+    height: 150px;
+    img{
+      height: 100%;
+    }
+  }
+  .like{
+    position: absolute;
+    right: 10px;
+    bottom: 15px;
+    display: block;
+  }
+}
+.text-intro{
+  margin: 10px;
+  color: #777;
+}
+.enquire{
+  adding: 10px;
+    display: block;
+    width: 50%;
+    margin: 10px auto;
+    padding: 10px;
+    background: $positive;
+    p{
+      margin: 0;
+      a{
+        color: white;
+      }
+    }
+}
+.about{
+  margin: 20px;
+  .about-des{
+    color: #777;
+  }
+}
+.gallery{
+  margin: 20px;
+}
+
+.play-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    z-index: 2;
+    transition :all ease 300ms;
+
+    img {
+        width: 35px !important;
+    }
+}
+.pic-50{
+  padding: 5px;
+}
+.event-main{
+  top: 44px;
+  position: absolute;
+}
+.event-head{
+  margin: 10px;
+  text-align: center;
+  h4{
+      display: block;
+  }
+  label{
+      display: inline-block;;
+      border: 1px solid grey;
+      width: 43%;
+      margin: 20px auto 0;
+      border-radius: 15px;
+      padding: 4px;
+      vertical-align: middle;
+      float: left;
+
+  }
+  button{
+      display: inline-block;
+      vertical-align: middle;
+      float: right;
+      margin: 10px auto;
+      background-color: $positive!important;
+      color: white!important;
+  }
+}
+.event-info{
+  margin: 15px;
+}
+.event-venue{
+  margin: 25px 15px;
+}
+.event-gallery{
+  margin: 15px;
+}
+.cross-img{
+  height: 30px;
+  width: 30px;
+  display: block;
+  text-align: right;
+  top: -15px;
+  right: -15px;
+  position: absolute;
+  z-index: 2222;
+  img{
+    height: 100%;
+    width: 100%;
+  }
+}
+.article-modal.popup{
+  width: 90%;
+}
+.button-div{
+
+  button{
+    background-color: $positive;
+    display: inline-block;
+    float: right;
+    padding: 5px;
+    border: none;
+    color: white;
+  }
+}
+.price{
+  background-color: $positive;
+  width: 20%;
+  padding: 5px;
+  display: inline-block;
+  color: white;
+}
+
+.articlepop .popup{
+  .popup-body{
+   padding: 0px;
+ }
+ .popup-head{
+   display: none;
+ }
+}
+.searchpop .popup{
+  .popup-body{
+   padding: 0px;
+ }
+ .popup-head{
+   display: none;
+ }
+}
+.modal-content{
+margin: 10px;
+}
+
+.search-button{
+  margin: 5px;
+  button{
+    margin: 10px;
+    background-color: $positive!important;
+    color: white!important;
+  }
+  .apply{
+    color: #fff;
+    background-color: #369e57!important;
+    border-color: #308b4d!important;
+  }
+}
+.textupper{
+  text-transform: capitalize;
+}

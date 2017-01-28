@@ -21,10 +21,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
       };
 
-      window.plugins.OneSignal
-        .startInit("193cfb85-cbea-4101-b86f-2b1de2109086")
-        .handleNotificationOpened(notificationOpenedCallback)
-        .endInit();
+      // window.plugins.OneSignal
+      //   .startInit("193cfb85-cbea-4101-b86f-2b1de2109086")
+      //   .handleNotificationOpened(notificationOpenedCallback)
+      //   .endInit();
     });
   })
 
@@ -50,6 +50,60 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           'menuContent': {
             templateUrl: 'templates/profile.html',
             controller: 'ProfileCtrl'
+          }
+        }
+      })
+      .state('app.articles', {
+        url: '/articles',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/articles.html',
+            controller: 'ArticlesCtrl'
+          }
+        }
+      })
+      .state('app.service', {
+        url: '/service',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/service.html',
+            controller: 'ServiceCtrl'
+          }
+        }
+      })
+      .state('app.event', {
+        url: '/event',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/event.html',
+            controller: 'EventsCtrl'
+          }
+        }
+      })
+      .state('app.article-detail', {
+        url: '/article-detail',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/article-detail.html',
+            controller: 'ArticleDetailCtrl'
+          }
+        }
+      })
+      .state('app.service-detail', {
+        url: '/service-detail',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/service-detail.html',
+            controller: 'ServiceDetailCtrl'
+          }
+        }
+      })
+      .state('app.event-detail', {
+        url: '/event-detail',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/event-detail.html',
+            controller: 'EventDetailCtrl'
           }
         }
       })

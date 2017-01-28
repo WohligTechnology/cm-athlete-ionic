@@ -1,0 +1,58 @@
+<ion-view view-title="Service Providers">
+  <ion-nav-buttons side="right">
+    <button type="button" class="button button-icon ln-magnifier ln-fit" ng-click="search();"></button>
+  </ion-nav-buttons>
+
+        <ion-tabs class=" tab-button tabs-top ">
+         <ion-tab title="Most Recent" >
+
+           <ion-content  class="">
+             <div class="has-tabs-top article-main">
+               <div class="list list-inset" ng-if="searchshow">
+                 <label class="item item-input search">
+                   <label for="" ng-click="searchpop();">All</label>
+
+                   <input type="text" placeholder="Search">
+                   <i class="icon ion-search placeholder-icon"></i>
+                 </label>
+               </div>
+                 <div class="service" ng-click="serviceList();" ng-repeat="s in servicelist" ui-sref="app.service-detail">
+                   <div class="profile-back">
+                       Orthopedic Doctor
+                   </div>
+                   <div class="card service-card"  >
+                       <div class="pro-div">
+                         <div class="pro-img" >
+                           <img ng-src="{{s.image}}" alt="...">
+                         </div>
+                         <div class="caption">
+                           <h4>{{s.name}} {{s.surname}}</h4>
+                             <p>{{s.country}},{{s.city}}</p>
+                             <p >{{s.mailId}}</p>
+                         </div>
+                       </div>
+                       <div class="des">
+                           <p>{{s.description}}</p>
+                       </div>
+                   </div>
+                 </div>
+             </div>
+         </ion-content>
+         </ion-tab>
+         <ion-tab title="Most Popular" >
+           <ion-content  class="tab-content ">
+
+
+         </ion-content >
+         </ion-tab>
+         <ion-tab title="Near Me" >
+           <ion-content  class="tab-content ">
+
+
+         </ion-content >
+
+         </ion-tab>
+    </ion-tabs>
+
+
+</ion-view>

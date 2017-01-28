@@ -1,0 +1,28 @@
+<ion-view view-title="Article Details">
+
+  <ion-content>
+    <div class="">
+      <div class="detail-div">
+        <div class="img-div">
+          <img ng-src="{{articleBanner.profile}}" alt="">
+        </div>
+        <div class="name textupper"><p>{{articleBanner.name}} {{articleBanner.surname}} on {{articleBanner.date}} in {{articleBanner.category}}</p></div>
+      </div>
+      <div class="article-banner">
+        <div class="banner">
+            <img ng-src="{{articleBanner.bannerImg}}" class="full-image">
+        </div>
+
+        <div class="rating-blog like">
+            <span class="rate rateup"><i class="ln ln-thumbs-up"></i>{{articleBanner.likes}}</span>
+            <span class="rate ratedown"><i class="ln ln-thumbs-down"></i>{{articleBanner.dislikes}}</span>
+        </div>
+      </div>
+      <div class="text-intro">
+          <div class="container container-pad ">
+              <div class="article-intro" ng-bind-html="articleBanner.content"></div>
+          </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
