@@ -10772,7 +10772,9 @@ p.bold {
     display: inline-block;
     width: 30%;
     margin-right: 5px;
-    font-size: 15px; }
+    font-size: 15px;
+    text-align: center;
+    text-transform: capitalize; }
 
 .rating-blog {
   display: block; }
@@ -10807,8 +10809,9 @@ p.bold {
       color: #777; }
 
 .market-div {
-  border-bottom: 1px solid white;
-  border-top: 1px solid white; }
+  background-color: #2871c1; }
+  .market-div .item-complex {
+    padding-left: 15px; }
 
 .item-divider {
   padding-top: 8px;

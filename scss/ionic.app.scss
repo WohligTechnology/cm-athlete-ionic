@@ -1208,6 +1208,8 @@ left: 0px;
     width: 30%;
     margin-right: 5px;
     font-size: 15px;
+    text-align: center;
+    text-transform: capitalize;
   }
 }
 .rating-blog{
@@ -1248,8 +1250,10 @@ left: 0px;
   }
 }
 .market-div{
-  border-bottom: 1px solid white;
-border-top: 1px solid white;
+background-color: #2871c1;
+.item-complex {
+      padding-left: 15px;
+}
 }
 .item-divider {
     padding-top: 8px;
