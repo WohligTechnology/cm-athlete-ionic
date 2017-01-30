@@ -1503,3 +1503,19 @@ margin: 10px;
 .textupper{
   text-transform: capitalize;
 }
+.tabs-striped .tabs{
+  border-bottom: transparent!important;
+}
+.detail-event{
+  top: 85px;
+  position: absolute;
+}
+.bar-header {
+    border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+}
+.bar {
+    background-size: 100% 0px;
+}

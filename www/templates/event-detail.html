@@ -2,27 +2,30 @@
 
 
 <div class="">
-  <ion-tabs class=" tab-button " >
+  <ion-tabs class=" tab-button tabs-top " >
    <ion-tab title="Event Info" >
      <ion-content  class="has-header event-main">
-       <div class="event-head">
-           <h4  >{{data.title}}</h4  >
-           <label class="textupper">{{data.date}}</label>
-           <button class="button button-light">
-              Register now
-            </button>
-       </div>
-       <div class="clearfix"></div>
+       <div class=" has-tabs-top detail-event">
+         <div class="event-head ">
+             <h4  >{{data.title}}</h4  >
+             <label class="textupper">{{data.date}}</label>
+             <button class="button button-light">
+                Register now
+              </button>
+         </div>
+         <div class="clearfix"></div>
 
-        <div class="event-info">
-          <h4>Event Info</h4>
-          <div class="col-xs-12 dividers">
-              <p><span>Wohlig Technology :<br></span> Chhatrapati Shivaji Terminus Area, Fort, Mumbai, Maharashtra 400001</p>
-              <p class="normal-text">9876548990/9877642765</p>
-              <p class="normal-text">coachmentor@gmail.com</p>
-              <p class="normal-text">www.coachmentor.com</p>
+          <div class="event-info">
+            <h4>Event Info</h4>
+            <div class="col-xs-12 dividers">
+                <p><span>Wohlig Technology :<br></span> Chhatrapati Shivaji Terminus Area, Fort, Mumbai, Maharashtra 400001</p>
+                <p class="normal-text">9876548990/9877642765</p>
+                <p class="normal-text">coachmentor@gmail.com</p>
+                <p class="normal-text">www.coachmentor.com</p>
+            </div>
           </div>
-        </div>
+       </div>
+
 
    </ion-content>
    </ion-tab>
@@ -30,7 +33,7 @@
 
    <ion-tab title="Venue Details" >
      <ion-content  class="tab-content event-main">
-       <div class="">
+       <div class="has-tabs-top detail-event">
          <div class="event-head">
              <h4  >{{data.title}}</h4  >
              <label class="textupper">{{data.date}}</label>
@@ -58,23 +61,26 @@
 
    <ion-tab title="Gallery" >
      <ion-content  class="tab-content event-main">
-       <div class="event-head">
-           <h4  >{{data.title}}</h4  >
-           <label class="textupper">{{data.date}}</label>
-           <button class="button button-light">
-              Register now
-            </button>
+       <div class="has-tabs-top detail-event">
+         <div class="event-head">
+             <h4  >{{data.title}}</h4  >
+             <label class="textupper">{{data.date}}</label>
+             <button class="button button-light">
+                Register now
+              </button>
+         </div>
+         <div class="clearfix"></div>
+          <div class=" gallery">
+              <h4>Gallery</h4>
+              <div class="row" ng-repeat="videolist1 in eventsGalleryDetaiLlist">
+                  <a class="col-50 pic-50" ng-repeat="videolist in videolist1">
+                      <img ng-src="{{videolist.img}}" class="full-image {{videolist.radius}}">
+                      <span class="{{videolist.classCircle}}"><img src="{{videolist.urlPlay}}"></span>
+                  </a>
+              </div>
+          </div>
        </div>
-       <div class="clearfix"></div>
-        <div class=" gallery">
-            <h4>Gallery</h4>
-            <div class="row" ng-repeat="videolist1 in eventsGalleryDetaiLlist">
-                <a class="col-50 pic-50" ng-repeat="videolist in videolist1">
-                    <img ng-src="{{videolist.img}}" class="full-image {{videolist.radius}}">
-                    <span class="{{videolist.classCircle}}"><img src="{{videolist.urlPlay}}"></span>
-                </a>
-            </div>
-        </div>
+
    </ion-content >
    </ion-tab>
 </ion-tabs>
